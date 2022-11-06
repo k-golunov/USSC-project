@@ -1,4 +1,5 @@
-﻿using USSC.Attributes;
+﻿using Microsoft.EntityFrameworkCore;
+using USSC.Attributes;
 
 namespace USSC.Dto;
 
@@ -41,4 +42,26 @@ public class TestTask
     public string Status { get; set; }
     public string Comment { get; set; }
     // public string Task { get; set; } скорее всего будет храниться другим образом
+}
+
+// тестовое добавление загрузки файла
+public class TestTaskFile
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Path { get; set; }
+    public IFormFile File { get; set; }
+}
+
+public class ModelsContext : DbContext
+{
+    // public DbSet<UserDto> Users { get; set; }
+    // public DbSet<ApplicationForm> ApplicationForms { get; set; }
+    // public DbSet<TestTask> TestTasks { get; set; }
+    public DbSet<TestTaskFile> Files { get; set; }
+    
+    public ModelsContext(DbContextOptions<ModelsContext> options) : base(options)
+    {
+        Database.EnsureCreated();
+    }
 }
