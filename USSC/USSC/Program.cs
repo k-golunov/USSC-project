@@ -29,7 +29,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sailora WEB API API", Version = "v1" });
 });
-//builder.Services.AddDbContext<ModelsContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
 
 var app = builder.Build();
 
