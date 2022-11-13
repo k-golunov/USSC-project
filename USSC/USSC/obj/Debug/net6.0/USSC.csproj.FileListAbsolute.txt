@@ -46,3 +46,7 @@ G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.EntityFramewor
 G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
 G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Npgsql.dll
 G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\System.Web.Http.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Newtonsoft.Json.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
