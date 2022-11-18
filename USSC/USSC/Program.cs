@@ -21,6 +21,7 @@ builder.Services.AddDbContext<DataContext>(opt =>
 
 builder.Services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IApplicationService, ApplicationService>();
 
 builder.Services.AddAutoMapper(typeof(UserProfile));
 builder.Services.AddCors();

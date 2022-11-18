@@ -3,10 +3,8 @@ using USSC.Entities;
 
 namespace USSC.Services;
 
-public interface IUserService
+public interface IUserService: IService<User>
 {
     AuthenticateResponse Authenticate(AuthenticateRequest model);
     Task<AuthenticateResponse> Register(UserModel userModel);
-    IEnumerable<User> GetAll();
-    User GetById(int id);
 }
