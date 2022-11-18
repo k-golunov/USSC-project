@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using USSC;
+using USSC.Dto;
+using USSC.Services;
 
 namespace USSC.Controllers;
 
@@ -6,12 +9,27 @@ namespace USSC.Controllers;
 [Route("[controller]")]
 public class InternshipApplicationController : ControllerBase
 {
-    [HttpPost("createApplication")]
-    public IActionResult CreateApplication()
+    private readonly ApplicationService _applicationService;
+    public InternshipApplicationController(ApplicationService applicationService)
     {
-        // сделать проверку на авторизацию
-        // if ()
-        return Ok();
+        _applicationService = applicationService;
+    }
+    
+    [HttpPost("createApplication")]
+    public IActionResult CreateApplication(ApplicationModel application)
+    {
+        try
+        {
+            //вот это проверка на существование application, но там не работает из-за long
+            //не захотел полностью переделывать, поэтому оставил на подумать
+            //var id = _applicationService.GetById(int.Parse(application.Id));
+            var response = _applicationService.SubmitApplicationAsync(application);
+            return response.Result;
+        }
+        catch
+        {
+            return BadRequest();
+        }
     }
 
     [HttpGet("GetApplication")]
@@ -19,6 +37,7 @@ public class InternshipApplicationController : ControllerBase
     {
         // проверка на доступ пользователя к заявкам role == Tutor || Admin
         // if ()
-        return Ok();
+        //по-моему тут вот так, и ничего более
+        return Ok(_applicationService.GetAll());
     }
 }

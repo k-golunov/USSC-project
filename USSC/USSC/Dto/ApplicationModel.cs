@@ -2,7 +2,7 @@
 
 namespace USSC.Dto;
 
-public class Application
+public class ApplicationModel
 {
     [Key]
     public long Id { get; set; }
