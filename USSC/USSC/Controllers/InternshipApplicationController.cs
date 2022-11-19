@@ -9,8 +9,8 @@ namespace USSC.Controllers;
 [Route("[controller]")]
 public class InternshipApplicationController : ControllerBase
 {
-    private readonly ApplicationService _applicationService;
-    public InternshipApplicationController(ApplicationService applicationService)
+    private readonly IApplicationService _applicationService;
+    public InternshipApplicationController(IApplicationService applicationService)
     {
         _applicationService = applicationService;
     }
