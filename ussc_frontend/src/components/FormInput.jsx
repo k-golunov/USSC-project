@@ -1,12 +1,16 @@
 import React from 'react';
 
-const FormInput = ({ label, type, name, id, required }) => {
+const FormInput = ({ label, type, name, id, required, ...props }) => {
   return (
     <label className='form_input_wrapper'>
-      <p className='form_input_label'>
-        {label}
-        {required ? '*' : ''}
-      </p>
+      {label ? (
+        <p className='form_input_label'>
+          {label}
+          {required ? '*' : ''}
+        </p>
+      ) : (
+        <></>
+      )}
       <input
         required={required}
         className='form_input'

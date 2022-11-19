@@ -1,10 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import { Provider } from 'react-redux';
+import store from './store';
+import './fonts/OpenSans-VariableFont_wdth_wght.ttf';
 import './App.css';
-import './fonts/OfficinaSansCTT.woff2';
-import './fonts/OfficinaSansCTTBold.woff2';
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+);

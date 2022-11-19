@@ -2,17 +2,16 @@ import React from 'react';
 import usscLogo from '../img/ussc_logo.svg';
 import cross from '../img/cross.svg';
 import udvLogo from '../img/udv_logo.png';
+import { Link } from 'react-router-dom';
 
 const NavLogo = () => {
   return (
     <div className='nav_logo'>
-      <a href='https://www.ussc.ru/'>
+      <Link to='/'>
         <img src={usscLogo} alt='' />
-      </a>
-      <img src={cross} alt='' className='logo_cross' />
-      <a href='https://udv.dev/'>
+        <img src={cross} alt='' className='logo_cross' />
         <img src={udvLogo} alt='' className='udv_logo' />
-      </a>
+      </Link>
     </div>
   );
 };
