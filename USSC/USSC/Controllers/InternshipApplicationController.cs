@@ -24,7 +24,7 @@ public class InternshipApplicationController : ControllerBase
             //не захотел полностью переделывать, поэтому оставил на подумать
             //var id = _applicationService.GetById(int.Parse(application.Id));
             var response = _applicationService.SubmitApplicationAsync(application);
-            return response.Result;
+            return Ok(response.Result);
         }
         catch
         {

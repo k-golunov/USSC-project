@@ -5,5 +5,5 @@ namespace USSC.Services;
 
 public interface IApplicationService: IService<Application>
 {
-    Task<IActionResult> SubmitApplicationAsync(ApplicationModel applicationModel);
+    Task<SuccessResponse> SubmitApplicationAsync(ApplicationModel applicationModel);
 }

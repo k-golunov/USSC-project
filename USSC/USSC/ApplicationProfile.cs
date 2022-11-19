@@ -32,15 +32,9 @@ public class ApplicationProfile: Profile
             .ForMember(dst => dst.Orientation, 
                 opt => opt.MapFrom(src => src.Orientation))
             ;
-        /*CreateMap<Application, AuthenticateResponse>()
-                 .ForMember(dst => dst.Email, opt => opt.MapFrom(src => src.Email))
-                 .ForMember(dst => dst.Username, opt => opt.MapFrom(src => src.Email))
-                 .ForMember(dst => dst.FirstName, opt => opt.MapFrom(src => src.Email))
-                 .ForMember(dst => dst.LastName, opt => opt.MapFrom(src => src.Email))
-                 .ForMember(dst => dst.Patronymic, opt => opt.MapFrom(src => src.Email))
-                 .ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.Id))
-                 .ForMember(dst => dst.Token, opt => opt.Ignore())*/
-                 
+
+        CreateMap<Application, SuccessResponse>();
+
     }
     
     
