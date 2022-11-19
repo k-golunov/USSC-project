@@ -8,13 +8,11 @@ namespace USSC.Services;
 public class ApplicationService: IApplicationService, IDisposable
 {
     private readonly IEfRepository<Application> _applicationRepository;
-    private readonly IConfiguration _configuration;
     private readonly IMapper _mapper;
     
-    public ApplicationService(IEfRepository<Application> applicationRepository, IConfiguration configuration, IMapper mapper)
+    public ApplicationService(IEfRepository<Application> applicationRepository, IMapper mapper)
     {
         _applicationRepository = applicationRepository;
-        _configuration = configuration;
         _mapper = mapper;
     }
     
