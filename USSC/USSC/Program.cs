@@ -18,11 +18,15 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DataContext>(opt => 
     opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<ApplicationDb>(opt => 
+    opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IApplicationService, ApplicationService>();
 
 builder.Services.AddAutoMapper(typeof(UserProfile));
+builder.Services.AddAutoMapper(typeof(ApplicationProfile));
 builder.Services.AddCors();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>

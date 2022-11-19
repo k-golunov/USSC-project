@@ -46,3 +46,59 @@ G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.EntityFramewor
 G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
 G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Npgsql.dll
 G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\System.Web.Http.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Newtonsoft.Json.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\appsettings.json
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\USSC.exe
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\USSC.deps.json
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\USSC.runtimeconfig.json
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\USSC.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\USSC.pdb
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\AutoMapper.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\System.Net.Http.Formatting.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\System.Web.Http.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Npgsql.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\obj\Debug\net6.0\USSC.csproj.AssemblyReference.cache
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\obj\Debug\net6.0\USSC.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\obj\Debug\net6.0\USSC.AssemblyInfoInputs.cache
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\obj\Debug\net6.0\USSC.AssemblyInfo.cs
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\obj\Debug\net6.0\USSC.csproj.CoreCompileInputs.cache
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\obj\Debug\net6.0\USSC.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\obj\Debug\net6.0\USSC.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\obj\Debug\net6.0\scopedcss\bundle\USSC.styles.css
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\obj\Debug\net6.0\USSC.csproj.CopyComplete
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\obj\Debug\net6.0\USSC.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\obj\Debug\net6.0\refint\USSC.dll
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\obj\Debug\net6.0\USSC.pdb
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\obj\Debug\net6.0\USSC.genruntimeconfig.cache
+C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\obj\Debug\net6.0\ref\USSC.dll
