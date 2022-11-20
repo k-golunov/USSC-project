@@ -9,14 +9,12 @@ namespace USSC.Controllers;
 public class TestCaseController : ControllerBase
 {
     [HttpGet("download")]
-    public FileStreamResult DownoloadFile(TestCaseFile file)
+    public FileStreamResult DownloadFile(string namePractices)
     {
-        // Нужно решить проблему с передачей в аргументы TestCaseFile появление лишних полей
-        // Возможно создать новую сущность, которая будет связана с TestCaseFile, но просить будет только id и practics id
-        var path = $"G:\\USSC project\\USSC-project\\USSC\\USSC\\Files\\test.txt";
+        var path = $"G:\\USSC project\\USSC-project\\USSC\\USSC\\Files\\{namePractices}.zip";
         var fileType="application/octet-stream";
         var fileStream = new FileStream(path, FileMode.Open);
-        var fileName = "test.txt";
+        var fileName = $"{namePractices}.zip";
         return File(fileStream, fileType, fileName);
     }
 
