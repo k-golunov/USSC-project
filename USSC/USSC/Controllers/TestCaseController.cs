@@ -5,7 +5,7 @@ using USSC.Dto;
 namespace USSC.Controllers;
 
 [ApiController]
-[Route("{controller}")]
+[Route("[controller]")]
 public class TestCaseController : ControllerBase
 {
     [HttpGet("download")]
