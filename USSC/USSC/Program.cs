@@ -6,7 +6,7 @@ using USSC.Dto;
 using USSC.Helpers;
 using USSC.Services;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(new WebApplicationOptions {WebRootPath = "Files"});
 
 // Add services to the container.
 
@@ -22,6 +22,7 @@ builder.Services.AddDbContext<ApplicationDb>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
+builder.Services.AddScoped(typeof(IEfRepository<>), typeof(ApplicationRepository<>));
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IApplicationService, ApplicationService>();
 

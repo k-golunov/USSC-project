@@ -16,4 +16,5 @@ public class ApplicationModel
     public int Course { get; set; }
     public string? Email { get; set; }
     public string[] Orientation { get; set; }
+    public bool Allow { get; set; }
 }
