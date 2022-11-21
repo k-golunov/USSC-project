@@ -11,4 +11,8 @@ public class User : BaseEntity
     public string Email { get; set; }
     [JsonIgnore]
     public string Password { get; set; }
+    
+    public long ApplicationId { get; set; }
+    
+    public long TestCaseId { get; set; }
 }

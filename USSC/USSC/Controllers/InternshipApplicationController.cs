@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using USSC;
+using USSC.Entities;
 using USSC.Dto;
 using USSC.Services;
 
@@ -16,28 +16,19 @@ public class InternshipApplicationController : ControllerBase
     }
     
     [HttpPost("createApplication")]
-    public IActionResult CreateApplication(ApplicationModel application)
+    public IActionResult CreateApplication(User user, ApplicationModel application)
     {
         try
         {
             //вот это проверка на существование application, но там не работает из-за long
             //не захотел полностью переделывать, поэтому оставил на подумать
             //var id = _applicationService.GetById(int.Parse(application.Id));
-            var response = _applicationService.SubmitApplicationAsync(application);
+            var response = _applicationService.SubmitApplicationAsync(user, application);
             return Ok(response.Result);
         }
         catch
         {
             return BadRequest();
         }
-    }
-
-    [HttpGet("GetApplication")]
-    public IActionResult GetApplication()
-    {
-        // проверка на доступ пользователя к заявкам role == Tutor || Admin
-        // if ()
-        //по-моему тут вот так, и ничего более
-        return Ok(_applicationService.GetAll());
     }
 }

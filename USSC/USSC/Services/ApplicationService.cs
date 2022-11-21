@@ -20,9 +20,10 @@ public class ApplicationService: IApplicationService, IDisposable
 
     public Application GetById(int id) => _applicationRepository.GetById(id);
 
-    public async Task<SuccessResponse> SubmitApplicationAsync(ApplicationModel applicationModel)
+    public async Task<SuccessResponse> SubmitApplicationAsync(User user, ApplicationModel applicationModel)
     {
         var application = _mapper.Map<Application>(applicationModel);
+        user.ApplicationId = application.Id;
 
         await _applicationRepository.Add(application);
 
