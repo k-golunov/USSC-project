@@ -4,6 +4,7 @@ using Microsoft.OpenApi.Models;
 using USSC;
 using USSC.Dto;
 using USSC.Helpers;
+using USSC.Profiles;
 using USSC.Services;
 
 var builder = WebApplication.CreateBuilder(new WebApplicationOptions {WebRootPath = "Files"});
@@ -18,8 +19,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DataContext>(opt => 
     opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddDbContext<ApplicationDb>(opt => 
-    opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+// builder.Services.AddDbContext<ApplicationDb>(opt => 
+//     opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
 builder.Services.AddScoped(typeof(IEfRepository<>), typeof(ApplicationRepository<>));
@@ -28,6 +29,7 @@ builder.Services.AddScoped<IApplicationService, ApplicationService>();
 
 builder.Services.AddAutoMapper(typeof(UserProfile));
 builder.Services.AddAutoMapper(typeof(ApplicationProfile));
+builder.Services.AddAutoMapper(typeof(TestCaseProfiles));
 builder.Services.AddCors();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>

@@ -21,8 +21,7 @@ public class ApplicationProfile: Profile
                 opt => opt.MapFrom(src => src.Course))
             .ForMember(dst => dst.Phone, 
                 opt => opt.MapFrom(src => src.Phone))
-            .ForMember(dst => dst.Users, 
-                opt => opt.MapFrom(src => src.Users))
+            .ForMember(dst => dst.Users, opt => opt.MapFrom(src => src.Users))
             ;
         CreateMap<ApplicationEntity, SuccessResponse>();
     }

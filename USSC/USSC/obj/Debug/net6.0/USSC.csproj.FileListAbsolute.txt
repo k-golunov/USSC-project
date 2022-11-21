@@ -163,3 +163,12 @@ C:\Users\79373\OneDrive\Рабочий стол\USSC-project-main\USSC\USSC-proj
 C:\Users\79373\OneDrive\Рабочий стол\USSC-project-main\USSC\USSC-project\USSC\USSC\obj\Debug\net6.0\USSC.pdb
 C:\Users\79373\OneDrive\Рабочий стол\USSC-project-main\USSC\USSC-project\USSC\USSC\obj\Debug\net6.0\USSC.genruntimeconfig.cache
 C:\Users\79373\OneDrive\Рабочий стол\USSC-project-main\USSC\USSC-project\USSC\USSC\obj\Debug\net6.0\ref\USSC.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Dapper.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Humanizer.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Mono.TextTemplating.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\System.CodeDom.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\System.Text.Encodings.Web.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\System.Text.Json.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
