@@ -9,11 +9,11 @@ namespace USSC.Services;
 
 public class UserService : IUserService
 {
-    private readonly IEfRepository<User> _userRepository;
+    private readonly IEfRepository<UsersEntity> _userRepository;
     private readonly IConfiguration _configuration;
     private readonly IMapper _mapper;
 
-    public UserService(IEfRepository<User> userRepository, IConfiguration configuration, IMapper mapper)
+    public UserService(IEfRepository<UsersEntity> userRepository, IConfiguration configuration, IMapper mapper)
     {
         _userRepository = userRepository;
         _configuration = configuration;
@@ -25,7 +25,7 @@ public class UserService : IUserService
     {
         var user = _userRepository
             .GetAll()
-            .FirstOrDefault(x => x.Username == model.Username && x.Password == model.Password);
+            .FirstOrDefault(x => x.Name == model.Username && x.HashedPassword == model.Password);
 
         if (user == null)
         {
@@ -40,25 +40,25 @@ public class UserService : IUserService
 
     public async Task<AuthenticateResponse> Register(UserModel userModel)
     {
-        var user = _mapper.Map<User>(userModel);
+        var user = _mapper.Map<UsersEntity>(userModel);
 
         var addedUser = await _userRepository.Add(user);
 
         var response = Authenticate(new AuthenticateRequest
         {
-            Username = user.Username,
-            Password = user.Password
+            Username = user.Name,
+            Password = user.HashedPassword
         });
             
         return response;
     }
         
-    public IEnumerable<User> GetAll()
+    public IEnumerable<UsersEntity> GetAll()
     {
         return _userRepository.GetAll();
     }
 
-    public User GetById(int id)
+    public UsersEntity GetById(Guid id)
     {
         return _userRepository.GetById(id);
     }

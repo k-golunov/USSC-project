@@ -4,21 +4,19 @@ namespace USSC.Dto;
 
 public class AuthenticateResponse
 {
-    public long Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    public Guid Id { get; set; }
+    public string Surname { get; set; }
+    public string Name { get; set; }
     public string Patronymic { get; set; }
-    public string Username { get; set; }
     public string Email { get; set; }
     public string Token { get; set; }
 
-    public AuthenticateResponse(User user, string token)
+    public AuthenticateResponse(UsersEntity user, string token)
     {
         Id = user.Id;
-        FirstName = user.FirstName;
-        LastName = user.LastName;
+        Surname = user.Surname;
+        Name = user.Name;
         Patronymic = user.Patronymic;
-        Username = user.Username;
         Email = user.Email;
         Token = token;
     }
