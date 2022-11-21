@@ -7,6 +7,6 @@ public class ApplicationEntity: BaseEntity
      public string? Speciality { get; set; }
      public int? Course { get; set; }
      public string? Phone { get; set; }
-     public List<UsersEntity> Users { get; set; }= new();
+     public List<UsersEntity>? Users { get; set; }= new();
 
 }
