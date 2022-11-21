@@ -15,7 +15,7 @@ public class ApplicationRepository<T>: IEfRepository<T> where T: BaseEntity
         return _context.Set<T>().ToList();
     }
 
-    public T GetById(long id)
+    public T GetById(Guid id)
     {
         var result = _context.Set<T>().FirstOrDefault(x => x.Id == id);
 
@@ -27,7 +27,7 @@ public class ApplicationRepository<T>: IEfRepository<T> where T: BaseEntity
         return result;
     }
 
-    public async Task<long> Add(T entity)
+    public async Task<Guid> Add(T entity)
     {
         var result = await _context.Set<T>().AddAsync(entity);
         await _context.SaveChangesAsync();

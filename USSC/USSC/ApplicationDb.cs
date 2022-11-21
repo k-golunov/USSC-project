@@ -5,7 +5,7 @@ namespace USSC;
 
 public class ApplicationDb: DbContext
 {
-    public DbSet<Application> Applications { get; set; }
+    public DbSet<ApplicationEntity> Applications { get; set; }
 
     public ApplicationDb(DbContextOptions<ApplicationDb> options): base(options)
     {

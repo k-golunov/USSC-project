@@ -1,6 +1,8 @@
-﻿namespace USSC.Entities;
+﻿using System.ComponentModel.DataAnnotations;
 
-public class BaseEntity
+namespace USSC.Entities;
+
+public class BaseEntity : IEntity
 {
-    public long Id { get; set; }
+    public Guid Id { get; set; }
 }

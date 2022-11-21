@@ -1,12 +1,18 @@
-﻿namespace USSC.Dto;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace USSC.Dto;
 
 public class UserModel
 {
-    public long Id { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    [Key]
+    public Guid Id { get; set; }
+    public string Surname { get; set; }
+    public string Name { get; set; }
     public string Patronymic { get; set; }
-    public string Username { get; set; }
     public string Email { get; set; }
-    public string Password { get; set; }
+    public string HashedPassword { get; set; }
+    public ApplicationModel? Application { get; set; }
+    public TestCaseModel? TestCase { get; set; }
+    public Guid ApplicationId { get; set; }
+    public Guid TestCaseId { get; set; }
 }
