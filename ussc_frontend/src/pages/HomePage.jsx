@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from '../components/Button';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import Popup from '../components/Popup';
 import PassRecoveryForm from '../forms/PassRecoveryForm';
 import SignInForm from '../forms/SignInForm';
@@ -31,8 +29,6 @@ const HomePage = () => {
 
   return (
     <>
-      <Header />
-
       <div className='main'>
         <div className='content'>
           <div className='content_section'>
@@ -48,7 +44,7 @@ const HomePage = () => {
                   безопасности. В течение месяца студенты решают рабочие задачи,
                   учатся у экспертов компании, делают вклад в свое развитие.
                 </p>
-                <Button enabled={true}>Начать</Button>
+                <Button>Начать</Button>
               </div>
               <div className='offer_images'>
                 <img src={school_logo} alt='' className='school_logo' />
@@ -56,13 +52,13 @@ const HomePage = () => {
                   src={circle}
                   alt=''
                   className='circle'
-                  style={{ left: '1272px', top: '380px' }}
+                  style={{ left: '285px', bottom: '320px' }}
                 />
                 <img
                   src={circleBig}
                   alt=''
                   className='circle'
-                  style={{ left: '1340px', top: '121px' }}
+                  style={{ left: '360px', bottom: '1125px' }}
                 />
               </div>
             </div>
@@ -87,7 +83,7 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-          <div className='content_section'>
+          <div className='content_section' id='about'>
             <h2 className='section_heading'>О практике</h2>
             <div className='about'>
               <ul className='about_list'>
@@ -128,8 +124,6 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-
-      <Footer />
 
       <Popup
         active={signInPopupActive}

@@ -42,9 +42,11 @@ body {
 }
 
 a {
+  display: block;
   text-decoration: none;
   color: #818284;
   cursor: pointer;
+  scroll-behavior: smooth;
 }
 
 textarea {
@@ -55,6 +57,14 @@ input {
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
+}
+
+button {
+  transition-duration: 0.2s;
+}
+
+button:active {
+  transform: scale(0.9);
 }
 
 .nav_logo {
@@ -213,11 +223,6 @@ input {
   border: none;
   color: white;
   background: #f99d1d;
-  transition-duration: 0.2s;
-}
-
-.button:active {
-  transform: scale(0.9);
 }
 
 .disabled {
@@ -384,6 +389,7 @@ input.checked {
   gap: 31px;
   height: min-content;
   margin-bottom: 265px;
+  height: 407px;
 }
 
 .offer_heading {
@@ -414,7 +420,7 @@ input.checked {
 }
 
 .circle {
-  position: absolute;
+  position: relative;
 }
 
 .advantages {
@@ -492,4 +498,49 @@ input.checked {
 .footer {
   height: 250px;
   background-color: #e7e7e8;
+}
+
+.taskpage_wrapper {
+  display: flex;
+  flex-direction: row;
+  margin: 63px auto 0 auto;
+  width: min-content;
+}
+
+.text {
+  font-family: 'OpenSans';
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.task {
+  width: 726px;
+}
+
+.file_field {
+  background-color: #e7e7e8;
+  border-radius: 20px;
+  padding: 14px 22px;
+}
+
+.add_button {
+  border: none;
+  background: none;
+  height: max-content;
+}
+
+.info_text {
+  color: #565a5a;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.file_field .wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.file_field .info_text {
+  padding-left: 26px;
 }

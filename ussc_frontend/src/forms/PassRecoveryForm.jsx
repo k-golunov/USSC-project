@@ -1,13 +1,19 @@
 import React from 'react';
 import Button from '../components/Button';
 import FormFrame from '../components/FormFrame';
-import FormInput from '../components/FormInput';
+import { useForm } from 'react-hook-form';
 
 const PassRecoveryForm = () => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (e) => alert(JSON.stringify(e));
+
   return (
-    <FormFrame title='Восстановление пароля'>
-      <FormInput label='E-mail' required={true} />
-      <Button enabled={true} style={{ marginTop: '70px' }}>
+    <FormFrame title='Восстановление пароля' onSubmit={handleSubmit(onSubmit)}>
+      <label className='form_input_wrapper'>
+        <p className='form_input_label'>E-mail*</p>
+        <input type='email' className='form_input' {...register('email')} />
+      </label>
+      <Button type='submit' style={{ marginTop: '70px' }}>
         Отправить
       </Button>
     </FormFrame>

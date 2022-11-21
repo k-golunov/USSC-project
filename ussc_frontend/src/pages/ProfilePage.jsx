@@ -1,25 +1,13 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
-import Header from '../components/Header';
-import leftArrow from '../img/left_arrow.svg';
+import GoBackButton from '../components/GoBackButton';
 
 const ProfilePage = () => {
-  const navigate = useNavigate();
-
-  const goBack = () => navigate(-1);
-
   return (
     <>
-      <Header />
       <div className='profile_wrapper'>
         <div className='profile'>
-          <a className='go_back' onClick={goBack}>
-            <span>
-              <img src={leftArrow} />
-            </span>
-            Назад
-          </a>
+          <GoBackButton />
           <h1 className='profile_heading'>Редактирование профиля</h1>
 
           <div className='profile_person'>
@@ -100,9 +88,7 @@ const ProfilePage = () => {
                 <input type='password' className='field_input' />
               </div>
             </div>
-            <Button enabled={true} style={{ width: '289px' }}>
-              Сохранить изменения
-            </Button>
+            <Button style={{ width: '289px' }}>Сохранить изменения</Button>
           </div>
         </div>
       </div>

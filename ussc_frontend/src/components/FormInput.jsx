@@ -17,6 +17,7 @@ const FormInput = ({ label, type, name, id, required, ...props }) => {
         type={type}
         name={name}
         id={id}
+        {...props}
       />
     </label>
   );

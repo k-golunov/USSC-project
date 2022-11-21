@@ -3,7 +3,7 @@ import React from 'react';
 const Nav = () => {
   return (
     <div className='nav'>
-      <a href='/' className='nav_item'>
+      <a href='#about' className='nav_item'>
         О нас
       </a>
       <a href='/' className='nav_item'>

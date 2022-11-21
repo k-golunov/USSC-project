@@ -39,9 +39,7 @@ const SignUpForm = () => {
         label='Нажимая кнопку зарегистрироваться, я принимаю условия пользовательского соглашения'
         style={{ marginTop: '30px' }}
       />
-      <Button enabled={true} style={{ marginTop: '66px' }}>
-        Зарегистрироваться
-      </Button>
+      <Button style={{ marginTop: '66px' }}>Зарегистрироваться</Button>
     </FormFrame>
   );
 };
