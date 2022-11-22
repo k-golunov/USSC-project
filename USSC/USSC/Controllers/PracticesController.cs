@@ -6,21 +6,33 @@ namespace USSC.Controllers;
 [Route("[controller]")]
 public class PracticesController : ControllerBase
 {
-    [HttpGet("GetPractices")]
+    [HttpGet("getAllPractices")]
     public IActionResult GetPractices()
     {
         // возвращает поля практики name, description, info, id
         return Ok();
     }
 
-    [HttpPut("UpdatePractices")]
+    [HttpGet("getPractices")]
+    public IActionResult GetPracticesById(int practicesId)
+    {
+        return Ok();
+    }
+
+    [HttpPut("updatePractice")]
     public IActionResult UpdatePractices()
     {
         return Ok();
     }
 
-    [HttpPost("CreatePractices")]
+    [HttpPost("createPractice")]
     public IActionResult CreatePractices()
+    {
+        return Ok();
+    }
+
+    [HttpDelete("deletePractice")]
+    public IActionResult DeletePractices(int practicesId)
     {
         return Ok();
     }

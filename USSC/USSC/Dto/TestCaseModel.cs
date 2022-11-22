@@ -2,11 +2,12 @@
 
 namespace USSC.Dto;
 
-public class TestCase
+public class TestCaseModel
 {
     [Key]
-    public long Id { get; set; }
+    public Guid Id { get; set; }
     public string? Comment { get; set; }
     public bool Allow { get; set; }
     public string? Path { get; set; }
+    public List<UserModel>? Users { get; set; }= new();
 }

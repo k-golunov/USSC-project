@@ -5,17 +5,16 @@ namespace USSC;
 public static class SeedData
 {
     // users hardcoded for simplicity, store in a db with hashed passwords in production applications
-    public static List<User> Users = new List<User>
+    public static List<UsersEntity> Users = new List<UsersEntity>
     {
-        new User
+        new UsersEntity()
         {
-            Id = 1, 
-            FirstName = "Test", 
-            LastName = "User", 
+            Id = Guid.Empty, 
+            Surname = "Test", 
+            Name = "User", 
             Patronymic = "UserPatr", 
             Email = "test@mail.ru", 
-            Username = "test", 
-            Password = "test"
+            HashedPassword = "test"
         }
     };
 }

@@ -7,6 +7,6 @@ namespace USSC.Services;
 public interface IEfRepository<T> where T: BaseEntity
 {
     List<T> GetAll();
-    T GetById(long id);
-    Task<long> Add(T entity);
+    T GetById(Guid id);
+    Task<Guid> Add(T entity);
 }
