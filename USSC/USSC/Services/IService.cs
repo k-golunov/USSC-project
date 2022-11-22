@@ -3,5 +3,5 @@
 public interface IService<T>
 {
     IEnumerable<T> GetAll();
-    T GetById(long id);
+    T GetById(int id);
 }

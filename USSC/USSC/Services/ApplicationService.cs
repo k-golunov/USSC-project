@@ -7,26 +7,22 @@ namespace USSC.Services;
 
 public class ApplicationService: IApplicationService, IDisposable
 {
-    private readonly IEfRepository<Application> _applicationRepository;
-    private readonly IEfRepository<User> _userRepository;
+    private readonly IEfRepository<ApplicationEntity> _applicationRepository;
     private readonly IMapper _mapper;
     
-    public ApplicationService(IEfRepository<Application> applicationRepository, IEfRepository<User> userRepository, IMapper mapper)
+    public ApplicationService(IEfRepository<ApplicationEntity> applicationRepository, IMapper mapper)
     {
         _applicationRepository = applicationRepository;
-        _userRepository = userRepository;
         _mapper = mapper;
     }
     
-    public IEnumerable<Application> GetAll() => _applicationRepository.GetAll();
+    public IEnumerable<ApplicationEntity> GetAll() => _applicationRepository.GetAll();
 
-    public Application GetById(long id) => _applicationRepository.GetById(id);
+    public ApplicationEntity GetById(Guid id) => _applicationRepository.GetById(id);
 
-    public async Task<SuccessResponse> SubmitApplicationAsync(BaseEntity entity, ApplicationModel applicationModel)
+    public async Task<SuccessResponse> SubmitApplicationAsync(ApplicationModel applicationModel)
     {
-        var application = _mapper.Map<Application>(applicationModel);
-        var user = _userRepository.GetById(entity.Id);
-        user.ApplicationId = application.Id;
+        var application = _mapper.Map<ApplicationEntity>(applicationModel);
 
         await _applicationRepository.Add(application);
 
