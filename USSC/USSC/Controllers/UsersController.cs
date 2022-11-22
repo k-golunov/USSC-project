@@ -40,7 +40,7 @@ public class UsersController : ControllerBase
         return Ok(response);
     }
 
-    [Authorize]
+    [Authorize(Roles="Admin")]
     [HttpGet]
     public IActionResult GetAll()
     {
