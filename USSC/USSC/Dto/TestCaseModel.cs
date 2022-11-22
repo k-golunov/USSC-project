@@ -9,5 +9,5 @@ public class TestCaseModel
     public string? Comment { get; set; }
     public bool Allow { get; set; }
     public string? Path { get; set; }
-    public List<UserModel>? Users { get; set; } = new();
+    public List<UserModel>? Users { get; set; }= new();
 }
