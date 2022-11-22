@@ -10,25 +10,28 @@ namespace USSC.Controllers;
 public class InternshipApplicationController : ControllerBase
 {
     private readonly IApplicationService _applicationService;
-    public InternshipApplicationController(IApplicationService applicationService)
+    private readonly IUserService _userService;
+    public InternshipApplicationController(IApplicationService applicationService, IUserService userService)
     {
         _applicationService = applicationService;
+        _userService = userService;
     }
     
     [HttpPost("createApplication")]
-    public IActionResult CreateApplication(User user, ApplicationModel application)
+    public IActionResult CreateApplication([FromQuery] BaseEntity entity, [FromBody]ApplicationModel application)
     {
         try
         {
             //вот это проверка на существование application, но там не работает из-за long
             //не захотел полностью переделывать, поэтому оставил на подумать
             //var id = _applicationService.GetById(int.Parse(application.Id));
+            var user = _userService.GetById(entity.Id);
             var response = _applicationService.SubmitApplicationAsync(user, application);
             return Ok(response.Result);
         }
         catch
         {
-            return BadRequest();
+            return BadRequest(StatusCode(400));
         }
     }
 }

@@ -3,9 +3,9 @@ namespace USSC.Services;
 
 public class ApplicationRepository<T>: IEfRepository<T> where T: BaseEntity
 {
-    private readonly ApplicationDb _context;
+    private readonly DataContext _context;
 
-    public ApplicationRepository(ApplicationDb context)
+    public ApplicationRepository(DataContext context)
     {
         _context = context;
     }

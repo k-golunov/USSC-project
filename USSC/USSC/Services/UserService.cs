@@ -58,7 +58,7 @@ public class UserService : IUserService
         return _userRepository.GetAll();
     }
 
-    public User GetById(int id)
+    public User GetById(long id)
     {
         return _userRepository.GetById(id);
     }

@@ -3,9 +3,9 @@ namespace USSC.Services;
 
 public class TestCaseRepository<T>: IEfRepository<T> where T: BaseEntity
 {
-    private readonly TestCaseDb _context;
+    private readonly DataContext _context;
 
-    public TestCaseRepository(TestCaseDb context)
+    public TestCaseRepository(DataContext context)
     {
         _context = context;
     }

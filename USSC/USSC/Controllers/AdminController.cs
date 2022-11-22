@@ -54,8 +54,9 @@ public class AdminController: Controller
     /// возвращает путь к файлу решен
     /// </summary>
     [HttpGet("downloadPractices")]
-    public IActionResult DownLoadPractice(User user)
+    public IActionResult DownLoadPractice([FromQuery] BaseEntity entity)
     {
+        var user = _userService.GetById(entity.Id);
         if (user.TestCaseId == default)
             return BadRequest(new { Message = "Пользователь не предоставил решения" });
         //тут не должно быть GetHashCode(), но я его поставил чтобы не было ошибки
@@ -69,7 +70,7 @@ public class AdminController: Controller
     /// проверка практики куратором
     /// </summary>
     [HttpPost("reviewPractice")]
-    public IActionResult ReviewPractice(User user, ReviewTestCaseModel caseModel)
+    public IActionResult ReviewPractice([FromQuery] BaseEntity user, [FromBody] ReviewTestCaseModel caseModel)
     {
         var response = _testCaseService.ReviewTestCaseAsync(user, caseModel);
         if (response.Result.Success)

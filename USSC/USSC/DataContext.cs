@@ -7,6 +7,8 @@ namespace USSC;
 public class DataContext : DbContext
 {
     public DbSet<User> Users { get; set; }
+    public DbSet<Application> Applications { get; set; }
+    public DbSet<TestCase> TestCases { get; set; }
 
     public DataContext(DbContextOptions<DataContext> options): base(options)
     {
