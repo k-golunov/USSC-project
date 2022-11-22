@@ -251,7 +251,7 @@ button:active {
   margin-left: 8px;
 }
 
-input.checked {
+input:checked.checked {
   background-color: #f99d1d;
   background-image: url('./img/checkbox.svg');
   background-repeat: no-repeat;

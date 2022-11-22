@@ -6,10 +6,10 @@ const Nav = () => {
       <a href='#about' className='nav_item'>
         О нас
       </a>
-      <a href='/' className='nav_item'>
+      <a href='#directions' className='nav_item'>
         Направления подготовки
       </a>
-      <a href='/' className='nav_item'>
+      <a href='#footer' className='nav_item'>
         Контакты
       </a>
     </div>

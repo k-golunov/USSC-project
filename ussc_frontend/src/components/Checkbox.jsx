@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Checkbox = ({ name, id, label, disabled, ...props }) => {
+const Checkbox = ({ name, id, label, disabled, style, ...props }) => {
   const [isChecked, setIsChecked] = React.useState(false);
-  const { style } = props;
+
   return (
     <div className='checkbox_wrapper' style={style}>
       <input
@@ -12,6 +12,7 @@ const Checkbox = ({ name, id, label, disabled, ...props }) => {
         id={id}
         onChange={() => setIsChecked((prev) => !prev)}
         disabled={disabled}
+        {...props}
       />
       <span>{label}</span>
     </div>

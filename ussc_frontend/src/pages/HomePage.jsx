@@ -114,7 +114,7 @@ const HomePage = () => {
               />
             </div>
           </div>
-          <div className='content_section'>
+          <div className='content_section' id='directions'>
             <h2 className='section_heading'>Направления подготовки</h2>
             <div className='directions'>
               <DirectionCard title='Разработка DATAPK' />
