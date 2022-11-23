@@ -30,6 +30,7 @@ builder.Services.AddScoped<IApplicationService, ApplicationService>();
 builder.Services.AddAutoMapper(typeof(UserProfile));
 builder.Services.AddAutoMapper(typeof(ApplicationProfile));
 builder.Services.AddAutoMapper(typeof(TestCaseProfiles));
+builder.Services.AddAutoMapper(typeof(PracticesProfile));
 builder.Services.AddCors();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>

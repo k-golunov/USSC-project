@@ -11,5 +11,6 @@ public class ApplicationModel
     public string? Speciality { get; set; }
     public int? Course { get; set; }
     public string? Phone { get; set; }
+    //public string? Telegram { get; set; }
     public List<UserModel>? Users { get; set; }= new();
 }
