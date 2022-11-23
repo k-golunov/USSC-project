@@ -1,5 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace USSC.Dto;
 
@@ -13,10 +15,10 @@ public class UserModel
     public string Patronymic { get; set; }
     public string Email { get; set; }
     public string HashedPassword { get; set; }
-    // [JsonIgnore]
-    public ApplicationModel? Application { get; set; }
-    // [JsonIgnore]
-    public TestCaseModel? TestCase { get; set; }
+    //[JsonIgnore]
+    public ApplicationModel Application { get; set; }
+    //[JsonIgnore]
+    public TestCaseModel TestCase { get; set; }
     [JsonIgnore]
     public Guid ApplicationId { get; set; }
     [JsonIgnore]

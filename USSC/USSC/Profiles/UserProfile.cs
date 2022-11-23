@@ -19,7 +19,6 @@ public class UserProfile : Profile
             .ForMember(dst => dst.Application, opt => opt.MapFrom(src => src.Application))
             .ForMember(dst => dst.TestCase, opt => opt.MapFrom(src => src.TestCase))
             .ForMember(dst => dst.Id, opt => opt.Ignore())
-            .ForAllMembers(x => x.Ignore())
             ;
             
         CreateMap<UsersEntity, AuthenticateResponse>()
