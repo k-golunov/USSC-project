@@ -40,10 +40,12 @@ public class JwtMiddleware
                 IssuerSigningKey = new SymmetricSecurityKey(key),
                 ValidateIssuer = false,
                 ValidateAudience = false,
-                ClockSkew = TimeSpan.Zero
+                ClockSkew = TimeSpan.Zero,
+                RoleClaimType = "User",
             }, out SecurityToken validatedToken);
 
             var jwtToken = (JwtSecurityToken)validatedToken;
+            // достает id пользователя из токена
             var userId = Guid.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
 
             context.Items["User"] = userService.GetById(userId);

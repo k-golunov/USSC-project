@@ -6,6 +6,7 @@ namespace USSC.Dto;
 public class UserModel
 {
     [Key]
+    [JsonIgnore]
     public Guid Id { get; set; }
     public string Surname { get; set; }
     public string Name { get; set; }
@@ -16,6 +17,8 @@ public class UserModel
     public ApplicationModel? Application { get; set; }
     // [JsonIgnore]
     public TestCaseModel? TestCase { get; set; }
+    [JsonIgnore]
     public Guid ApplicationId { get; set; }
+    [JsonIgnore]
     public Guid TestCaseId { get; set; }
 }
