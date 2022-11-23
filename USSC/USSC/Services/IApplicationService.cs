@@ -5,5 +5,5 @@ namespace USSC.Services;
 
 public interface IApplicationService: IService<ApplicationEntity>
 {
-    Task<SuccessResponse> SubmitApplicationAsync(ApplicationModel applicationModel);
+    Task<SuccessResponse> SubmitApplicationAsync(BaseEntity entity, ApplicationModel applicationModel);
 }
