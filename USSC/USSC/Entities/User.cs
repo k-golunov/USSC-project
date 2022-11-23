@@ -14,5 +14,5 @@ public class User : BaseEntity
     
     public long ApplicationId { get; set; }
     
-    public long TestCaseId { get; set; }
+    public Guid TestCaseId { get; set; }
 }

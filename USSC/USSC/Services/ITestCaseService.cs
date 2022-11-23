@@ -7,6 +7,6 @@ public interface ITestCaseService: IService<TestCase>
 {
     public Task<SuccessResponse> ReviewTestCaseAsync(BaseEntity entity, ReviewTestCaseModel caseModel);
 
-    public string DownLoad(int testCaseId);
+    public string DownLoad(Guid testCaseId);
 
 }

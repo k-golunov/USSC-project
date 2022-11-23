@@ -61,7 +61,7 @@ public class AdminController: Controller
             return BadRequest(new { Message = "Пользователь не предоставил решения" });
         //тут не должно быть GetHashCode(), но я его поставил чтобы не было ошибки
         //потому что user.TestCaseId должны быть int а не long
-        var testCasePath = _testCaseService.DownLoad(user.TestCaseId.GetHashCode());
+        var testCasePath = _testCaseService.DownLoad(user.TestCaseId);
         
         return Ok(testCasePath);
     }

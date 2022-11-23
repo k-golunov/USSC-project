@@ -20,7 +20,7 @@ public class ApplicationService: IApplicationService, IDisposable
 
     public ApplicationEntity GetById(Guid id) => _applicationRepository.GetById(id);
 
-    public async Task<SuccessResponse> SubmitApplicationAsync(ApplicationModel applicationModel)
+    public async Task<SuccessResponse> SubmitApplicationAsync(BaseEntity entity, ApplicationModel applicationModel)
     {
         var application = _mapper.Map<ApplicationEntity>(applicationModel);
 

@@ -19,7 +19,7 @@ public class TestCaseService : ITestCaseService
 
     public IEnumerable<TestCase> GetAll() => _testcaseRepository.GetAll();
 
-    public TestCase GetById(long id) => _testcaseRepository.GetById(id);
+    public TestCase GetById(Guid id) => _testcaseRepository.GetById(id);
     
     
 
@@ -27,14 +27,14 @@ public class TestCaseService : ITestCaseService
     {
         var model = _mapper.Map<TestCase>(caseModel);
         var user = _userRepository.GetById(entity.Id);
-         user.TestCaseId = model.Id;
+        user.TestCaseId = model.Id;
     
         await _testcaseRepository.Add(model);
 
         return  new SuccessResponse(true);
     }
 
-    public string DownLoad(int testCaseId)
+    public string DownLoad(Guid testCaseId)
     {
         return _testcaseRepository.GetById(testCaseId).Path;
     }
