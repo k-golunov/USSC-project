@@ -39,4 +39,12 @@ public class UsersController : ControllerBase
 
         return Ok(response);
     }
+
+    [Authorize(Roles="Admin")]
+    [HttpGet]
+    public IActionResult GetAll()
+    {
+        var users = _userService.GetAll();
+        return Ok(users);
+    }
 }
