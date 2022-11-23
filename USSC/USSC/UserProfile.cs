@@ -16,10 +16,10 @@ public class UserProfile : Profile
             .ForMember(dst => dst.Patronymic, opt => opt.MapFrom(src => src.Patronymic))
             .ForMember(dst => dst.ApplicationId, opt => opt.MapFrom(src => src.ApplicationId))
             .ForMember(dst => dst.TestCaseId, opt => opt.MapFrom(src => src.TestCaseId))
-            .ForMember(dst => dst.TestCase, opt => opt.MapFrom(src => src.TestCase))
             .ForMember(dst => dst.Application, opt => opt.MapFrom(src => src.Application))
+            .ForMember(dst => dst.TestCase, opt => opt.MapFrom(src => src.TestCase))
             .ForMember(dst => dst.Id, opt => opt.Ignore())
-            // .ForAllMembers(x => x.Ignore())
+            .ForAllMembers(x => x.Ignore())
             ;
             
         CreateMap<UsersEntity, AuthenticateResponse>()
