@@ -5,7 +5,7 @@ import Popup from '../components/Popup';
 import PassRecoveryForm from '../forms/PassRecoveryForm';
 import SignInForm from '../forms/SignInForm';
 import SignUpForm from '../forms/SignUpForm';
-import { togglePopup } from '../store/popupSlice';
+import { togglePopup } from '../store/slices/popupSlice';
 import school_logo from '../img/u_summer_school_logo.png';
 import circle from '../img/circle.svg';
 import circleBig from '../img/circle_big.svg';

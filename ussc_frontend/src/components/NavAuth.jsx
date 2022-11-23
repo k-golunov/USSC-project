@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { togglePopup } from '../store/popupSlice';
+import { togglePopup } from '../store/slices/popupSlice';
 import { Link } from 'react-router-dom';
 
 const NavAuth = () => {

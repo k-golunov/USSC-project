@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import Button from '../components/Button';
 import FormFrame from '../components/FormFrame';
 import FormInput from '../components/FormInput';
-import { togglePopup } from '../store/popupSlice';
+import { togglePopup } from '../store/slices/popupSlice';
 
 const md5 = require('md5');
 

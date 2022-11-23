@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDispatch } from 'react-redux';
-import { togglePopup } from '../store/popupSlice';
+import { togglePopup } from '../store/slices/popupSlice';
 
 import FormFrame from '../components/FormFrame';
 import FormInput from '../components/FormInput';
@@ -9,6 +9,38 @@ import Button from '../components/Button';
 import Checkbox from '../components/Checkbox';
 import { useForm } from 'react-hook-form';
 import md5 from 'md5';
+
+// {
+
+//   "surname": "string",
+//   "name": "string",
+//   "patronymic": "string",
+//   "email": "string",
+//   "hashedPassword": "string",
+//   "application": {
+
+//   },
+//   "testCase": {
+//   },
+//   "applicationId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+//   "testCaseId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+// }
+
+const signUpUser = async (user) => {
+  let response = await fetch('https://localhost:7296/Users/register', {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: JSON.stringify({
+      ...user,
+      application: {},
+      testCase: {},
+      applicationId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+      testCaseId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+    }),
+  });
+};
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
@@ -18,14 +50,16 @@ const SignUpForm = () => {
 
   const methods = useForm();
   const { register, handleSubmit } = methods;
-  const onSubmit = (e) => {
-    if (e.password !== e.password_again) {
+  const onSubmit = (user) => {
+    if (user.hashedPassword !== user.password_again) {
       alert('Вы указали разные пароли!');
       return;
     }
-    delete e.password_again;
-    e.password = md5(e.password);
-    alert(JSON.stringify(e));
+
+    delete user.rule; //Потом надо будет вернуть
+    delete user.password_again;
+    user.hashedPassword = md5(user.hashedPassword);
+    signUpUser(user);
   };
 
   const [isChecked, setIsChecked] = React.useState(false);
@@ -50,7 +84,7 @@ const SignUpForm = () => {
         <input
           type='text'
           className='form_input'
-          {...register('lastName', { required: true })}
+          {...register('surname', { required: true })}
         />
       </label>
 
@@ -59,7 +93,7 @@ const SignUpForm = () => {
         <input
           type='text'
           className='form_input'
-          {...register('firstName', { required: true })}
+          {...register('name', { required: true })}
         />
       </label>
 
@@ -86,7 +120,7 @@ const SignUpForm = () => {
         <input
           type='password'
           className='form_input'
-          {...register('password', { required: true })}
+          {...register('hashedPassword', { required: true })}
         />
       </label>
 
@@ -99,7 +133,7 @@ const SignUpForm = () => {
         />
       </label>
 
-      <div className='checkbox_wrapper' style={{ marginTop: '30px' }}>
+      {/* <div className='checkbox_wrapper' style={{ marginTop: '30px' }}>
         <input
           className={isChecked ? 'checked' : ''}
           type='checkbox'
@@ -113,7 +147,7 @@ const SignUpForm = () => {
           Нажимая кнопку зарегистрироваться, я принимаю условия
           пользовательского соглашения
         </span>
-      </div>
+      </div> */}
       {/* <FormInput {...methods} type='text' label='Фамилия' required={true} />
       <FormInput type='text' label='Имя' required={true} />
       <FormInput type='text' label='Отчество' required={true} />
