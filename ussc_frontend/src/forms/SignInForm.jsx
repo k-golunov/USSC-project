@@ -5,8 +5,18 @@ import Button from '../components/Button';
 import FormFrame from '../components/FormFrame';
 import FormInput from '../components/FormInput';
 import { togglePopup } from '../store/slices/popupSlice';
+import md5 from 'md5';
 
-const md5 = require('md5');
+const signInUser = async (user) => {
+  let response = await fetch('https://localhost:7296/Users/authenticate', {
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: JSON.stringify(user),
+  });
+  return response;
+};
 
 const SignInForm = () => {
   const dispatch = useDispatch();
@@ -16,9 +26,12 @@ const SignInForm = () => {
   const togglePassRecoveryPopup = () => dispatch(togglePopup('passRecovery'));
 
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
-    data.password = md5(data.password);
-    alert(JSON.stringify(data));
+  const onSubmit = async (user) => {
+    user.password = md5(user.password);
+
+    let response = await signInUser(user);
+
+    console.log(await response.json());
   };
 
   return (
@@ -39,9 +52,9 @@ const SignInForm = () => {
       <label className='form_input_wrapper'>
         <p className='form_input_label'>E-mail*</p>
         <input
-          type='email'
+          type='text'
           className='form_input'
-          {...register('email')}
+          {...register('username')}
           required
         />
       </label>
