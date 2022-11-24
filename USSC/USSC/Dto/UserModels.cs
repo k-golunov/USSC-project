@@ -15,10 +15,10 @@ public class UserModel
     public string Patronymic { get; set; }
     public string Email { get; set; }
     public string HashedPassword { get; set; }
-    //[JsonIgnore]
-    public ApplicationModel Application { get; set; }
-    //[JsonIgnore]
-    public TestCaseModel TestCase { get; set; }
+    [JsonIgnore] 
+    public ApplicationModel Application { get; set; } = new();
+    [JsonIgnore] 
+    public TestCaseModel TestCase { get; set; } = new();
     [JsonIgnore]
     public Guid ApplicationId { get; set; }
     [JsonIgnore]
