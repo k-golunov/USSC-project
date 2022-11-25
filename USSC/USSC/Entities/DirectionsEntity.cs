@@ -7,9 +7,8 @@ namespace USSC.Entities;
 public class DirectionsEntity : BaseEntity
 {
     public string? Directions { get; set; }
-    [JsonIgnore]
-    [ForeignKey("TeacherId")]
-    public TeachersEntity Teacher { get; set; }
-
-    public Guid TeacherId { get; set; }
+    public string? Path { get; set; }
+    public List<PracticesEntity> Practices { get; set; } 
+    public List<UsersDirectionsfkEntity> Users { get; set; } 
+    public List<TestCaseEntity> TestCase { get; set; }
 }
