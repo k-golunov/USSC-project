@@ -40,6 +40,8 @@ public class UserService : IUserService
 
     public async Task<AuthenticateResponse> Register(UserModel userModel)
     {
+        userModel.Role = "User";
+        userModel.RefreshToken = "1";
         var user = _mapper.Map<UsersEntity>(userModel);
 
         var addedUser = await _userRepository.Add(user);

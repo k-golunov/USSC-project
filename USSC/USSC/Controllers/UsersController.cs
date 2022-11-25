@@ -6,7 +6,7 @@ using USSC.Services;
 namespace USSC.Controllers;
 
 [ApiController]
-[Route("[controller]")]
+[Route("user")]
 public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
@@ -16,7 +16,7 @@ public class UsersController : ControllerBase
         _userService = userService;
     }
 
-    [HttpPost("authenticate")]
+    [HttpPost("signin")]
     public IActionResult Authenticate(AuthenticateRequest model)
     {
         var response = _userService.Authenticate(model);
