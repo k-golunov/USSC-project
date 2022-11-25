@@ -10,11 +10,8 @@ public static class SeedData
         new UsersEntity()
         {
             Id = Guid.Empty, 
-            Surname = "Test", 
-            Name = "User", 
-            Patronymic = "UserPatr", 
             Email = "test@mail.ru", 
-            HashedPassword = "test"
+            Password = "test"
         }
     };
 }

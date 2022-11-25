@@ -25,7 +25,7 @@ public class UserService : IUserService
     {
         var user = _userRepository
             .GetAll()
-            .FirstOrDefault(x => x.Email == model.Email && x.HashedPassword == model.Password);
+            .FirstOrDefault(x => x.Email == model.Email && x.Password == model.Password);
 
         if (user == null)
         {
@@ -47,7 +47,7 @@ public class UserService : IUserService
         var response = Authenticate(new AuthenticateRequest
         {
             Email = user.Email,
-            Password = user.HashedPassword
+            Password = user.Password
         });
             
         return response;

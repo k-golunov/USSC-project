@@ -11,13 +11,9 @@ public class AuthenticateResponse
     public string Email { get; set; }
     public string Token { get; set; }
 
-    public AuthenticateResponse(UsersEntity user, string token)
+    public AuthenticateResponse(UsersEntity user, string? toke)
     {
         Id = user.Id;
-        Surname = user.Surname;
-        Name = user.Name;
-        Patronymic = user.Patronymic;
         Email = user.Email;
-        Token = token;
     }
 }
