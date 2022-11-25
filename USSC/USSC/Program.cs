@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using USSC;
 using USSC.Dto;
+using USSC.Entities;
 using USSC.Helpers;
 using USSC.Profiles;
 using USSC.Services;
@@ -24,13 +25,16 @@ builder.Services.AddDbContext<DataContext>(opt =>
 
 builder.Services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
 builder.Services.AddScoped(typeof(IEfRepository<>), typeof(ApplicationRepository<>));
+builder.Services.AddScoped(typeof(IEfRepository<>), typeof(ProfileRepository<>));
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IApplicationService, ApplicationService>();
+builder.Services.AddScoped<IProfileService, ProfileService>();
 
 builder.Services.AddAutoMapper(typeof(UserProfile));
 builder.Services.AddAutoMapper(typeof(ApplicationProfile));
 builder.Services.AddAutoMapper(typeof(TestCaseProfiles));
 builder.Services.AddAutoMapper(typeof(PracticesProfile));
+builder.Services.AddAutoMapper(typeof(ProfileUserProfile));
 builder.Services.AddCors();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
