@@ -2,21 +2,19 @@
 using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
+using USSC.Dto;
 
 
 namespace USSC.Entities;
 
 public class UsersEntity : BaseEntity
 {
-    public string Surname { get; set; }
-    public string Name { get; set; }
-    public string Patronymic { get; set; }
+    
     public string Email { get; set; }
-    public string HashedPassword { get; set; }
-    [ForeignKey("ApplicationId")]
-    public ApplicationEntity? Application { get; set; } 
-    public Guid ApplicationId { get; set; } 
-    [ForeignKey("TestCaseId")]
-    public TestCaseEntity? TestCase { get; set; }
-    public Guid TestCaseId { get; set; } 
+    public string Password { get; set; }
+    public string RefreshToken { get; set; }
+    public string Role { get; set; }
+    public List<UsersDirectionsfkEntity> Directions { get; set; } 
+    public List<TestCaseEntity> TestCase { get; set; }
+    public List<ProfileEntity> Profile { get; set; }
 }

@@ -25,7 +25,7 @@ public class UserService : IUserService
     {
         var user = _userRepository
             .GetAll()
-            .FirstOrDefault(x => x.Email == model.Email && x.HashedPassword == model.Password);
+            .FirstOrDefault(x => x.Email == model.Email && x.Password == model.Password);
 
         if (user == null)
         {
@@ -40,6 +40,8 @@ public class UserService : IUserService
 
     public async Task<AuthenticateResponse> Register(UserModel userModel)
     {
+        userModel.Role = "User";
+        userModel.RefreshToken = "1";
         var user = _mapper.Map<UsersEntity>(userModel);
 
         var addedUser = await _userRepository.Add(user);
@@ -47,7 +49,7 @@ public class UserService : IUserService
         var response = Authenticate(new AuthenticateRequest
         {
             Email = user.Email,
-            Password = user.HashedPassword
+            Password = user.Password
         });
             
         return response;

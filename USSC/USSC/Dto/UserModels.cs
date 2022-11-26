@@ -2,6 +2,7 @@
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using USSC.Entities;
 
 namespace USSC.Dto;
 
@@ -10,17 +11,17 @@ public class UserModel
     [Key]
     [JsonIgnore]
     public Guid Id { get; set; }
-    public string Surname { get; set; }
-    public string Name { get; set; }
-    public string Patronymic { get; set; }
     public string Email { get; set; }
-    public string HashedPassword { get; set; }
-    [JsonIgnore] 
-    public ApplicationModel Application { get; set; } = new();
-    [JsonIgnore] 
-    public TestCaseModel TestCase { get; set; } = new();
+    public string Password { get; set; }
     [JsonIgnore]
-    public Guid ApplicationId { get; set; }
+    public List<TestCaseModel> TestCase { get; set; } = new();
     [JsonIgnore]
-    public Guid TestCaseId { get; set; }
+    public List<UsersDirectionsfkModel> Directions { get; set; } = new();
+    [JsonIgnore]
+    public string? Role { get; set; }
+    [JsonIgnore]
+    public string? RefreshToken { get; set; }
+    [JsonIgnore]
+    public List<ProfileEntity> Profile { get; set; } = new();
+
 }
