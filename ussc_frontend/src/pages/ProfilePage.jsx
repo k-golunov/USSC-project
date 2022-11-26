@@ -14,17 +14,31 @@ const ProfilePage = () => {
             <div className='profile_photo'></div>
             <div className='profile_name_wrapper'>
               <p className='profile_name'>Имя Фамилия Отчество</p>
-              <a>Изменить</a>
             </div>
           </div>
 
           <div className='profile_data'>
             <div className='profile_datasection'>
-              <h2 className='datasection_heading'>
-                Контактная
-                <br />
-                информация
-              </h2>
+              <h2 className='datasection_heading'>Основная информация</h2>
+
+              <div className='datasection_field'>
+                <p className='field_title'>Фамилия</p>
+                <input className='field_input' type='text' />
+              </div>
+
+              <div className='datasection_field'>
+                <p className='field_title'>Имя</p>
+                <input className='field_input' type='text' />
+              </div>
+
+              <div className='datasection_field'>
+                <p className='field_title'>Отчество</p>
+                <input className='field_input' type='text' />
+              </div>
+            </div>
+
+            <div className='profile_datasection'>
+              <h2 className='datasection_heading'>Контактная информация</h2>
 
               <div className='datasection_field'>
                 <p className='field_title'>Телефон</p>
@@ -33,7 +47,7 @@ const ProfilePage = () => {
 
               <div className='datasection_field'>
                 <p className='field_title'>E-mail</p>
-                <input className='field_input' type='email' />
+                <input className='field_input' type='email' disabled />
               </div>
 
               <div className='datasection_field'>
@@ -71,6 +85,10 @@ const ProfilePage = () => {
               </div>
             </div>
 
+            <Button style={{ alignSelf: 'flex-start' }}>
+              Сохранить изменения
+            </Button>
+
             <div className='profile_datasection'>
               <h2 className='datasection_heading'>Изменить пароль</h2>
               <div className='datasection_field'>
@@ -88,7 +106,7 @@ const ProfilePage = () => {
                 <input type='password' className='field_input' />
               </div>
             </div>
-            <Button style={{ width: '289px' }}>Сохранить изменения</Button>
+            <Button style={{ alignSelf: 'flex-start' }}>Изменить пароль</Button>
           </div>
         </div>
       </div>

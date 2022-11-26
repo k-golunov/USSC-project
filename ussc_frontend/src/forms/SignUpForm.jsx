@@ -27,18 +27,12 @@ import md5 from 'md5';
 // }
 
 const signUpUser = async (user) => {
-  let response = await fetch('https://localhost:7296/Users/register', {
+  let response = await fetch('https://localhost:7296/user/register', {
     method: 'post',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
     },
-    body: JSON.stringify({
-      ...user,
-      application: {},
-      testCase: {},
-      applicationId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-      testCaseId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-    }),
+    body: JSON.stringify(user),
   });
 };
 
@@ -51,14 +45,14 @@ const SignUpForm = () => {
   const methods = useForm();
   const { register, handleSubmit } = methods;
   const onSubmit = (user) => {
-    if (user.hashedPassword !== user.password_again) {
+    if (user.password !== user.password_again) {
       alert('Вы указали разные пароли!');
       return;
     }
 
     delete user.rule; //Потом надо будет вернуть
     delete user.password_again;
-    user.hashedPassword = md5(user.hashedPassword);
+    user.password = md5(user.password);
     signUpUser(user);
   };
 
@@ -80,33 +74,6 @@ const SignUpForm = () => {
       </div>
 
       <label className='form_input_wrapper'>
-        <p className='form_input_label'>Фамилия*</p>
-        <input
-          type='text'
-          className='form_input'
-          {...register('surname', { required: true })}
-        />
-      </label>
-
-      <label className='form_input_wrapper'>
-        <p className='form_input_label'>Имя*</p>
-        <input
-          type='text'
-          className='form_input'
-          {...register('name', { required: true })}
-        />
-      </label>
-
-      <label className='form_input_wrapper'>
-        <p className='form_input_label'>Отчество*</p>
-        <input
-          type='text'
-          className='form_input'
-          {...register('patronymic', { required: true })}
-        />
-      </label>
-
-      <label className='form_input_wrapper'>
         <p className='form_input_label'>E-mail*</p>
         <input
           type='email'
@@ -120,7 +87,7 @@ const SignUpForm = () => {
         <input
           type='password'
           className='form_input'
-          {...register('hashedPassword', { required: true })}
+          {...register('password', { required: true })}
         />
       </label>
 

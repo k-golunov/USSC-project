@@ -14,13 +14,13 @@
   src: url('./fonts/Oswald-VariableFont_wght.ttf') format('truetype');
 }
 
-@media screen and (max-width: 1440px) {
+@media screen and (max-width: 1600px) {
   body {
     zoom: 80%;
   }
 }
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1100px) {
   body {
     zoom: 60%;
   }
@@ -53,7 +53,9 @@ textarea {
   resize: none;
 }
 
-input {
+input,
+textarea {
+  font-family: 'OpenSans';
   font-weight: 400;
   font-size: 16px;
   line-height: 20px;
@@ -106,8 +108,8 @@ button:active {
 .header_wrapper {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
-  width: 100%;
+  justify-content: space-between;
+  min-width: 1480px;
   height: 100%;
 }
 
@@ -542,4 +544,41 @@ input:checked.checked {
 
 .file_field .info_text {
   padding-left: 26px;
+}
+
+/* ApplicationsPage */
+
+.directionspage {
+  width: 1480px;
+  margin: auto;
+}
+
+.directionspage .content_section {
+  margin-top: 160px;
+}
+
+/* FillProfileRequest */
+
+.fill_profile_request {
+  padding: 40px;
+  background-color: #e7e7e8;
+  border-radius: 20px;
+}
+
+.fill_profile_request .request {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.request .request_heading {
+  margin-bottom: 22px;
+}
+
+.request .request_text {
+  max-width: 926px;
+}
+
+.request .button {
+  align-self: flex-end;
 }

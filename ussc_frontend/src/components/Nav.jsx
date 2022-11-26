@@ -1,6 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { useAuth } from '../hooks/use-auth';
 
 const Nav = () => {
+  const isAuth = useAuth().isAuth;
+
+  if (isAuth) {
+    return (
+      <div className='nav'>
+        <a href='' className='nav_item'>
+          Мои заявки
+        </a>
+        <Link to='/directions' className='nav_item'>
+          Направления подготовки
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <div className='nav'>
       <a href='#about' className='nav_item'>

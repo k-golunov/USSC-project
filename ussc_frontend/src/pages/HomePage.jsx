@@ -14,15 +14,21 @@ import bagIcon from '../img/bag_icon.svg';
 import checkmarckIcon from '../img/checkmark_icon.svg';
 import samplePhoto1 from '../img/sample_photo1.jpg';
 import DirectionCard from '../components/DirectionCard';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../hooks/use-auth';
 
 const HomePage = () => {
   const dispatch = useDispatch();
+  const isAuth = useAuth().isAuth;
 
   const signInPopupActive = useSelector((state) => state.popups.signIn);
   const signUpPopupActive = useSelector((state) => state.popups.signUp);
   const passRecoveryPopupActive = useSelector(
     (state) => state.popups.passRecovery
   );
+
+  if (isAuth) return <Navigate to='/directions' />;
+
   const toggleSignInActive = () => dispatch(togglePopup('signIn'));
   const toggleSignUpActive = () => dispatch(togglePopup('signUp'));
   const togglePassRecoveryActive = () => dispatch(togglePopup('passRecovery'));

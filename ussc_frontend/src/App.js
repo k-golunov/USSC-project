@@ -8,6 +8,9 @@ import ProfilePage from './pages/ProfilePage';
 import HomeLayout from './components/HomeLayout';
 import ProfileLayout from './components/ProfileLayout';
 import TaskPage from './pages/TaskPage';
+import RequireAuth from './hoc/RequireAuth';
+import { useAuth } from './hooks/use-auth';
+import DirectionsPage from './pages/DirectionsPage';
 
 function App() {
   return (
@@ -18,9 +21,35 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path='*' element={<NotFoundPage />} />
           </Route>
-          <Route path='/profile/' element={<ProfileLayout />}>
+          <Route
+            path='/profile'
+            element={
+              <RequireAuth>
+                <ProfileLayout />
+              </RequireAuth>
+            }
+          >
             <Route index element={<ProfilePage />} />
-            <Route path='task' element={<TaskPage />} />
+          </Route>
+          <Route
+            path='tasks'
+            element={
+              <RequireAuth>
+                <ProfileLayout />
+              </RequireAuth>
+            }
+          >
+            <Route index element={<TaskPage />} />
+          </Route>
+          <Route
+            path='/directions'
+            element={
+              <RequireAuth>
+                <ProfileLayout />
+              </RequireAuth>
+            }
+          >
+            <Route index element={<DirectionsPage />} />
           </Route>
         </Routes>
       </Router>

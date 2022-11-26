@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Button = ({ children, style, disabled, ...props }) => {
+const Button = ({ children, disabled, ...props }) => {
   return (
     <button
       className={`button${disabled ? ' disabled' : ''}`}
-      style={style}
+      //style={style}
       disabled={disabled}
       {...props}
     >

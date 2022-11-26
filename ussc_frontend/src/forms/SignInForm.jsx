@@ -5,10 +5,12 @@ import Button from '../components/Button';
 import FormFrame from '../components/FormFrame';
 import FormInput from '../components/FormInput';
 import { togglePopup } from '../store/slices/popupSlice';
+import { setUser } from '../store/slices/userSlice';
 import md5 from 'md5';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const signInUser = async (user) => {
-  let response = await fetch('https://localhost:7296/Users/authenticate', {
+  let response = await fetch('https://localhost:7296/user/signin', {
     method: 'post',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -20,6 +22,7 @@ const signInUser = async (user) => {
 
 const SignInForm = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const toggleSignUpPopup = () => dispatch(togglePopup('signUp'));
   const toggleSignInPopup = () => dispatch(togglePopup('signIn'));
@@ -31,7 +34,11 @@ const SignInForm = () => {
 
     let response = await signInUser(user);
 
-    console.log(await response.json());
+    if (response.ok) {
+      dispatch(setUser(await response.json()));
+      toggleSignInPopup();
+      navigate('/profile');
+    }
   };
 
   return (
@@ -54,7 +61,7 @@ const SignInForm = () => {
         <input
           type='text'
           className='form_input'
-          {...register('username')}
+          {...register('email')}
           required
         />
       </label>
