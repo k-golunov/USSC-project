@@ -6,6 +6,7 @@ using USSC.Entities;
 
 namespace USSC.Dto;
 
+
 public class UserModel
 {
     [Key]
