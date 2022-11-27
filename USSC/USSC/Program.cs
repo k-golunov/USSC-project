@@ -1,5 +1,7 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
 using USSC;
 using USSC.Dto;
@@ -22,10 +24,14 @@ builder.Services.AddDbContext<DataContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 // builder.Services.AddDbContext<ApplicationDb>(opt => 
 //     opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
 builder.Services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
-builder.Services.AddScoped(typeof(IEfRepository<>), typeof(ApplicationRepository<>));
-builder.Services.AddScoped(typeof(IEfRepository<>), typeof(ProfileRepository<>));
+// builder.Services.AddScoped<UserRepository<UsersEntity>>();
+// builder.Services.AddScoped<ProfileRepository>();
+// builder.Services.AddScoped(typeof(IEfRepository<>), typeof(ApplicationRepository<>));
+// builder.Services.AddScoped(typeof(IEfRepository<ProfileEntity>), typeof(ProfileRepository<ProfileEntity>));
+builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
+// builder.Services.AddScoped<IEfRepository<UsersEntity>>();
+// builder.Services.AddScoped<IEfRepository<ProfileEntity>>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IApplicationService, ApplicationService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();

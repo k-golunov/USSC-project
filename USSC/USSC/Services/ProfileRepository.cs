@@ -2,7 +2,7 @@
 
 namespace USSC.Services;
 
-public class ProfileRepository<T> : IEfRepository<T> where T: BaseEntity
+public class ProfileRepository : IProfileRepository
 {
     private readonly DataContext _context;
 
@@ -10,19 +10,19 @@ public class ProfileRepository<T> : IEfRepository<T> where T: BaseEntity
     {
         _context = context;
     }
-    public List<T> GetAll()
+    public List<ProfileEntity> GetAll()
     {
         throw new NotImplementedException();
     }
 
-    public T GetById(Guid id)
+    public ProfileEntity GetById(Guid id)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Guid> Add(T entity)
+    public async Task<Guid> Add(ProfileEntity entity)
     {
-        var result = await _context.Set<T>().AddAsync(entity);
+        var result = await _context.Set<ProfileEntity>().AddAsync(entity);
         await _context.SaveChangesAsync();
         return result.Entity.Id;
     }

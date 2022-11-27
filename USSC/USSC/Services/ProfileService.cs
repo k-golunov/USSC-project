@@ -6,11 +6,11 @@ namespace USSC.Services;
 
 public class ProfileService : IProfileService
 {
-    private readonly IEfRepository<ProfileEntity> _profileRepository;
+    private readonly IProfileRepository _profileRepository;
     private readonly IConfiguration _configuration;
     private readonly IMapper _mapper;
 
-    public ProfileService(IEfRepository<ProfileEntity> profileRepository, IConfiguration configuration, IMapper mapper)
+    public ProfileService(IProfileRepository profileRepository, IConfiguration configuration, IMapper mapper)
     {
         _profileRepository = profileRepository;
         _configuration = configuration;
