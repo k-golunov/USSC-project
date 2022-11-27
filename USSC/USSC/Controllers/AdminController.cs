@@ -53,7 +53,7 @@ public class AdminController: Controller
     /// <summary>
     /// возвращает путь к файлу решен
     /// </summary>
-    [HttpGet("downloadPractices")]
+    /*[HttpGet("downloadPractices")]
     public IActionResult DownLoadPractice([FromQuery] BaseEntity entity)
     {
         var user = _userService.GetById(entity.Id);
@@ -64,7 +64,7 @@ public class AdminController: Controller
         var testCasePath = _testCaseService.DownLoad(user.TestCaseId);
         
         return Ok(testCasePath);
-    }
+    }*/
 
     /// <summary>
     /// проверка практики куратором

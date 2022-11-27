@@ -4,7 +4,7 @@ namespace USSC.Services;
 
 //create baseEntity and DataContext
 
-public class UserRepository<T>: IEfRepository<T> where T: BaseEntity
+public class UserRepository<T> : IEfRepository<T> where T : BaseEntity
 {
     private readonly DataContext _context;
 
