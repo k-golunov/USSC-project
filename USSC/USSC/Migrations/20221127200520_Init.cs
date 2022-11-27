@@ -31,8 +31,7 @@ namespace USSC.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     Info = table.Column<string>(type: "text", nullable: true),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    Path = table.Column<string>(type: "text", nullable: true)
+                    Name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -161,6 +160,12 @@ namespace USSC.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Directions_Path",
+                table: "Directions",
+                column: "Path",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DirectionsEntityPracticesEntity_PracticesId",
                 table: "DirectionsEntityPracticesEntity",
                 column: "PracticesId");
@@ -176,9 +181,21 @@ namespace USSC.Migrations
                 column: "DirectionId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TestCase_Path",
+                table: "TestCase",
+                column: "Path",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TestCase_UserId",
                 table: "TestCase",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_UsersDirectionsfk_DirectionsId",

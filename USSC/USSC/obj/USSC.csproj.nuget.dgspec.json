@@ -1,25 +1,31 @@
 {
   "format": 1,
   "restore": {
-    "G:\\USSC project\\USSC-project\\USSC\\USSC\\USSC.csproj": {}
+    "C:\\Users\\79373\\OneDrive\\Рабочий стол\\USSC-project-main\\USSC\\USSC-project\\USSC\\USSC\\USSC.csproj": {}
   },
   "projects": {
-    "G:\\USSC project\\USSC-project\\USSC\\USSC\\USSC.csproj": {
+    "C:\\Users\\79373\\OneDrive\\Рабочий стол\\USSC-project-main\\USSC\\USSC-project\\USSC\\USSC\\USSC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\USSC project\\USSC-project\\USSC\\USSC\\USSC.csproj",
+        "projectUniqueName": "C:\\Users\\79373\\OneDrive\\Рабочий стол\\USSC-project-main\\USSC\\USSC-project\\USSC\\USSC\\USSC.csproj",
         "projectName": "USSC",
-        "projectPath": "G:\\USSC project\\USSC-project\\USSC\\USSC\\USSC.csproj",
-        "packagesPath": "C:\\Users\\Kostya\\.nuget\\packages\\",
-        "outputPath": "G:\\USSC project\\USSC-project\\USSC\\USSC\\obj\\",
+        "projectPath": "C:\\Users\\79373\\OneDrive\\Рабочий стол\\USSC-project-main\\USSC\\USSC-project\\USSC\\USSC\\USSC.csproj",
+        "packagesPath": "C:\\Users\\79373\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\79373\\OneDrive\\Рабочий стол\\USSC-project-main\\USSC\\USSC-project\\USSC\\USSC\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "E:\\Visual\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Kostya\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\79373\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -104,7 +110,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
