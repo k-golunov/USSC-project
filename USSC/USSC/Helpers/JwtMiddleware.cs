@@ -20,7 +20,7 @@ public class JwtMiddleware
     public async Task Invoke(HttpContext context, IUserService userService)
     {
         var token1 = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ");
-        var token = token1.Last();
+        var token = token1?.Last();
 
         if (token != null)
             AttachUserToContext(context, userService, token);

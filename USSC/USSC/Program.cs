@@ -32,15 +32,20 @@ builder.Services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 // builder.Services.AddScoped<IEfRepository<UsersEntity>>();
 // builder.Services.AddScoped<IEfRepository<ProfileEntity>>();
+builder.Services.AddScoped<IDirectionRepository, DirectionRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IApplicationService, ApplicationService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 
+
+
+builder.Services.AddScoped<IDirectionService, DirectionService>();
 builder.Services.AddAutoMapper(typeof(UserProfile));
 builder.Services.AddAutoMapper(typeof(ApplicationProfile));
 builder.Services.AddAutoMapper(typeof(TestCaseProfiles));
 builder.Services.AddAutoMapper(typeof(PracticesProfile));
 builder.Services.AddAutoMapper(typeof(ProfileUserProfile));
+builder.Services.AddAutoMapper(typeof(DirectionProfile));
 builder.Services.AddCors();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
