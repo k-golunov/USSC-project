@@ -33,4 +33,9 @@ public class ApplicationRepository<T>: IEfRepository<T> where T: BaseEntity
         await _context.SaveChangesAsync();
         return result.Entity.Id;
     }
+
+    public Task<Guid> Update(T entity)
+    {
+        throw new NotImplementedException();
+    }
 }

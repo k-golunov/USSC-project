@@ -54,7 +54,14 @@ public class UserService : IUserService
             
         return response;
     }
-        
+
+    public async Task<Guid> Update(UserModel entity)
+    {
+        var a = _mapper.Map<UsersEntity>(entity);
+        await _userRepository.Update(a);
+        return entity.Id;
+    }
+
     public IEnumerable<UsersEntity> GetAll()
     {
         return _userRepository.GetAll();

@@ -9,10 +9,9 @@ namespace USSC.Dto;
 public class UserModel
 {
     [Key]
-    [JsonIgnore]
     public Guid Id { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
+    public string? Email { get; set; }
+    public string? Password { get; set; }
     [JsonIgnore]
     public List<TestCaseModel> TestCase { get; set; } = new();
     [JsonIgnore]

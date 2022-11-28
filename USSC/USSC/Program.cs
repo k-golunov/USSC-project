@@ -30,10 +30,12 @@ builder.Services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
 // builder.Services.AddScoped(typeof(IEfRepository<>), typeof(ApplicationRepository<>));
 // builder.Services.AddScoped(typeof(IEfRepository<ProfileEntity>), typeof(ProfileRepository<ProfileEntity>));
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
+builder.Services.AddScoped<ITestCaseRepository, TestCaseRepository>();
 // builder.Services.AddScoped<IEfRepository<UsersEntity>>();
 // builder.Services.AddScoped<IEfRepository<ProfileEntity>>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IApplicationService, ApplicationService>();
+builder.Services.AddScoped<ITestCaseService, TestCaseService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 
 builder.Services.AddAutoMapper(typeof(UserProfile));

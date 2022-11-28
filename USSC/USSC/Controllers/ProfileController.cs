@@ -16,9 +16,10 @@ public class ProfileController : ControllerBase
     }
     
     [HttpGet("getInfo")]
-    public IActionResult GetProfileInfo()
+    public IActionResult GetProfileInfo(Guid userId)
     {
-        return Ok();
+        var profile = _profileService.GetById(userId);
+        return Ok(profile);
     }
 
     [HttpPost("fillInfo")]
