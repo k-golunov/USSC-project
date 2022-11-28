@@ -2,6 +2,7 @@
 using System.Text.Json.Serialization;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using USSC.Attributes;
 using USSC.Entities;
 
 namespace USSC.Dto;
@@ -11,6 +12,8 @@ public class UserModel
     [Key]
     [JsonIgnore]
     public Guid Id { get; set; }
+    // [Email]
+    // [Index("Email", IsUnique=true)]
     public string Email { get; set; }
     public string Password { get; set; }
     [JsonIgnore]

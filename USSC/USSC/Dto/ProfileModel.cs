@@ -9,8 +9,9 @@ public class ProfileModel
     public string? FirstName { get; set; }
     public string? SecondName { get; set; }
     public string? Patronymic { get; set; }
-    // [JsonIgnore]
+    [JsonIgnore]
     public UserModel? Users { get; set; }
+    // [JsonIgnore]
     public Guid UserId { get; set; }
     public string? University { get; set; }
     public string? Faculty { get; set; }

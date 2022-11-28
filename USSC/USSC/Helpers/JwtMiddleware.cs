@@ -19,7 +19,8 @@ public class JwtMiddleware
 
     public async Task Invoke(HttpContext context, IUserService userService)
     {
-        var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+        var token1 = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ");
+        var token = token1.Last();
 
         if (token != null)
             AttachUserToContext(context, userService, token);
@@ -46,7 +47,7 @@ public class JwtMiddleware
 
             var jwtToken = (JwtSecurityToken)validatedToken;
             // достает id пользователя из токена
-            var userId = Guid.Parse(jwtToken.Claims.First(x => x.Type == "id").Value);
+            var userId = Guid.Parse(jwtToken.Claims.First(x => x.Type == "UserId").Value);
 
             context.Items["User"] = userService.GetById(userId);
         }

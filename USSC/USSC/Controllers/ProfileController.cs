@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using USSC.Dto;
 using USSC.Services;
 
@@ -24,10 +25,12 @@ public class ProfileController : ControllerBase
     [HttpPost("fillInfo")]
     public async Task<IActionResult> FillProfileInfo(ProfileModel profileModel)
     {
+        // profileModel.UserId = Guid.Parse(HttpContext.Items["Users"].ToString());
         var result = await _profileService.Add(profileModel);
         return Ok(new SuccessResponse(true));
     }
 
+    [Authorize]
     [HttpPut("updateInfo")]
     public IActionResult UpdateProfileInfo(ProfileModel profileModel)
     {
