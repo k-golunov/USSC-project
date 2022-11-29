@@ -22,4 +22,5 @@ public class ProfileService : IProfileService
         var profile = _mapper.Map<ProfileEntity>(profileModel);
         return _profileRepository.Add(profile);
     }
+    
 }

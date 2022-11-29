@@ -26,4 +26,5 @@ public class ProfileRepository : IProfileRepository
         await _context.SaveChangesAsync();
         return result.Entity.Id;
     }
+    
 }
