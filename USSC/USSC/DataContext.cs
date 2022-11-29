@@ -10,7 +10,6 @@ public class DataContext : DbContext
     public DbSet<UsersEntity> Users { get; set; }
     public DbSet<DirectionsEntity> Directions { get; set; }
     public DbSet<PracticesEntity> Practices { get; set; }
-    public DbSet<UsersDirectionsfkEntity> UsersDirectionsfk { get; set; }
     public DbSet<TestCaseEntity> TestCase { get; set; }
 
     public DataContext(DbContextOptions<DataContext> options): base(options)
@@ -20,5 +19,18 @@ public class DataContext : DbContext
     public async Task<int> SaveChangesAsync()
     {
         return await base.SaveChangesAsync();
+    }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<UsersEntity>()
+            .HasIndex(e => e.Email)
+            .IsUnique();
+        modelBuilder.Entity<DirectionsEntity>()
+            .HasIndex(e => e.Path)
+            .IsUnique();
+        modelBuilder.Entity<TestCaseEntity>()
+            .HasIndex(e => e.Path)
+            .IsUnique();
     }
 }

@@ -14,7 +14,7 @@ public class UsersEntity : BaseEntity
     public string Password { get; set; }
     public string RefreshToken { get; set; }
     public string Role { get; set; }
-    public List<UsersDirectionsfkEntity> Directions { get; set; } 
+    public List<RequestEntity> Request { get; set; } 
     public List<TestCaseEntity> TestCase { get; set; }
     public List<ProfileEntity> Profile { get; set; }
 }

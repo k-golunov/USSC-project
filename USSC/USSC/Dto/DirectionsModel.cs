@@ -11,5 +11,5 @@ public class DirectionsModel
     public string? Path { get; set; }
     public List<TestCaseModel>? TestCase { get; set; } = new();
     public List<PracticesModel>? Practices { get; set; } = new();
-    public List<UsersDirectionsfkModel>? Users { get; set; } = new();
+    public List<RequestModel>? Request { get; set; } = new();
 }

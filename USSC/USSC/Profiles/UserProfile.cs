@@ -14,7 +14,7 @@ public class UserProfile : Profile
             .ForMember(dst => dst.TestCase, opt => opt.MapFrom(src => src.TestCase))
             .ForMember(dst => dst.RefreshToken, opt => opt.MapFrom(src => src.RefreshToken))
             .ForMember(dst => dst.Role, opt => opt.MapFrom(src => src.Role))
-            .ForMember(dst => dst.Directions, opt => opt.MapFrom(src => src.Directions))
+            .ForMember(dst => dst.Request, opt => opt.MapFrom(src => src.Request))
             .ForMember(dst => dst.Profile, opt => opt.MapFrom(src => src.Profile))
             .ForMember(dst => dst.Id, opt => opt.Ignore())
             ;

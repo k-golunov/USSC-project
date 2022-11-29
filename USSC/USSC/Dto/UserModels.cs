@@ -15,7 +15,7 @@ public class UserModel
     [JsonIgnore]
     public List<TestCaseModel> TestCase { get; set; } = new();
     [JsonIgnore]
-    public List<UsersDirectionsfkModel> Directions { get; set; } = new();
+    public List<RequestModel> Request { get; set; } = new();
     [JsonIgnore]
     public string? Role { get; set; }
     [JsonIgnore]

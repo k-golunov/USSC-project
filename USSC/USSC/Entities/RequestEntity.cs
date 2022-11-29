@@ -2,14 +2,12 @@
 
 namespace USSC.Entities;
 
-public class TestCaseEntity : BaseEntity
+public class RequestEntity : BaseEntity
 {
-    public string? Comment { get; set; }
     public bool Allow { get; set; }
-    public string? Path { get; set; }
-    public Guid UserId { get; set; }
-    [ForeignKey(("UserId"))] public UsersEntity Users { get; set; } = new();
     [ForeignKey("DirectionId")]
     public DirectionsEntity Directions { get; set; }
     public Guid DirectionId { get; set; }
+    public List<UsersEntity> Users { get; set; } 
+    
 }

@@ -3,12 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace USSC.Dto;
 
-public class UsersDirectionsfkModel
+public class UsersRequestfkModel
 {
-    public Guid Id { get; set; }
     public UserModel Users { get; set; } = new();
     public Guid UserId { get; set; }
-    public DirectionsModel Directions { get; set; } = new();
-    public Guid DirectionsId { get; set; }
-    public bool Allow { get; set; }
+    public RequestModel Request { get; set; } = new();
+    public Guid RequestId { get; set; }
 }

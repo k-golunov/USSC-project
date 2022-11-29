@@ -15,7 +15,7 @@ public class TestCaseModel
     public UserModel Users { get; set; } = new();
     public Guid UserId { get; set; }
     [JsonIgnore]
-    public List<DirectionsModel> Directions { get; set; } = new();
+    public DirectionsModel Directions { get; set; } = new();
     
     public Guid DirectionId { get; set; }
 }

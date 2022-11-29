@@ -3,13 +3,12 @@ using System.Text.Json.Serialization;
 
 namespace USSC.Entities;
 
-public class UsersDirectionsfkEntity : BaseEntity
+public class UsersRequestfkEntity 
 {
-    public bool Allow { get; set; }
     [ForeignKey("UserId")]
     public UsersEntity Users { get; set; }
     public Guid UserId { get; set; }
-    [ForeignKey("DirectionsId")]
-    public DirectionsEntity Directions { get; set; }
-    public Guid DirectionsId { get; set; }
+    [ForeignKey("RequestId")]
+    public RequestEntity Request { get; set; }
+    public Guid RequestId { get; set; }
 }
