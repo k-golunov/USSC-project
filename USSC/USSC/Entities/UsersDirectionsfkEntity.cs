@@ -5,6 +5,7 @@ namespace USSC.Entities;
 
 public class UsersDirectionsfkEntity : BaseEntity
 {
+    public Guid Id { get; set; }
     public bool Allow { get; set; }
     [ForeignKey("UserId")]
     public UsersEntity? Users { get; set; }
