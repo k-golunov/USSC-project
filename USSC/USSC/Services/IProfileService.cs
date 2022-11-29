@@ -5,4 +5,5 @@ namespace USSC.Services;
 public interface IProfileService
 {
     Task<Guid> Add(ProfileModel profileModel);
+    
 }
