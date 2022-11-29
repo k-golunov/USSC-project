@@ -32,6 +32,14 @@ public class ProfileController : ControllerBase
     [HttpPut("updateInfo")]
     public IActionResult UpdateProfileInfo(ProfileModel profileModel)
     {
-        return Ok();
+        // try
+        // {
+            var id = _profileService.Update(profileModel);
+            return Ok(new SuccessResponse(profileModel.Id == id.Result));
+        // }
+        // catch
+        // {
+        //     return BadRequest(new {Message = "Не удалось обновить профиль", StatusCode=StatusCode(123)});
+        // }
     }
 }

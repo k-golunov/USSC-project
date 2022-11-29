@@ -8,4 +8,6 @@ public interface IProfileService
     Task<Guid> Add(ProfileModel userModel);
 
     ProfileEntity GetById(Guid id);
+
+    Task<Guid> Update(ProfileModel profileModel);
 }
