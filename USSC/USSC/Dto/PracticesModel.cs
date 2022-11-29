@@ -9,6 +9,5 @@ public class PracticesModel
     public string Descriptions { get; set; }
     public string Info { get; set; }
     public string Name { get; set; }
-    public string Path { get; set; }
     public List<DirectionsModel>? Directions { get; set; } = new();
 }

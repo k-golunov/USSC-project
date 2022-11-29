@@ -51,6 +51,9 @@ namespace USSC.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Path")
+                        .IsUnique();
+
                     b.ToTable("Directions");
                 });
 
@@ -67,9 +70,6 @@ namespace USSC.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Path")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -157,6 +157,9 @@ namespace USSC.Migrations
 
                     b.HasIndex("DirectionId");
 
+                    b.HasIndex("Path")
+                        .IsUnique();
+
                     b.HasIndex("UserId");
 
                     b.ToTable("TestCase");
@@ -209,6 +212,9 @@ namespace USSC.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
