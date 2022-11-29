@@ -144,7 +144,7 @@ namespace USSC.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ProfileEntity");
+                    b.ToTable("Profile");
                 });
 
             modelBuilder.Entity("USSC.Entities.RequestEntity", b =>
@@ -163,7 +163,7 @@ namespace USSC.Migrations
 
                     b.HasIndex("DirectionId");
 
-                    b.ToTable("RequestEntity");
+                    b.ToTable("Request");
                 });
 
             modelBuilder.Entity("USSC.Entities.TestCaseEntity", b =>

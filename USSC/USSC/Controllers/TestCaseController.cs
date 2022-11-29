@@ -57,48 +57,54 @@ public class TestCaseController : ControllerBase
     }
 
     [HttpPost("addTest")]
-    public IActionResult AddTestCase(AddedTestCase testCase)
+    public IActionResult AddTestCase(/*AddedTestCase testCase*/ TestCaseModel model)
     {
-        var user = _userService.GetById(testCase.UserId);
-        var response = _testCaseService.Upload(user, testCase.DirectionId, testCase.Path);
+        //var user = _userService.GetById(model.UserId);
+        //var response = _testCaseService.Upload(user, model.DirectionId, model.Path);
+        // model.Users.Email = "string";
+        // model.Users.Password = "string";
+        // model.Users.RefreshToken = "1";
+        // model.Users.Role = "User";
+        var response = _testCaseService.Upload(model);
         return Ok(new SuccessResponse(true));
     }
     
     [Authorize(Roles="Admin")]
     [HttpGet("getAll")]
-     public IActionResult GetAll()
-     {
-         var testCases = _testCaseService.GetAll();
-         return Ok(testCases);
-     }
+    public IActionResult GetAll()
+    {
+        var testCases = _testCaseService.GetAll();
+        return Ok(testCases);
+    }
 
-     /// <summary>
-     /// возвращает путь к файлу решен
-     /// </summary>
-     // [Authorize(Roles = "Admin")]
-     [HttpGet("downloadPractices")]
-     public IActionResult DownLoadPractice(Guid userId, Guid directionId)
-     {
-         var user = _userService.GetById(userId);
-         if (user.TestCase.Count == 0)
-             return BadRequest(new { Message = "Пользователь не предоставил решения" });
-         var testCasePath = _testCaseService.DownLoad(userId, directionId);
-         
-         return Ok(testCasePath);
-     }
+    /// <summary>
+    /// возвращает путь к файлу решен
+    /// </summary>
+    // [Authorize(Roles = "Admin")]
+    [HttpGet("downloadPractices")]
+    public IActionResult DownLoadPractice(Guid userId, Guid directionId)
+    {
+        try
+        {
+            var testCasePath = _testCaseService.DownLoad(userId, directionId);
+            return Ok(testCasePath);
+        }
+        catch
+        {
+            return BadRequest(new { Message = "Пользователь не предоставил решения" });
+        }
+    }
 
-     /// <summary>
-     /// проверка практики куратором
-     /// </summary>
-     [HttpPost("reviewPractice")]
-     public IActionResult ReviewPractice(ReviewedTestCase reviewTestcase)
-     {
-         var user = _userService.GetById(reviewTestcase.UserId);
-         var testCase = user.TestCase.FirstOrDefault(x => x.DirectionId == reviewTestcase.DirectionId);
-         var response = _testCaseService.ReviewTestCaseAsync(user, testCase, reviewTestcase);
-         if (response.Result.Success)
-             return Ok(response.Result);
-         else
-             return BadRequest(response.Result); //здесь тоже логика с racticeService
-     }
+    /// <summary>
+    /// проверка практики куратором
+    /// </summary>
+    [HttpPost("reviewPractice")]
+    public IActionResult ReviewPractice(ReviewedTestCase reviewTestcase)
+    {
+        var response = _testCaseService.ReviewTestCaseAsync(reviewTestcase);
+        if (response.Result.Success)
+            return Ok(response.Result);
+        else
+            return BadRequest(response.Result); //здесь тоже логика с racticeService
+    }
 }

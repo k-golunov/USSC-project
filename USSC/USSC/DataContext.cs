@@ -11,8 +11,8 @@ public class DataContext : DbContext
     public DbSet<DirectionsEntity> Directions { get; set; }
     public DbSet<PracticesEntity> Practices { get; set; }
     public DbSet<TestCaseEntity> TestCase { get; set; }
-    // public DbSet<RequestEntity> RequestEntities { get; set; }
-    // public DbSet<ProfileEntity> Profile { get; set; }
+    public DbSet<RequestEntity> Request { get; set; }
+    public DbSet<ProfileEntity> Profile { get; set; }
 
     public DataContext(DbContextOptions<DataContext> options): base(options)
     {
@@ -23,16 +23,16 @@ public class DataContext : DbContext
         return await base.SaveChangesAsync();
     }
     
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<UsersEntity>()
-            .HasIndex(e => e.Email)
-            .IsUnique();
-        modelBuilder.Entity<DirectionsEntity>()
-            .HasIndex(e => e.Path)
-            .IsUnique();
-        modelBuilder.Entity<TestCaseEntity>()
-            .HasIndex(e => e.Path)
-            .IsUnique();
-    }
+    // protected override void OnModelCreating(ModelBuilder modelBuilder)
+    // {
+    //     modelBuilder.Entity<UsersEntity>()
+    //         .HasIndex(e => e.Email)
+    //         .IsUnique();
+    //     modelBuilder.Entity<DirectionsEntity>()
+    //         .HasIndex(e => e.Path)
+    //         .IsUnique();
+    //     modelBuilder.Entity<TestCaseEntity>()
+    //         .HasIndex(e => e.Path)
+    //         .IsUnique();
+    // }
 }

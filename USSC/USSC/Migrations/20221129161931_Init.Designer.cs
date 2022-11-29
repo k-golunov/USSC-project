@@ -12,7 +12,7 @@ using USSC;
 namespace USSC.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221129161931_Init")]
+    [Migration("20221129182134_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -147,7 +147,7 @@ namespace USSC.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ProfileEntity");
+                    b.ToTable("Profile");
                 });
 
             modelBuilder.Entity("USSC.Entities.RequestEntity", b =>
@@ -166,7 +166,7 @@ namespace USSC.Migrations
 
                     b.HasIndex("DirectionId");
 
-                    b.ToTable("RequestEntity");
+                    b.ToTable("Request");
                 });
 
             modelBuilder.Entity("USSC.Entities.TestCaseEntity", b =>

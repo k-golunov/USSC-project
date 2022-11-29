@@ -7,14 +7,12 @@ namespace USSC.Services;
 public class TestCaseService : ITestCaseService
 {
     private readonly ITestCaseRepository _testcaseRepository;
-    //private readonly IEfRepository<UsersEntity> _userRepository;
     private readonly IConfiguration _configuration;
     private readonly IMapper _mapper;
 
-    public TestCaseService(ITestCaseRepository testcaseRepository, /*IEfRepository<UsersEntity> userRepository, */IConfiguration configuration, IMapper mapper)
+    public TestCaseService(ITestCaseRepository testcaseRepository, IConfiguration configuration, IMapper mapper)
     {
         _testcaseRepository = testcaseRepository;
-        //_userRepository = userRepository;
         _configuration = configuration;
         _mapper = mapper;
     }
@@ -23,37 +21,32 @@ public class TestCaseService : ITestCaseService
 
     public TestCaseEntity GetById(Guid id) => _testcaseRepository.GetById(id);
 
-    public async Task<SuccessResponse> ReviewTestCaseAsync(UsersEntity user, TestCaseEntity testCase, ReviewedTestCase review)
+    public async Task<SuccessResponse> ReviewTestCaseAsync(ReviewedTestCase reviewedTestCase)
     {
-        var testCaseEntity = _testcaseRepository.GetById(testCase.Id);
-        var entity = _mapper.Map<TestCaseEntity>(testCaseEntity);
-        await _testcaseRepository.Update(entity);
+        try
+        {
+            var testCaseEntity = _testcaseRepository.GetByUserId(reviewedTestCase.UserId, reviewedTestCase.DirectionId);
+            foreach (var field in reviewedTestCase.GetType().GetProperties())
+            {
+                var prop = testCaseEntity.GetType().GetProperty(field.Name);
+                prop?.SetValue(testCaseEntity, field.GetValue(reviewedTestCase));
+            }
+            await _testcaseRepository.Update(testCaseEntity);
 
-        return  new SuccessResponse(true);
+            return  new SuccessResponse(true);
+        }
+        catch
+        {
+            return new SuccessResponse(false);
+        }
+        
     }
 
-    public Task<Guid> Upload(UsersEntity user, Guid directionId, string path)
+    public Task<Guid> Upload(TestCaseModel testCaseModelmodel)
     {
-        var model = new TestCaseModel()
-        {
-            UserId = user.Id,
-            Path = path,
-            Comment = "",
-            Allow = false,
-            Users = new UserModel()
-            {
-                Email = user.Email,
-                Password = user.Password,
-                RefreshToken = user.RefreshToken,
-                Role = user.Role
-            },
-            DirectionId = directionId
-        };
-        var entity = _mapper.Map<TestCaseEntity>(model);
+        var entity = _mapper.Map<TestCaseEntity>(testCaseModelmodel);
         return _testcaseRepository.Add(entity);
     }
-
-    
 
     public string DownLoad(Guid userId, Guid directionId)
     {

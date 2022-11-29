@@ -1,6 +1,7 @@
 ﻿using USSC.Entities;
 namespace USSC.Services;
 
+
 public class TestCaseRepository: ITestCaseRepository
 {
     private readonly DataContext _context;
@@ -36,14 +37,9 @@ public class TestCaseRepository: ITestCaseRepository
 
     public async Task<Guid> Update(TestCaseEntity entity)
     {
-        var result = _context.Set<TestCaseEntity>().FirstOrDefault(x => x.Id == entity.Id);
-        result.Comment = entity.Comment;
-        result.Allow = entity.Allow;
+        _context.TestCase.Update(entity);
         await _context.SaveChangesAsync();
-        return result.Id;
-        // _context.Set<TestCaseEntity>().Attach(entity);
-        // var result = _context.Entry(entity);
-        // return result.Entity.Id;
+        return entity.Id;
     }
 
     public TestCaseEntity GetByUserId(Guid userId, Guid directionId)
