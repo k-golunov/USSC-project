@@ -84,26 +84,24 @@ public class TestCaseController : ControllerBase
      [HttpGet("downloadPractices")]
      public IActionResult DownLoadPractice(Guid userId, Guid directionId)
      {
-         var user = _userService.GetById(userId);
-         if (user.TestCase.Count == 0)
+         try
+         {
+             var testCasePath = _testCaseService.DownLoad(userId, directionId);
+             return Ok(testCasePath);
+         }
+         catch
+         {
              return BadRequest(new { Message = "Пользователь не предоставил решения" });
-         var testCasePath = _testCaseService.DownLoad(userId, directionId);
-         
-         return Ok(testCasePath);
+         }
      }
 
      /// <summary>
      /// проверка практики куратором
      /// </summary>
      [HttpPost("reviewPractice")]
-     public IActionResult ReviewPractice(TestCaseModel testCaseModel, string comment, bool allow)
+     public IActionResult ReviewPractice(ReviewedTestCase reviewTestcase)
      {
-         // var user = _userService.GetById(reviewTestcase.UserId);
-         // var testCase = user.TestCase.FirstOrDefault(x => x.DirectionId == reviewTestcase.DirectionId);
-         // var response = _testCaseService.ReviewTestCaseAsync(user, testCase, reviewTestcase);
-         testCaseModel.Comment = comment;
-         testCaseModel.Allow = allow;
-         var response = _testCaseService.ReviewTestCaseAsync(testCaseModel);
+         var response = _testCaseService.ReviewTestCaseAsync(reviewTestcase);
          if (response.Result.Success)
              return Ok(response.Result);
          else

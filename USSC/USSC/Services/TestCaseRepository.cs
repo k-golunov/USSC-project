@@ -37,13 +37,6 @@ public class TestCaseRepository: ITestCaseRepository
 
     public async Task<Guid> Update(TestCaseEntity entity)
     {
-        // var result = _context.Set<TestCaseEntity>().FirstOrDefault(x => x.Id == entity.Id);
-        // result.Comment = entity.Comment;
-        // result.Allow = entity.Allow;
-        // await _context.SaveChangesAsync();
-        // return result.Id;
-        //_context.Set<TestCaseEntity>().Attach(entity);
-        //var result = _context.Entry(entity);
         _context.TestCase.Update(entity);
         await _context.SaveChangesAsync();
         return entity.Id;
