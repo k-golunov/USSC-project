@@ -11,6 +11,8 @@ public class DataContext : DbContext
     public DbSet<DirectionsEntity> Directions { get; set; }
     public DbSet<PracticesEntity> Practices { get; set; }
     public DbSet<TestCaseEntity> TestCase { get; set; }
+    // public DbSet<RequestEntity> RequestEntities { get; set; }
+    // public DbSet<ProfileEntity> Profile { get; set; }
 
     public DataContext(DbContextOptions<DataContext> options): base(options)
     {

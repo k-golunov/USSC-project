@@ -17,9 +17,9 @@ public class ApplicationService: IApplicationService
         _configuration = configuration;
         _mapper = mapper;
     }
-    public Task<Guid> Add(UsersDirectionsfkModel model)
+    public Task<Guid> Add(RequestModel model)
     {
-        var application = _mapper.Map<UsersDirectionsfkEntity>(model);
+        var application = _mapper.Map<RequestEntity>(model);
         return _applicationRepository.Add(application);
     }
 }

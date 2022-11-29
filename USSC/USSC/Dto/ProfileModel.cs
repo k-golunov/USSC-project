@@ -1,11 +1,15 @@
-﻿namespace USSC.Dto;
+﻿using System.Text.Json.Serialization;
+
+namespace USSC.Dto;
 
 public class ProfileModel
 {
+    [JsonIgnore]
     public Guid Id { get; set; }
     public string? FirstName { get; set; }
     public string? SecondName { get; set; }
     public string? Patronymic { get; set; }
+    [JsonIgnore]
     public UserModel? Users { get; set; }
     public Guid UserId { get; set; }
     public string? University { get; set; }

@@ -3,7 +3,7 @@ using USSC.Entities;
 
 namespace USSC.Services;
 
-public interface IApplicationRepository : IEfRepository<UsersDirectionsfkEntity>
+public interface IApplicationRepository : IEfRepository<RequestEntity>
 {
     
 }
