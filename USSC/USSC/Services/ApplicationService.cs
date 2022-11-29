@@ -5,32 +5,21 @@ using USSC.Entities;
 
 namespace USSC.Services;
 
-public class ApplicationService: IApplicationService, IDisposable
+public class ApplicationService: IApplicationService
 {
-    private readonly IEfRepository<ApplicationEntity> _applicationRepository;
+    private readonly IApplicationRepository _applicationRepository;
+    private readonly IConfiguration _configuration;
     private readonly IMapper _mapper;
-    
-    public ApplicationService(IEfRepository<ApplicationEntity> applicationRepository, IMapper mapper)
+
+    public ApplicationService(IApplicationRepository applicationRepository, IConfiguration configuration, IMapper mapper)
     {
         _applicationRepository = applicationRepository;
+        _configuration = configuration;
         _mapper = mapper;
     }
-    
-    public IEnumerable<ApplicationEntity> GetAll() => _applicationRepository.GetAll();
-
-    public ApplicationEntity GetById(Guid id) => _applicationRepository.GetById(id);
-
-    public async Task<SuccessResponse> SubmitApplicationAsync(BaseEntity entity, ApplicationModel applicationModel)
+    public Task<Guid> Add(UsersDirectionsfkModel model)
     {
-        var application = _mapper.Map<ApplicationEntity>(applicationModel);
-
-        await _applicationRepository.Add(application);
-
-        return new SuccessResponse(true);
-    }
-
-    public void Dispose()
-    {
-        GC.SuppressFinalize(this);
+        var application = _mapper.Map<UsersDirectionsfkEntity>(model);
+        return _applicationRepository.Add(application);
     }
 }
