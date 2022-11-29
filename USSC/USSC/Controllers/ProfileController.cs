@@ -28,6 +28,7 @@ public class ProfileController : ControllerBase
         // profileModel.UserId = Guid.Parse(HttpContext.Items["Users"].ToString());
         var result = await _profileService.Add(profileModel);
         return Ok(new SuccessResponse(true));
+        
     }
 
     [Authorize]
