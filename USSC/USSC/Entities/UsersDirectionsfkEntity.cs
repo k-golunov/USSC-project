@@ -7,9 +7,9 @@ public class UsersDirectionsfkEntity : BaseEntity
 {
     public bool Allow { get; set; }
     [ForeignKey("UserId")]
-    public UsersEntity Users { get; set; }
+    public UsersEntity? Users { get; set; }
     public Guid UserId { get; set; }
     [ForeignKey("DirectionsId")]
-    public DirectionsEntity Directions { get; set; }
+    public DirectionsEntity? Directions { get; set; }
     public Guid DirectionsId { get; set; }
 }

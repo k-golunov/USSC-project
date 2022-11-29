@@ -30,6 +30,7 @@ builder.Services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
 // builder.Services.AddScoped(typeof(IEfRepository<>), typeof(ApplicationRepository<>));
 // builder.Services.AddScoped(typeof(IEfRepository<ProfileEntity>), typeof(ProfileRepository<ProfileEntity>));
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
+builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 // builder.Services.AddScoped<IEfRepository<UsersEntity>>();
 // builder.Services.AddScoped<IEfRepository<ProfileEntity>>();
 builder.Services.AddScoped<IDirectionRepository, DirectionRepository>();
