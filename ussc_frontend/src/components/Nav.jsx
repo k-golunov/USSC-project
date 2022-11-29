@@ -8,9 +8,9 @@ const Nav = () => {
   if (isAuth) {
     return (
       <div className='nav'>
-        <a href='' className='nav_item'>
+        <Link to='/applications' className='nav_item'>
           Мои заявки
-        </a>
+        </Link>
         <Link to='/directions' className='nav_item'>
           Направления подготовки
         </Link>

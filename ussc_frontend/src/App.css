@@ -62,11 +62,11 @@ textarea {
 }
 
 button {
-  transition-duration: 0.2s;
+  transition-duration: 0.1s;
 }
 
 button:active {
-  transform: scale(0.9);
+  transform: scale(0.95);
 }
 
 .nav_logo {
@@ -375,7 +375,7 @@ input:checked.checked {
 
 /* HomePage */
 
-.content {
+.homepage_content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -546,14 +546,14 @@ input:checked.checked {
   padding-left: 26px;
 }
 
-/* ApplicationsPage */
+/* DirectionsPage */
 
-.directionspage {
+.directionspage_content {
   width: 1480px;
   margin: auto;
 }
 
-.directionspage .content_section {
+.directionspage_content .content_section {
   margin-top: 160px;
 }
 

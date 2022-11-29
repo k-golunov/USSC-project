@@ -36,7 +36,7 @@ const HomePage = () => {
   return (
     <>
       <div className='main'>
-        <div className='content'>
+        <div className='homepage_content'>
           <div className='content_section'>
             <div className='offer'>
               <div className='offer_text'>

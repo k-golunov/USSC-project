@@ -11,6 +11,7 @@ import TaskPage from './pages/TaskPage';
 import RequireAuth from './hoc/RequireAuth';
 import { useAuth } from './hooks/use-auth';
 import DirectionsPage from './pages/DirectionsPage';
+import ApplicationsPage from './pages/ApplicationsPage';
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
             <Route index element={<ProfilePage />} />
           </Route>
           <Route
-            path='tasks'
+            path='/tasks'
             element={
               <RequireAuth>
                 <ProfileLayout />
@@ -51,6 +52,15 @@ function App() {
           >
             <Route index element={<DirectionsPage />} />
           </Route>
+          <Route
+            path='/applications'
+            element={
+              <RequireAuth>
+                <ProfileLayout />
+              </RequireAuth>
+            }
+          ></Route>
+          <Route index element={<ApplicationsPage />} />
         </Routes>
       </Router>
     </React.StrictMode>

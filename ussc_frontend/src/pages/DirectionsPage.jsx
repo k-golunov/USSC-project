@@ -14,9 +14,9 @@ const DirectionsPage = () => {
   };
 
   return (
-    <div className='directionspage_wrapper'>
-      <div className='directionspage'>
-        {!isFilledProfile() ? (
+    <div className='main'>
+      <div className='directionspage_content'>
+        {isFilledProfile() ? (
           <></>
         ) : (
           <FillProfileRequest style={{ marginTop: '109px' }} />

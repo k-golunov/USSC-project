@@ -3,11 +3,10 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import Button from '../components/Button';
 import FormFrame from '../components/FormFrame';
-import FormInput from '../components/FormInput';
 import { togglePopup } from '../store/slices/popupSlice';
 import { setUser } from '../store/slices/userSlice';
 import md5 from 'md5';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const signInUser = async (user) => {
   let response = await fetch('https://localhost:7296/user/signin', {
