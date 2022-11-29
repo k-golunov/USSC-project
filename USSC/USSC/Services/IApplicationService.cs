@@ -3,7 +3,7 @@ using USSC.Entities;
 using USSC.Dto;
 namespace USSC.Services;
 
-public interface IApplicationService: IService<ApplicationEntity>
+public interface IApplicationService
 {
-    public Task<SuccessResponse> SubmitApplicationAsync(BaseEntity entity, ApplicationModel applicationModel);
+    Task<Guid> Add(UsersDirectionsfkModel model);
 }

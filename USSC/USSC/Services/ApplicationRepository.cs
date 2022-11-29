@@ -1,7 +1,7 @@
 ﻿using USSC.Entities;
 namespace USSC.Services;
 
-public class ApplicationRepository<T>: IEfRepository<T> where T: BaseEntity
+public class ApplicationRepository : IApplicationRepository
 {
     private readonly DataContext _context;
 
@@ -10,26 +10,19 @@ public class ApplicationRepository<T>: IEfRepository<T> where T: BaseEntity
         _context = context;
     }
 
-    public List<T> GetAll()
+    public List<UsersDirectionsfkEntity> GetAll()
     {
-        return _context.Set<T>().ToList();
+        throw new NotImplementedException();
     }
 
-    public T GetById(Guid id)
+    public UsersDirectionsfkEntity GetById(Guid id)
     {
-        var result = _context.Set<T>().FirstOrDefault(x => x.Id == id);
-
-        if (result == null)
-        {
-            return null;
-        }
-
-        return result;
+        throw new NotImplementedException();
     }
 
-    public async Task<Guid> Add(T entity)
+    public async Task<Guid> Add(UsersDirectionsfkEntity entity)
     {
-        var result = await _context.Set<T>().AddAsync(entity);
+        var result = await _context.Set<UsersDirectionsfkEntity>().AddAsync(entity);
         await _context.SaveChangesAsync();
         return result.Entity.Id;
     }
