@@ -9,13 +9,13 @@ public class TestCaseModel
     [JsonIgnore]
     public string? Comment { get; set; }
     [JsonIgnore]
-    public bool? Allow { get; set; }
+    public bool Allow { get; set; }
     public string? Path { get; set; }
     [JsonIgnore]
-    public UserModel Users { get; set; } = new();
+    public UserModel? Users { get; set; }
     public Guid UserId { get; set; }
     [JsonIgnore]
-    public DirectionsModel Directions { get; set; } = new();
+    public List<DirectionsModel>? Directions { get; set; } = new();
     
     public Guid DirectionId { get; set; }
 }

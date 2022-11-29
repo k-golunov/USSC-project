@@ -23,33 +23,34 @@ public class TestCaseService : ITestCaseService
 
     public TestCaseEntity GetById(Guid id) => _testcaseRepository.GetById(id);
 
-    public async Task<SuccessResponse> ReviewTestCaseAsync(UsersEntity user, TestCaseEntity testCase, ReviewedTestCase review)
+    public async Task<SuccessResponse> ReviewTestCaseAsync(TestCaseModel testCaseModel)
     {
-        var testCaseEntity = _testcaseRepository.GetById(testCase.Id);
-        var entity = _mapper.Map<TestCaseEntity>(testCaseEntity);
-        await _testcaseRepository.Update(entity);
+        var testCaseEntity = _testcaseRepository.GetById(testCaseModel.Id);
+        testCaseEntity.Comment = testCaseModel.Comment;
+        testCaseEntity.Allow = testCaseModel.Allow;
+        await _testcaseRepository.Update(testCaseEntity);
 
         return  new SuccessResponse(true);
     }
 
-    public Task<Guid> Upload(UsersEntity user, Guid directionId, string path)
+    public Task<Guid> Upload(TestCaseModel testCaseModelmodel)
     {
-        var model = new TestCaseModel()
-        {
-            UserId = user.Id,
-            Path = path,
-            Comment = "",
-            Allow = false,
-            Users = new UserModel()
-            {
-                Email = user.Email,
-                Password = user.Password,
-                RefreshToken = user.RefreshToken,
-                Role = user.Role
-            },
-            DirectionId = directionId
-        };
-        var entity = _mapper.Map<TestCaseEntity>(model);
+        // var model = new TestCaseModel()
+        // {
+        //     UserId = testCaseModelmodel.UserId,
+        //     Path = testCaseModelmodel.Path,
+        //     Comment = testCaseModelmodel.Comment,
+        //     Allow = false,
+        //     Users = new UserModel()
+        //     {
+        //         Email = user.Email,
+        //         Password = user.Password,
+        //         RefreshToken = user.RefreshToken,
+        //         Role = user.Role
+        //     },
+        //     DirectionId = directionId
+        // };
+        var entity = _mapper.Map<TestCaseEntity>(testCaseModelmodel);
         return _testcaseRepository.Add(entity);
     }
 

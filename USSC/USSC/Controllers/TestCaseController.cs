@@ -57,10 +57,15 @@ public class TestCaseController : ControllerBase
     }
 
     [HttpPost("addTest")]
-    public IActionResult AddTestCase(AddedTestCase testCase)
+    public IActionResult AddTestCase(/*AddedTestCase testCase*/ TestCaseModel model)
     {
-        var user = _userService.GetById(testCase.UserId);
-        var response = _testCaseService.Upload(user, testCase.DirectionId, testCase.Path);
+        //var user = _userService.GetById(model.UserId);
+        //var response = _testCaseService.Upload(user, model.DirectionId, model.Path);
+        // model.Users.Email = "string";
+        // model.Users.Password = "string";
+        // model.Users.RefreshToken = "1";
+        // model.Users.Role = "User";
+        var response = _testCaseService.Upload(model);
         return Ok(new SuccessResponse(true));
     }
     
@@ -91,11 +96,14 @@ public class TestCaseController : ControllerBase
      /// проверка практики куратором
      /// </summary>
      [HttpPost("reviewPractice")]
-     public IActionResult ReviewPractice(ReviewedTestCase reviewTestcase)
+     public IActionResult ReviewPractice(TestCaseModel testCaseModel, string comment, bool allow)
      {
-         var user = _userService.GetById(reviewTestcase.UserId);
-         var testCase = user.TestCase.FirstOrDefault(x => x.DirectionId == reviewTestcase.DirectionId);
-         var response = _testCaseService.ReviewTestCaseAsync(user, testCase, reviewTestcase);
+         // var user = _userService.GetById(reviewTestcase.UserId);
+         // var testCase = user.TestCase.FirstOrDefault(x => x.DirectionId == reviewTestcase.DirectionId);
+         // var response = _testCaseService.ReviewTestCaseAsync(user, testCase, reviewTestcase);
+         testCaseModel.Comment = comment;
+         testCaseModel.Allow = allow;
+         var response = _testCaseService.ReviewTestCaseAsync(testCaseModel);
          if (response.Result.Success)
              return Ok(response.Result);
          else

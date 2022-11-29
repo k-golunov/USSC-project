@@ -5,9 +5,9 @@ namespace USSC.Services;
 
 public interface ITestCaseService: IService<TestCaseEntity>
 {
-    public Task<SuccessResponse> ReviewTestCaseAsync(UsersEntity user, TestCaseEntity testCase, ReviewedTestCase review);
+    public Task<SuccessResponse> ReviewTestCaseAsync(TestCaseModel testCaseModel);
 
-    public Task<Guid> Upload(UsersEntity user, Guid directionId, string path);
+    public Task<Guid> Upload(TestCaseModel testCaseModel);
     public string DownLoad(Guid userId, Guid directionId);
 
 }
