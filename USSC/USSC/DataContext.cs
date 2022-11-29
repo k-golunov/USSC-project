@@ -21,17 +21,4 @@ public class DataContext : DbContext
     {
         return await base.SaveChangesAsync();
     }
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<UsersEntity>()
-            .HasIndex(e => e.Email)
-            .IsUnique();
-        modelBuilder.Entity<DirectionsEntity>()
-            .HasIndex(e => e.Path)
-            .IsUnique();
-        modelBuilder.Entity<TestCaseEntity>()
-            .HasIndex(e => e.Path)
-            .IsUnique();
-    }
 }

@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using USSC.Dto;
-using USSC.Helpers;
-
-// using USSC.Helpers;
 
 
 namespace USSC.Controllers;
@@ -27,7 +24,6 @@ public class TestCaseController : ControllerBase
     /// Еще возможно сделать обработку сценария, когда файл с таким именем уже есть на сервере
     /// </summary>
     /// <param name="file"></param>
-    [Authorize(Roles = "User")]
     [HttpPost("upload")]
     public async void UploadFile(IFormFile file)
     {
