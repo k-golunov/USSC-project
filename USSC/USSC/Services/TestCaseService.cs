@@ -6,36 +6,58 @@ namespace USSC.Services;
 
 public class TestCaseService : ITestCaseService
 {
-    private readonly IEfRepository<TestCase> _testcaseRepository;
-    private readonly IEfRepository<User> _userRepository;
+    private readonly ITestCaseRepository _testcaseRepository;
+    //private readonly IEfRepository<UsersEntity> _userRepository;
+    private readonly IConfiguration _configuration;
     private readonly IMapper _mapper;
 
-    public TestCaseService(IEfRepository<TestCase> testcaseRepository, IEfRepository<User> userRepository, IMapper mapper)
+    public TestCaseService(ITestCaseRepository testcaseRepository, /*IEfRepository<UsersEntity> userRepository, */IConfiguration configuration, IMapper mapper)
     {
         _testcaseRepository = testcaseRepository;
-        _userRepository = userRepository;
+        //_userRepository = userRepository;
+        _configuration = configuration;
         _mapper = mapper;
     }
 
-    public IEnumerable<TestCase> GetAll() => _testcaseRepository.GetAll();
+    public IEnumerable<TestCaseEntity> GetAll() => _testcaseRepository.GetAll();
 
-    public TestCase GetById(Guid id) => _testcaseRepository.GetById(id);
-    
-    
+    public TestCaseEntity GetById(Guid id) => _testcaseRepository.GetById(id);
 
-    public async Task<SuccessResponse> ReviewTestCaseAsync(BaseEntity entity, ReviewTestCaseModel caseModel)
+    public async Task<SuccessResponse> ReviewTestCaseAsync(UsersEntity user, TestCaseEntity testCase, ReviewedTestCase review)
     {
-        var model = _mapper.Map<TestCase>(caseModel);
-        var user = _userRepository.GetById(entity.Id);
-        user.TestCaseId = model.Id;
-    
-        await _testcaseRepository.Add(model);
+        var testCaseEntity = _testcaseRepository.GetById(testCase.Id);
+        var entity = _mapper.Map<TestCaseEntity>(testCaseEntity);
+        await _testcaseRepository.Update(entity);
 
         return  new SuccessResponse(true);
     }
 
-    public string DownLoad(Guid testCaseId)
+    public Task<Guid> Upload(UsersEntity user, Guid directionId, string path)
     {
-        return _testcaseRepository.GetById(testCaseId).Path;
+        var model = new TestCaseModel()
+        {
+            UserId = user.Id,
+            Path = path,
+            Comment = "",
+            Allow = false,
+            Users = new UserModel()
+            {
+                Email = user.Email,
+                Password = user.Password,
+                RefreshToken = user.RefreshToken,
+                Role = user.Role
+            },
+            DirectionId = directionId
+        };
+        var entity = _mapper.Map<TestCaseEntity>(model);
+        return _testcaseRepository.Add(entity);
+    }
+
+    
+
+    public string DownLoad(Guid userId, Guid directionId)
+    {
+        var testCase = _testcaseRepository.GetByUserId(userId, directionId);
+        return testCase != null ? testCase.Path : null;
     }
 }

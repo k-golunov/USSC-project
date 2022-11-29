@@ -26,5 +26,9 @@ public class ProfileRepository : IProfileRepository
         await _context.SaveChangesAsync();
         return result.Entity.Id;
     }
-    
+
+    public Task<Guid> Update(ProfileEntity entity)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -26,4 +26,9 @@ public class ApplicationRepository : IApplicationRepository
         await _context.SaveChangesAsync();
         return result.Entity.Id;
     }
+
+    public Task<Guid> Update(T entity)
+    {
+        throw new NotImplementedException();
+    }
 }

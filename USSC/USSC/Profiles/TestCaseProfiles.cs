@@ -13,7 +13,8 @@ public class TestCaseProfiles : Profile
             .ForMember(dst => dst.Allow, opt => opt.MapFrom(src => src.Allow))
             .ForMember(dst => dst.Comment, opt => opt.MapFrom(src => src.Comment))
             .ForMember(dst => dst.Path, opt => opt.MapFrom(src => src.Path))
-            .ForMember(dst => dst.Users, opt => opt.MapFrom(src => src.Users));
+            .ForMember(dst => dst.Users, opt => opt.MapFrom(src => src.Users))
+            .ForMember(dst => dst.Directions, opt => opt.MapFrom(src => src.Directions));
         //.ForAllMembers(x => x.Ignore());   
     }
 }

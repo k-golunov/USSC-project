@@ -31,8 +31,7 @@ namespace USSC.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     Info = table.Column<string>(type: "text", nullable: true),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    Path = table.Column<string>(type: "text", nullable: true)
+                    Name = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -52,6 +51,25 @@ namespace USSC.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RequestEntity",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    Allow = table.Column<bool>(type: "boolean", nullable: false),
+                    DirectionId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RequestEntity", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RequestEntity_Directions_DirectionId",
+                        column: x => x.DirectionId,
+                        principalTable: "Directions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -135,30 +153,34 @@ namespace USSC.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UsersDirectionsfk",
+                name: "RequestEntityUsersEntity",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Allow = table.Column<bool>(type: "boolean", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    DirectionsId = table.Column<Guid>(type: "uuid", nullable: false)
+                    RequestId = table.Column<Guid>(type: "uuid", nullable: false),
+                    UsersId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UsersDirectionsfk", x => x.Id);
+                    table.PrimaryKey("PK_RequestEntityUsersEntity", x => new { x.RequestId, x.UsersId });
                     table.ForeignKey(
-                        name: "FK_UsersDirectionsfk_Directions_DirectionsId",
-                        column: x => x.DirectionsId,
-                        principalTable: "Directions",
+                        name: "FK_RequestEntityUsersEntity_RequestEntity_RequestId",
+                        column: x => x.RequestId,
+                        principalTable: "RequestEntity",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UsersDirectionsfk_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_RequestEntityUsersEntity_Users_UsersId",
+                        column: x => x.UsersId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Directions_Path",
+                table: "Directions",
+                column: "Path",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_DirectionsEntityPracticesEntity_PracticesId",
@@ -171,9 +193,25 @@ namespace USSC.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RequestEntity_DirectionId",
+                table: "RequestEntity",
+                column: "DirectionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RequestEntityUsersEntity_UsersId",
+                table: "RequestEntityUsersEntity",
+                column: "UsersId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TestCase_DirectionId",
                 table: "TestCase",
                 column: "DirectionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TestCase_Path",
+                table: "TestCase",
+                column: "Path",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TestCase_UserId",
@@ -181,14 +219,10 @@ namespace USSC.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UsersDirectionsfk_DirectionsId",
-                table: "UsersDirectionsfk",
-                column: "DirectionsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UsersDirectionsfk_UserId",
-                table: "UsersDirectionsfk",
-                column: "UserId");
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -201,19 +235,22 @@ namespace USSC.Migrations
                 name: "ProfileEntity");
 
             migrationBuilder.DropTable(
-                name: "TestCase");
+                name: "RequestEntityUsersEntity");
 
             migrationBuilder.DropTable(
-                name: "UsersDirectionsfk");
+                name: "TestCase");
 
             migrationBuilder.DropTable(
                 name: "Practices");
 
             migrationBuilder.DropTable(
-                name: "Directions");
+                name: "RequestEntity");
 
             migrationBuilder.DropTable(
                 name: "Users");
+
+            migrationBuilder.DropTable(
+                name: "Directions");
         }
     }
 }

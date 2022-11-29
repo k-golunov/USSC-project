@@ -1,4 +1,5 @@
-﻿using USSC.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using USSC.Entities;
 
 namespace USSC.Services;
 
@@ -36,5 +37,12 @@ public class UserRepository<T>: IEfRepository<T> where T: BaseEntity
         var result = await _context.Set<T>().AddAsync(entity);
         await _context.SaveChangesAsync();
         return result.Entity.Id;
+    }
+
+    public async Task<Guid> Update(T entity)
+    {
+        var result = _context.Set<T>().FirstOrDefault(x => x.Id == entity.Id);
+        await _context.SaveChangesAsync();
+        return result.Id;
     }
 }

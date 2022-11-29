@@ -1,7 +1,7 @@
 ﻿using USSC.Entities;
 namespace USSC.Services;
 
-public class TestCaseRepository<T>: IEfRepository<T> where T: BaseEntity
+public class TestCaseRepository: ITestCaseRepository
 {
     private readonly DataContext _context;
 
@@ -10,14 +10,14 @@ public class TestCaseRepository<T>: IEfRepository<T> where T: BaseEntity
         _context = context;
     }
     
-    public List<T> GetAll()
+    public List<TestCaseEntity> GetAll()
     {
-        return _context.Set<T>().ToList();
+        return _context.Set<TestCaseEntity>().ToList();
     }
 
-    public T GetById(Guid id)
+    public TestCaseEntity GetById(Guid id)
     {
-        var result = _context.Set<T>().FirstOrDefault(x => x.Id == id);
+        var result = _context.Set<TestCaseEntity>().FirstOrDefault(x => x.Id == id);
 
         if (result == null)
         {
@@ -27,10 +27,29 @@ public class TestCaseRepository<T>: IEfRepository<T> where T: BaseEntity
         return result;
     }
 
-    public async Task<Guid> Add(T entity)
+    public async Task<Guid> Add(TestCaseEntity entity)
     {
-        var result = await _context.Set<T>().AddAsync(entity);
+        var result = await _context.Set<TestCaseEntity>().AddAsync(entity);
         await _context.SaveChangesAsync();
         return result.Entity.Id;
+    }
+
+    public async Task<Guid> Update(TestCaseEntity entity)
+    {
+        var result = _context.Set<TestCaseEntity>().FirstOrDefault(x => x.Id == entity.Id);
+        result.Comment = entity.Comment;
+        result.Allow = entity.Allow;
+        await _context.SaveChangesAsync();
+        return result.Id;
+        // _context.Set<TestCaseEntity>().Attach(entity);
+        // var result = _context.Entry(entity);
+        // return result.Entity.Id;
+    }
+
+    public TestCaseEntity GetByUserId(Guid userId, Guid directionId)
+    {
+        var testCase = _context.Set<TestCaseEntity>().FirstOrDefault(x =>
+            x.UserId == userId && x.DirectionId == directionId);
+        return testCase;
     }
 }
