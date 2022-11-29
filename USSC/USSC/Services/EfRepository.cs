@@ -4,7 +4,7 @@ namespace USSC.Services;
 
 //create baseEntity and DataContext
 
-public class UserRepository<T> : IEfRepository<T> where T : BaseEntity
+public class UserRepository<T>: IEfRepository<T> where T: BaseEntity
 {
     private readonly DataContext _context;
 
@@ -22,8 +22,13 @@ public class UserRepository<T> : IEfRepository<T> where T : BaseEntity
     {
         var result = _context.Set<T>().FirstOrDefault(x => x.Id == id);
 
-        //todo: need to add logger
-        return result ?? null;
+        if (result == null)
+        {
+            //todo: need to add logger
+            return null;
+        }
+
+        return result;
     }
 
     public async Task<Guid> Add(T entity)
