@@ -14,7 +14,7 @@ public class ApplicationController : ControllerBase
     {
         _applicationService = applicationService;
     }
-    
+
     [HttpPost("send")]
     public async Task<IActionResult> SendApplication(Guid userId)
     {
