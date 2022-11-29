@@ -31,7 +31,6 @@ public class ProfileService : IProfileService
     public async Task<Guid> Update(ProfileModel profileModel)
     {
         var profile = _profileRepository.GetByUserId(profileModel.UserId);
-        profileModel.Id = profile.Id;
         foreach (var field in profileModel.GetType().GetProperties())
         {
             var prop = profile.GetType().GetProperty(field.Name);
