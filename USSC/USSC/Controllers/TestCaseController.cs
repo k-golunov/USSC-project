@@ -71,40 +71,40 @@ public class TestCaseController : ControllerBase
     
     [Authorize(Roles="Admin")]
     [HttpGet("getAll")]
-    public IActionResult GetAll()
-    {
-        var testCases = _testCaseService.GetAll();
-        return Ok(testCases);
-    }
+     public IActionResult GetAll()
+     {
+         var testCases = _testCaseService.GetAll();
+         return Ok(testCases);
+     }
 
-    /// <summary>
-    /// возвращает путь к файлу решен
-    /// </summary>
-    // [Authorize(Roles = "Admin")]
-    [HttpGet("downloadPractices")]
-    public IActionResult DownLoadPractice(Guid userId, Guid directionId)
-    {
-        try
-        {
-            var testCasePath = _testCaseService.DownLoad(userId, directionId);
-            return Ok(testCasePath);
-        }
-        catch
-        {
-            return BadRequest(new { Message = "Пользователь не предоставил решения" });
-        }
-    }
+     /// <summary>
+     /// возвращает путь к файлу решен
+     /// </summary>
+     // [Authorize(Roles = "Admin")]
+     [HttpGet("downloadPractices")]
+     public IActionResult DownLoadPractice(Guid userId, Guid directionId)
+     {
+         try
+         {
+             var testCasePath = _testCaseService.DownLoad(userId, directionId);
+             return Ok(testCasePath);
+         }
+         catch
+         {
+             return BadRequest(new { Message = "Пользователь не предоставил решения" });
+         }
+     }
 
-    /// <summary>
-    /// проверка практики куратором
-    /// </summary>
-    [HttpPost("reviewPractice")]
-    public IActionResult ReviewPractice(ReviewedTestCase reviewTestcase)
-    {
-        var response = _testCaseService.ReviewTestCaseAsync(reviewTestcase);
-        if (response.Result.Success)
-            return Ok(response.Result);
-        else
-            return BadRequest(response.Result); //здесь тоже логика с racticeService
-    }
+     /// <summary>
+     /// проверка практики куратором
+     /// </summary>
+     [HttpPost("reviewPractice")]
+     public IActionResult ReviewPractice(ReviewedTestCase reviewTestcase)
+     {
+         var response = _testCaseService.ReviewTestCaseAsync(reviewTestcase);
+         if (response.Result.Success)
+             return Ok(response.Result);
+         else
+             return BadRequest(response.Result); //здесь тоже логика с racticeService
+     }
 }
