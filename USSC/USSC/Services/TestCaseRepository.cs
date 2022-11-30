@@ -11,23 +11,10 @@ public class TestCaseRepository: ITestCaseRepository
         _context = context;
     }
     
-    public List<TestCaseEntity> GetAll()
-    {
-        return _context.Set<TestCaseEntity>().ToList();
-    }
+    public List<TestCaseEntity> GetAll() => _context.Set<TestCaseEntity>().ToList();
 
-    public TestCaseEntity GetById(Guid id)
-    {
-        var result = _context.Set<TestCaseEntity>().FirstOrDefault(x => x.Id == id);
-
-        if (result == null)
-        {
-            return null;
-        }
-
-        return result;
-    }
-
+    public TestCaseEntity GetById(Guid id) => _context.Set<TestCaseEntity>().FirstOrDefault(x => x.Id == id);
+    
     public async Task<Guid> Add(TestCaseEntity entity)
     {
         var result = await _context.Set<TestCaseEntity>().AddAsync(entity);
