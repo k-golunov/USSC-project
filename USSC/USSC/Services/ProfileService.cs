@@ -23,10 +23,9 @@ public class ProfileService : IProfileService
         return _profileRepository.Add(profile);
     }
 
-    public ProfileEntity GetById(Guid id)
-    {
-        return _profileRepository.GetById(id);
-    }
+    public ProfileEntity GetById(Guid id) => _profileRepository.GetById(id);
+
+    public ProfileEntity GetByUserId(Guid userId) => _profileRepository.GetByUserId(userId);
 
     public async Task<Guid> Update(ProfileModel profileModel)
     {

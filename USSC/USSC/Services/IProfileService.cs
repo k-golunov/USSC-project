@@ -9,5 +9,7 @@ public interface IProfileService
 
     ProfileEntity GetById(Guid id);
 
+    ProfileEntity GetByUserId(Guid userId);
+
     Task<Guid> Update(ProfileModel profileModel);
 }

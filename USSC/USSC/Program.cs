@@ -47,7 +47,7 @@ builder.Services.AddCors();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sailora WEB API API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "USSC-project", Version = "v1" });
 });
 
 
