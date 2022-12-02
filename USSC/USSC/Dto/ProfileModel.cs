@@ -4,7 +4,7 @@ namespace USSC.Dto;
 
 public class ProfileModel
 {
-    // [JsonIgnore]
+    [JsonIgnore]
     public Guid Id { get; set; }
     public string? FirstName { get; set; }
     public string? SecondName { get; set; }
