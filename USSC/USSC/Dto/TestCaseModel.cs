@@ -5,7 +5,9 @@ namespace USSC.Dto;
 
 public class TestCaseModel
 {
-    [Key] public Guid Id { get; set; }
+    [Key]
+    [JsonIgnore]
+    public Guid Id { get; set; }
     [JsonIgnore]
     public string? Comment { get; set; }
     [JsonIgnore]
