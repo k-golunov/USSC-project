@@ -50,11 +50,11 @@ public class TestCaseController : ControllerBase
         }
         // здесь вместо file.FileName должно быть {user.Id}.zip 
         var uploadPath = $".\\Upload\\{model.UserId.ToString()}.zip";
-        model.Path = uploadPath;
-        // var uploadPath = $"G:\\USSC project\\USSC-project\\USSC\\USSC\\Upload\\{model.UserId.ToString()}.zip";
         
+        // var uploadPath = $"G:\\USSC project\\USSC-project\\USSC\\USSC\\Upload\\{file.FileName}";
+        model.Path = uploadPath;
         using (var fileStream = new FileStream(uploadPath, FileMode.Create))
-        { 
+        {
             await file.CopyToAsync(fileStream);
         }
         
@@ -85,21 +85,25 @@ public class TestCaseController : ControllerBase
      }
 
      /// <summary>
-     /// возвращает путь к файлу решен
+     /// возвращает файл решения пользователя
      /// </summary>
      // [Authorize(Roles = "Admin")]
      [HttpGet("downloadPractices")]
-     public IActionResult DownLoadPractice(Guid userId, Guid directionId)
+     public FileStreamResult DownLoadPractice(Guid userId, Guid directionId)
      {
-         try
-         {
-             var testCasePath = _testCaseService.DownLoad(userId, directionId);
-             return Ok(testCasePath);
-         }
-         catch
-         {
-             return BadRequest(new { Message = "Пользователь не предоставил решения" });
-         }
+         // try
+         // {
+             var testCasePath = _testCaseService.DownLoad(userId, directionId);            
+             var fileType="application/octet-stream";
+             var fileStream = new FileStream(testCasePath, FileMode.Open);
+             var fileName = $"{userId}.zip";
+             return File(fileStream, fileType, fileName);
+             // return Ok(testCasePath);
+         // }
+         // catch
+         // {
+         //     return BadRequest(new { Message = "Пользователь не предоставил решения" });
+         // }
      }
 
      /// <summary>
