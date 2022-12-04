@@ -7,21 +7,12 @@ import { togglePopup } from '../store/slices/popupSlice';
 import { setUser } from '../store/slices/userSlice';
 import md5 from 'md5';
 import { useNavigate } from 'react-router-dom';
-
-const signInUser = async (user) => {
-  let response = await fetch('https://localhost:7296/user/signin', {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    },
-    body: JSON.stringify(user),
-  });
-  return response;
-};
+import { useSignIn } from '../hooks/use-signin';
 
 const SignInForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const signIn = useSignIn();
 
   const toggleSignUpPopup = () => dispatch(togglePopup('signUp'));
   const toggleSignInPopup = () => dispatch(togglePopup('signIn'));
@@ -31,12 +22,14 @@ const SignInForm = () => {
   const onSubmit = async (user) => {
     user.password = md5(user.password);
 
-    let response = await signInUser(user);
+    let response = await signIn(user);
 
     if (response.ok) {
-      dispatch(setUser(await response.json()));
+      let user = await response.json();
+      dispatch(setUser(user));
+      localStorage.setItem('token', user.token);
+      localStorage.setItem('userId', user.id);
       toggleSignInPopup();
-      navigate('/profile');
     }
   };
 

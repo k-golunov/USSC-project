@@ -15,55 +15,53 @@ import ApplicationsPage from './pages/ApplicationsPage';
 
 function App() {
   return (
-    <React.StrictMode>
-      <Router>
-        <Routes>
-          <Route path='/' element={<HomeLayout />}>
-            <Route index element={<HomePage />} />
-            <Route path='*' element={<NotFoundPage />} />
-          </Route>
-          <Route
-            path='/profile'
-            element={
-              <RequireAuth>
-                <ProfileLayout />
-              </RequireAuth>
-            }
-          >
-            <Route index element={<ProfilePage />} />
-          </Route>
-          <Route
-            path='/tasks'
-            element={
-              <RequireAuth>
-                <ProfileLayout />
-              </RequireAuth>
-            }
-          >
-            <Route index element={<TaskPage />} />
-          </Route>
-          <Route
-            path='/directions'
-            element={
-              <RequireAuth>
-                <ProfileLayout />
-              </RequireAuth>
-            }
-          >
-            <Route index element={<DirectionsPage />} />
-          </Route>
-          <Route
-            path='/applications'
-            element={
-              <RequireAuth>
-                <ProfileLayout />
-              </RequireAuth>
-            }
-          ></Route>
-          <Route index element={<ApplicationsPage />} />
-        </Routes>
-      </Router>
-    </React.StrictMode>
+    <Router>
+      <Routes>
+        <Route path='/' element={<HomeLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path='*' element={<NotFoundPage />} />
+        </Route>
+        <Route
+          path='/profile'
+          element={
+            <RequireAuth>
+              <ProfileLayout />
+            </RequireAuth>
+          }
+        >
+          <Route index element={<ProfilePage />} />
+        </Route>
+        <Route
+          path='/tasks'
+          element={
+            <RequireAuth>
+              <ProfileLayout />
+            </RequireAuth>
+          }
+        >
+          <Route index element={<TaskPage />} />
+        </Route>
+        <Route
+          path='/directions'
+          element={
+            <RequireAuth>
+              <ProfileLayout />
+            </RequireAuth>
+          }
+        >
+          <Route index element={<DirectionsPage />} />
+        </Route>
+        <Route
+          path='/applications'
+          element={
+            <RequireAuth>
+              <ProfileLayout />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route index element={<ApplicationsPage />} />
+      </Routes>
+    </Router>
   );
 }
 

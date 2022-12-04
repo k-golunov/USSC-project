@@ -1,8 +1,15 @@
 import React from 'react';
 import Button from '../components/Button';
 import GoBackButton from '../components/GoBackButton';
+import { useGetProfile } from '../hooks/use-getprofile';
+import { useEffect } from 'react';
 
 const ProfilePage = () => {
+  const getProfile = useGetProfile();
+  useEffect(() => {
+    getProfile();
+  }, []);
+
   return (
     <>
       <div className='profile_wrapper'>

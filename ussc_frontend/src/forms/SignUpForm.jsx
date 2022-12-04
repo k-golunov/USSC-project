@@ -9,6 +9,10 @@ import Button from '../components/Button';
 import Checkbox from '../components/Checkbox';
 import { useForm } from 'react-hook-form';
 import md5 from 'md5';
+import { useSignUp } from '../hooks/use-signup';
+import { useSignIn } from '../hooks/use-signin';
+import { setUser } from '../store/slices/userSlice';
+import { useNavigate } from 'react-router-dom';
 
 // {
 
@@ -26,25 +30,18 @@ import md5 from 'md5';
 //   "testCaseId": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
 // }
 
-const signUpUser = async (user) => {
-  let response = await fetch('https://localhost:7296/user/register', {
-    method: 'post',
-    headers: {
-      'Content-Type': 'application/json;charset=utf-8',
-    },
-    body: JSON.stringify(user),
-  });
-};
-
 const SignUpForm = () => {
   const dispatch = useDispatch();
+  const signUp = useSignUp();
+  const signIn = useSignIn();
+  const navigate = useNavigate();
 
   const toggleSignUpPopup = () => dispatch(togglePopup('signUp'));
   const toggleSignInPopup = () => dispatch(togglePopup('signIn'));
 
   const methods = useForm();
   const { register, handleSubmit } = methods;
-  const onSubmit = (user) => {
+  const onSubmit = async (user) => {
     if (user.password !== user.password_again) {
       alert('Вы указали разные пароли!');
       return;
@@ -53,10 +50,17 @@ const SignUpForm = () => {
     delete user.rule; //Потом надо будет вернуть
     delete user.password_again;
     user.password = md5(user.password);
-    signUpUser(user);
+    let response = await signUp(user);
+
+    response = await signIn(user);
+
+    if (response.ok) {
+      dispatch(setUser(await response.json()));
+      toggleSignUpPopup();
+    }
   };
 
-  const [isChecked, setIsChecked] = React.useState(false);
+  // const [isChecked, setIsChecked] = React.useState(false);
 
   return (
     <FormFrame onSubmit={handleSubmit(onSubmit)}>
