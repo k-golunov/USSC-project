@@ -8,7 +8,7 @@ public class ApplicationProfile: Profile
 {
     public ApplicationProfile()
     {
-        CreateMap<UsersDirectionsfkModel, UsersDirectionsfkEntity>()
+        CreateMap<RequestModel, RequestEntity>()
             .ForMember(dst => dst.Id, 
                 opt => opt.Ignore())
             .ForMember(dst => dst.Allow, 
@@ -16,11 +16,9 @@ public class ApplicationProfile: Profile
             .ForMember(dst => dst.Directions, 
                 opt => opt.MapFrom(src => src.Directions))
             .ForMember(dst => dst.Users, 
-                opt => opt.MapFrom(src => src.Users))
-            .ForMember(dst => dst.DirectionsId, 
-                opt => opt.MapFrom(src => src.DirectionsId))
-            .ForMember(dst => dst.UserId, 
-                opt => opt.MapFrom(src => src.UserId))
+                opt => opt.MapFrom(src => src.User))
+            .ForMember(dst => dst.DirectionId, 
+                opt => opt.MapFrom(src => src.DirectionId))
             //.ForMember(dst => dst.Telegram, opt => opt.MapFrom(src => src.Telegram))
             ;
     }

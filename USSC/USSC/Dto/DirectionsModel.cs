@@ -16,5 +16,5 @@ public class DirectionsModel
     [JsonIgnore]
     public List<PracticesModel>? Practices { get; set; } = new();
     [JsonIgnore]
-    public List<UsersDirectionsfkModel>? Users { get; set; } = new();
+    public List<RequestModel>? Request { get; set; } = new();
 }

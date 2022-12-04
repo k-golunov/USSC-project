@@ -10,14 +10,13 @@ public class ProfileRepository : IProfileRepository
     {
         _context = context;
     }
-    public List<ProfileEntity> GetAll()
-    {
-        throw new NotImplementedException();
-    }
+    public List<ProfileEntity> GetAll() => _context.Set<ProfileEntity>().ToList();
 
-    public ProfileEntity GetById(Guid id)
+    public ProfileEntity GetById(Guid id) => _context.Set<ProfileEntity>().FirstOrDefault(x => x.Id == id);
+
+    public ProfileEntity GetByUserId(Guid userId)
     {
-        throw new NotImplementedException();
+        return _context.Set<ProfileEntity>().FirstOrDefault(x => x.UserId == userId);
     }
 
     public async Task<Guid> Add(ProfileEntity entity)
@@ -26,5 +25,11 @@ public class ProfileRepository : IProfileRepository
         await _context.SaveChangesAsync();
         return result.Entity.Id;
     }
-    
+
+    public async Task<Guid> Update(ProfileEntity entity)
+    {
+        _context.Profile.Update(entity);
+        await _context.SaveChangesAsync();
+        return entity.Id;
+    }
 }

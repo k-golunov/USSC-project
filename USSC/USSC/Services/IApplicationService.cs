@@ -5,5 +5,5 @@ namespace USSC.Services;
 
 public interface IApplicationService
 {
-    Task<Guid> Add(UsersDirectionsfkModel model);
+    Task<Guid> Add(RequestModel model);
 }

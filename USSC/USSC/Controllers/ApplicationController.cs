@@ -16,22 +16,13 @@ public class ApplicationController : ControllerBase
     }
 
     [HttpPost("send")]
-    public async Task<IActionResult> SendApplication(Guid userId)
+    public async Task<IActionResult> SendApplication(RequestModel model)
     {
-        var model = new UsersDirectionsfkModel()
-        {
-            UserId = userId,
-            Allow = true,
-            DirectionsId = Guid.Parse("23f10d61-a1c9-4de8-880d-dbe754b7e863"),
-            Users = new UserModel()
-            {
-                Id = userId,
-                Email = "1",
-                Password = "1",
-                RefreshToken = "1",
-                Role = "User"
-            }
-        };
+        // var model = new RequestModel()
+        // {
+        //     Allow = true,
+        //     DirectionId = Guid.Parse("23f10d61-a1c9-4de8-880d-dbe754b7e863"),
+        // };
         var result = await _applicationService.Add(model);
         return Ok(new SuccessResponse(true));
     }

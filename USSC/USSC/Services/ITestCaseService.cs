@@ -3,10 +3,10 @@ using USSC.Entities;
 
 namespace USSC.Services;
 
-public interface ITestCaseService: IService<TestCase>
+public interface ITestCaseService: IService<TestCaseEntity>
 {
-    public Task<SuccessResponse> ReviewTestCaseAsync(BaseEntity entity, ReviewTestCaseModel caseModel);
-
-    public string DownLoad(Guid testCaseId);
+    public Task<SuccessResponse> ReviewTestCaseAsync(ReviewedTestCase reviewedTestCase);
+    public Task<Guid> Upload(TestCaseModel testCaseModel);
+    public string DownLoad(Guid userId, Guid directionId);
 
 }

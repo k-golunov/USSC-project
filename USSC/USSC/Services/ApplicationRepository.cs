@@ -1,4 +1,5 @@
-﻿using USSC.Entities;
+﻿using USSC.Dto;
+using USSC.Entities;
 namespace USSC.Services;
 
 public class ApplicationRepository : IApplicationRepository
@@ -10,20 +11,25 @@ public class ApplicationRepository : IApplicationRepository
         _context = context;
     }
 
-    public List<UsersDirectionsfkEntity> GetAll()
+    public List<RequestEntity> GetAll()
     {
         throw new NotImplementedException();
     }
 
-    public UsersDirectionsfkEntity GetById(Guid id)
+    public RequestEntity GetById(Guid id)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Guid> Add(UsersDirectionsfkEntity entity)
+    public async Task<Guid> Add(RequestEntity entity)
     {
-        var result = await _context.Set<UsersDirectionsfkEntity>().AddAsync(entity);
+        var result = await _context.Set<RequestEntity>().AddAsync(entity);
         await _context.SaveChangesAsync();
         return result.Entity.Id;
+    }
+
+    public Task<Guid> Update(RequestEntity entity)
+    {
+        throw new NotImplementedException();
     }
 }

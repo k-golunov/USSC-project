@@ -26,4 +26,9 @@ public class DirectionRepository : IDirectionRepository
         await _context.SaveChangesAsync();
         return result.Entity.Id;
     }
+
+    public Task<Guid> Update(DirectionsEntity entity)
+    {
+        throw new NotImplementedException();
+    }
 }

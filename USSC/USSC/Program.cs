@@ -30,26 +30,28 @@ builder.Services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
 // builder.Services.AddScoped(typeof(IEfRepository<>), typeof(ApplicationRepository<>));
 // builder.Services.AddScoped(typeof(IEfRepository<ProfileEntity>), typeof(ProfileRepository<ProfileEntity>));
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
+builder.Services.AddScoped<ITestCaseRepository, TestCaseRepository>();
+builder.Services.AddScoped<IDirectionRepository, DirectionRepository>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 // builder.Services.AddScoped<IEfRepository<UsersEntity>>();
 // builder.Services.AddScoped<IEfRepository<ProfileEntity>>();
-builder.Services.AddScoped<IDirectionRepository, DirectionRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IApplicationService, ApplicationService>();
+builder.Services.AddScoped<ITestCaseService, TestCaseService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
-
 builder.Services.AddScoped<IDirectionService, DirectionService>();
+
 builder.Services.AddAutoMapper(typeof(UserProfile));
 builder.Services.AddAutoMapper(typeof(ApplicationProfile));
 builder.Services.AddAutoMapper(typeof(TestCaseProfiles));
 builder.Services.AddAutoMapper(typeof(PracticesProfile));
 builder.Services.AddAutoMapper(typeof(ProfileUserProfile));
-builder.Services.AddAutoMapper(typeof(DirectionProfile));
+builder.Services.AddAutoMapper(typeof(RequestProfile));
 builder.Services.AddCors();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Sailora WEB API API", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "USSC-project", Version = "v1" });
 });
 
 

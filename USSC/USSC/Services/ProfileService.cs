@@ -22,5 +22,25 @@ public class ProfileService : IProfileService
         var profile = _mapper.Map<ProfileEntity>(profileModel);
         return _profileRepository.Add(profile);
     }
-    
+
+    public ProfileEntity GetById(Guid id) => _profileRepository.GetById(id);
+
+    public ProfileEntity GetByUserId(Guid userId) => _profileRepository.GetByUserId(userId);
+
+    public async Task<Guid> Update(ProfileModel profileModel)
+    {
+        var profile = _profileRepository.GetByUserId(profileModel.UserId);
+        foreach (var field in profileModel.GetType().GetProperties())
+        {
+            var prop = profile.GetType().GetProperty(field.Name);
+            if (prop?.GetValue(profile) != field.GetValue(profileModel) 
+                && field.PropertyType.FullName == prop.PropertyType.FullName
+                && field.GetCustomAttributes(true).Equals(prop.GetCustomAttributes(true)))
+            {
+                prop?.SetValue(profile, field.GetValue(profileModel));
+            }
+        }
+
+        return await _profileRepository.Update(profile);
+    }
 }
