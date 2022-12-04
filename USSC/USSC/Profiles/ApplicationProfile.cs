@@ -16,7 +16,9 @@ public class ApplicationProfile: Profile
             .ForMember(dst => dst.Directions, 
                 opt => opt.MapFrom(src => src.Directions))
             .ForMember(dst => dst.Users, 
-                opt => opt.MapFrom(src => src.User))
+                opt => opt.MapFrom(src => src.Users))
+            .ForMember(dst => dst.UserId, 
+                opt => opt.MapFrom(src => src.UserId))
             .ForMember(dst => dst.DirectionId, 
                 opt => opt.MapFrom(src => src.DirectionId))
             //.ForMember(dst => dst.Telegram, opt => opt.MapFrom(src => src.Telegram))
