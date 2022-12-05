@@ -15,10 +15,31 @@ public class DirectionController : ControllerBase
         _directionService = directionService;
     }
     
+    // почему работает только без асинхронности, надо разобраться
     [HttpPost("add")]
-    public async Task<IActionResult> AddNewDirection(DirectionsModel directionsModel)
-    {
-        var result = await _directionService.Add(directionsModel);
-        return Ok(new SuccessResponse(true));
+    public void AddNewDirection(IFormFile file, string direction)
+    { 
+        var uploadPath = $".\\Files\\{direction}.zip";
+        var directionsModel = new DirectionsModel
+        {
+            Directions = direction,
+            Path = $".\\Files\\{file.FileName}"
+        };
+        var response = HttpContext.Response;
+        var name = file.FileName.Split("."); 
+        if (name.Length != 2 || name[1] != "zip") 
+        {
+            // throw new Exception("Invalid format file");
+            response.WriteAsync("Invalid format file or file name");
+            return;
+        }
+        
+        using (var fileStream = new FileStream(uploadPath, FileMode.Create))
+        {
+            file.CopyTo(fileStream);
+        }
+
+        // response.WriteAsync("Файлы успешно загружены");
+        var result =  _directionService.Add(directionsModel);
     }
 }

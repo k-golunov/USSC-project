@@ -5,7 +5,9 @@ namespace USSC.Dto;
 
 public class TestCaseModel
 {
-    [Key] public Guid Id { get; set; }
+    [Key]
+    [JsonIgnore]
+    public Guid Id { get; set; }
     [JsonIgnore]
     public string? Comment { get; set; }
     [JsonIgnore]
@@ -16,7 +18,7 @@ public class TestCaseModel
     public UserModel? Users { get; set; }
     public Guid UserId { get; set; }
     [JsonIgnore]
-    public DirectionsModel? Directions { get; set; } = new();
+    public List<DirectionsModel>? Directions { get; set; } = new();
     
     public Guid DirectionId { get; set; }
 }
