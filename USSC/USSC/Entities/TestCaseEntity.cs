@@ -13,6 +13,6 @@ public class TestCaseEntity : BaseEntity
     public UsersEntity Users { get; set; }
 
     [ForeignKey("DirectionId")] 
-    public DirectionsEntity Directions { get; set; }
+    public List<DirectionsEntity> Directions { get; set; }
     public Guid DirectionId { get; set; }
 }
