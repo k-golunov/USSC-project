@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using USSC.Dto;
+using USSC.Helpers;
 using USSC.Services;
 
 namespace USSC.Controllers;
@@ -41,10 +41,18 @@ public class UsersController : ControllerBase
     }
 
     [Authorize(Roles="Admin")]
-    [HttpGet]
+    [HttpGet("getAll")]
     public IActionResult GetAll()
     {
         var users = _userService.GetAll();
         return Ok(users);
+    }
+
+    // Если все хорошо, возвращает ФИО, возможно надо перенести в profile
+    [Authorize]
+    [HttpGet]
+    public IActionResult CheckToken()
+    {
+        return Ok();
     }
 }
