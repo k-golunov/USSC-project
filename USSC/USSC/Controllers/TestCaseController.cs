@@ -35,7 +35,7 @@ public class TestCaseController : ControllerBase
     /// придумать уникальное название файла для каждой практики и каждого юзера
     /// </summary>
     [HttpPost("upload")]
-    public async void UploadFile(IFormFile file, Guid userId, Guid directionId)
+    public void UploadFile(IFormFile file, Guid userId, Guid directionId)
     {
         var model = new TestCaseModel();
         model.UserId = userId;
@@ -45,22 +45,22 @@ public class TestCaseController : ControllerBase
         if (name.Length != 2 || name[1] != "zip") 
         {
             // throw new Exception("Invalid format file");
-            await response.WriteAsync("Invalid format file or file name");
+            response.WriteAsync("Invalid format file or file name");
             return;
         }
         // здесь вместо file.FileName должно быть {user.Id}.zip 
-        var uploadPath = $".\\Upload\\{model.UserId.ToString()}.zip";
+        var uploadPath = $".\\Uploads\\{model.UserId.ToString()}.zip";
         
         // var uploadPath = $"G:\\USSC project\\USSC-project\\USSC\\USSC\\Upload\\{file.FileName}";
         model.Path = uploadPath;
         using (var fileStream = new FileStream(uploadPath, FileMode.Create))
         {
-            await file.CopyToAsync(fileStream);
+            file.CopyToAsync(fileStream);
         }
         
         var response2 = _testCaseService.Upload(model);
 
-        await response.WriteAsync("Файлы успешно загружены");
+        // await response.WriteAsync("Файлы успешно загружены");
     }
 
     // [HttpPost("addTest")]
