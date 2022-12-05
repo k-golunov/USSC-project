@@ -1,29 +1,27 @@
-﻿// using Microsoft.AspNetCore.Mvc;
-//
-// namespace USSC.Controllers;
+﻿ using Microsoft.AspNetCore.Mvc;
 
-//КОНТРОЛЛЕР НЕ НУЖЕН ТАК КАК ВСЕ МАНИПУЛЯЦИИ С НАПРАВЛЕНИЯМИ ПРАКТИК ДЕЛАЕТСЯ В АДМИНЕ
+ namespace USSC.Controllers;
+ 
+ [ApiController]
+ [Route("practices")]
+ public class PracticesController : ControllerBase
+ {
+     [HttpGet("GetPractices")]
+     public IActionResult GetPractices()
+     {
+         // возвращает поля практики name, description, info, id
+         return Ok();
+     }
 
-// [ApiController]
-// [Route("[controller]")]
-// public class PracticesController : ControllerBase
-// {
-//     [HttpGet("GetPractices")]
-//     public IActionResult GetPractices()
-//     {
-//         // возвращает поля практики name, description, info, id
-//         return Ok();
-//     }
-//
-//     [HttpPut("UpdatePractices")]
-//     public IActionResult UpdatePractices()
-//     {
-//         return Ok();
-//     }
-//
-//     [HttpPost("CreatePractices")]
-//     public IActionResult CreatePractices()
-//     {
-//         return Ok();
-//     }
-// }
+     [HttpPut("UpdatePractices")]
+     public IActionResult UpdatePractices()
+     {
+         return Ok();
+     }
+
+     [HttpPost("CreatePractices")]
+     public IActionResult CreatePractices()
+     {
+         return Ok();
+     }
+ }
