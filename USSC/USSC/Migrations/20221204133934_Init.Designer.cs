@@ -12,7 +12,7 @@ using USSC;
 namespace USSC.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221129182134_Init")]
+    [Migration("20221204133934_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -38,21 +38,6 @@ namespace USSC.Migrations
                     b.HasIndex("PracticesId");
 
                     b.ToTable("DirectionsEntityPracticesEntity");
-                });
-
-            modelBuilder.Entity("RequestEntityUsersEntity", b =>
-                {
-                    b.Property<Guid>("RequestId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("UsersId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("RequestId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("RequestEntityUsersEntity");
                 });
 
             modelBuilder.Entity("USSC.Entities.DirectionsEntity", b =>
@@ -156,15 +141,20 @@ namespace USSC.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<bool>("Allow")
+                    b.Property<bool?>("Allow")
                         .HasColumnType("boolean");
 
                     b.Property<Guid>("DirectionId")
                         .HasColumnType("uuid");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uuid");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DirectionId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Request");
                 });
@@ -175,7 +165,7 @@ namespace USSC.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<bool>("Allow")
+                    b.Property<bool?>("Allow")
                         .HasColumnType("boolean");
 
                     b.Property<string>("Comment")
@@ -247,21 +237,6 @@ namespace USSC.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("RequestEntityUsersEntity", b =>
-                {
-                    b.HasOne("USSC.Entities.RequestEntity", null)
-                        .WithMany()
-                        .HasForeignKey("RequestId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("USSC.Entities.UsersEntity", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("USSC.Entities.ProfileEntity", b =>
                 {
                     b.HasOne("USSC.Entities.UsersEntity", "Users")
@@ -281,7 +256,15 @@ namespace USSC.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("USSC.Entities.UsersEntity", "Users")
+                        .WithMany("Request")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Directions");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("USSC.Entities.TestCaseEntity", b =>
@@ -313,6 +296,8 @@ namespace USSC.Migrations
             modelBuilder.Entity("USSC.Entities.UsersEntity", b =>
                 {
                     b.Navigation("Profile");
+
+                    b.Navigation("Request");
 
                     b.Navigation("TestCase");
                 });

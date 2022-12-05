@@ -18,7 +18,9 @@ public class RequestProfile : Profile
             .ForMember(dst => dst.DirectionId,
                 opt => opt.MapFrom(src => src.DirectionId))
             .ForMember(dst => dst.Users,
-                opt => opt.MapFrom(src => src.User))
+                opt => opt.MapFrom(src => src.Users))
+            .ForMember(dst => dst.UserId,
+                opt => opt.MapFrom(src => src.UserId))
             ;
     }
 }
