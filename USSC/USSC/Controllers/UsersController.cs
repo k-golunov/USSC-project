@@ -22,7 +22,9 @@ public class UsersController : ControllerBase
         var response = _userService.Authenticate(model);
 
         if (response == null)
+        {
             return BadRequest(new { message = "Username or password is incorrect" });
+        }
 
         return Ok(response);
     }
@@ -34,6 +36,7 @@ public class UsersController : ControllerBase
 
         if (response == null)
         {
+            
             return BadRequest(new {message = "Didn't register!"});
         }
 
@@ -45,6 +48,12 @@ public class UsersController : ControllerBase
     public IActionResult GetAll()
     {
         var users = _userService.GetAll();
+        if (users.Count() == 0)
+        {
+            HttpContext.Response.StatusCode = 204;
+            return BadRequest(new { message = "Пользователи отсутсвуют" });
+        }
+        
         return Ok(users);
     }
 
