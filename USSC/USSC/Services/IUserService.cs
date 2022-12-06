@@ -9,4 +9,5 @@ public interface IUserService: IService<UsersEntity>
     Task<AuthenticateResponse> Register(UserModel userModel);
 
     Task<Guid> Update(UserModel entity);
+    AuthenticateResponse UpdateTokens(UsersEntity user, string refreshToken);
 }

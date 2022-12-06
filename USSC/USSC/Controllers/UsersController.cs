@@ -16,6 +16,11 @@ public class UsersController : ControllerBase
         _userService = userService;
     }
 
+    /// <summary>
+    /// Вход в аккаунт
+    /// </summary>
+    /// <param name="model">Модель для входа в аккаунт (Почта, пароль)</param>
+    /// <returns></returns>
     [HttpPost("signin")]
     public IActionResult Authenticate(AuthenticateRequest model)
     {
@@ -29,6 +34,11 @@ public class UsersController : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// Регистрация пользователя
+    /// </summary>
+    /// <param name="userModel">Основная модель данных для пользователя</param>
+    /// <returns></returns>
     [HttpPost("register")]
     public async Task<IActionResult> Register(UserModel userModel)
     {
@@ -43,6 +53,10 @@ public class UsersController : ControllerBase
         return Ok(response);
     }
 
+    /// <summary>
+    /// Возвращает всех пользователей, которые зарегистрированы
+    /// </summary>
+    /// <returns></returns>
     [Authorize(Roles="Admin")]
     [HttpGet("getAll")]
     public IActionResult GetAll()
@@ -63,5 +77,22 @@ public class UsersController : ControllerBase
     public IActionResult CheckToken()
     {
         return Ok();
+    }
+
+    /// <summary>
+    /// Создает новый рефреш и аксес токены и отдает их, рефреш токен сохраняется в бд
+    /// </summary>
+    /// <param name="userId">Идентификатор пользователя, Guid</param>
+    /// <param name="refreshToken">Старый рефреш токен пользователя</param>
+    /// <returns></returns>
+    // [Authorize]
+    [HttpPut("refresh")]
+    public IActionResult UpdateRefreshToken(Guid userId, string refreshToken)
+    {
+        var user = _userService.GetById(userId);
+        if (user.RefreshToken != refreshToken)
+            return BadRequest(new { message = "Token not valid" });
+        var response = _userService.UpdateTokens(user, refreshToken);
+        return Ok(response);
     }
 }

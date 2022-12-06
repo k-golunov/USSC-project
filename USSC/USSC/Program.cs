@@ -24,11 +24,12 @@ builder.Services.AddDbContext<DataContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 // builder.Services.AddDbContext<ApplicationDb>(opt => 
 //     opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
+// builder.Services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
 // builder.Services.AddScoped<UserRepository<UsersEntity>>();
 // builder.Services.AddScoped<ProfileRepository>();
 // builder.Services.AddScoped(typeof(IEfRepository<>), typeof(ApplicationRepository<>));
 // builder.Services.AddScoped(typeof(IEfRepository<ProfileEntity>), typeof(ProfileRepository<ProfileEntity>));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 builder.Services.AddScoped<ITestCaseRepository, TestCaseRepository>();
 builder.Services.AddScoped<IDirectionRepository, DirectionRepository>();
