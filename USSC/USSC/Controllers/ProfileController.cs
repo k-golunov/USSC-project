@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using USSC.Dto;
+using USSC.Entities;
+using USSC.Helpers;
 using USSC.Services;
 
 namespace USSC.Controllers;
@@ -16,10 +17,12 @@ public class ProfileController : ControllerBase
         _profileService = profileService;
     }
     
-    [HttpGet("getInfo")]
+    [HttpGet("getByUserId")]
     public IActionResult GetProfileInfo(Guid userId)
     {
         var profile = _profileService.GetByUserId(userId);
+        if (profile == null)
+            return BadRequest(new { message = "Профиль не найден" });
         return Ok(profile);
     }
 
@@ -43,7 +46,7 @@ public class ProfileController : ControllerBase
         }
         catch
         {
-            return BadRequest(new {Message = "Не удалось обновить профиль", StatusCode=StatusCode(123)});
+            return BadRequest(new {Message = "Не удалось обновить профиль", StatusCode=StatusCode(400)});
         }
     }
 }

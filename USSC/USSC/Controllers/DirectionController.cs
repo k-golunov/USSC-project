@@ -15,7 +15,7 @@ public class DirectionController : ControllerBase
         _directionService = directionService;
     }
     
-    // почему работает только без асинхронности, надо разобраться
+    // почему-то работает только без асинхронности, надо разобраться
     [HttpPost("add")]
     public void AddNewDirection(IFormFile file, string direction)
     { 
