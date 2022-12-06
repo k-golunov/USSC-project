@@ -8,4 +8,6 @@ public class PracticesEntity : BaseEntity
     public  string? Info { get; set; }
     public  string? Name { get; set; }
     public List<DirectionsEntity>? Directions { get; set; }
+    public DateTime? StartPractices { get; set; }
+    public DateTime? EndPractices { get; set; }
 }

@@ -31,7 +31,9 @@ namespace USSC.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     Info = table.Column<string>(type: "text", nullable: true),
-                    Name = table.Column<string>(type: "text", nullable: true)
+                    Name = table.Column<string>(type: "text", nullable: true),
+                    StartPractices = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    EndPractices = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -173,7 +175,8 @@ namespace USSC.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Profile_UserId",
                 table: "Profile",
-                column: "UserId");
+                column: "UserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Request_DirectionId",
