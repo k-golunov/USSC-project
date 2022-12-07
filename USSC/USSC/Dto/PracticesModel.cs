@@ -10,4 +10,6 @@ public class PracticesModel
     public string Info { get; set; }
     public string Name { get; set; }
     public List<DirectionsModel>? Directions { get; set; } = new();
+    public DateTime? StartPractices { get; set; }
+    public DateTime? EndPractices { get; set; }
 }

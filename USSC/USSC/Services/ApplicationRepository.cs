@@ -13,12 +13,12 @@ public class ApplicationRepository : IApplicationRepository
 
     public List<RequestEntity> GetAll()
     {
-        throw new NotImplementedException();
+        return _context.Set<RequestEntity>().ToList();
     }
 
     public RequestEntity GetById(Guid id)
     {
-        throw new NotImplementedException();
+       return _context.Set<RequestEntity>().FirstOrDefault(x => x.Id == id);
     }
 
     public async Task<Guid> Add(RequestEntity entity)
@@ -28,8 +28,17 @@ public class ApplicationRepository : IApplicationRepository
         return result.Entity.Id;
     }
 
-    public Task<Guid> Update(RequestEntity entity)
+    public async Task<Guid> Update(RequestEntity entity)
     {
-        throw new NotImplementedException();
+        _context.Request.Update(entity);
+        await _context.SaveChangesAsync();
+        return entity.Id;
+    }
+
+    public RequestEntity GetByUserId(Guid userId, Guid directionId)
+    {
+        var testCase = _context.Set<RequestEntity>().FirstOrDefault(x =>
+            x.UserId == userId && x.DirectionId == directionId);
+        return testCase;
     }
 }

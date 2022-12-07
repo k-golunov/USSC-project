@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using USSC.Dto;
+using USSC.Helpers;
 using USSC.Services;
 
 namespace USSC.Controllers;
@@ -25,6 +26,23 @@ public class ApplicationController : ControllerBase
         // };
         var result = await _applicationService.Add(model);
         return Ok(new SuccessResponse(true));
+    }
+    
+    [Authorize(Roles = "Admin")]
+    [HttpGet("getAll")]
+    public IActionResult GetAll()
+    {
+        var requests = _applicationService.GetAll().Where(x => x.Allow == null);
+        if (requests.Any())
+            return Ok(requests);
+        return Ok(new { Message = "Нет необработанных заявок", StatusCode=StatusCode(200)});
+    }
+
+    [HttpPost("getAllow")]
+    public async Task<IActionResult> ProcessApplication(RequestModel requestModel)
+    {
+        var response = await _applicationService.ProcessRequest(requestModel);
+        return Ok(response);
     }
     
 }

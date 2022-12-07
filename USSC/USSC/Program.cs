@@ -24,15 +24,17 @@ builder.Services.AddDbContext<DataContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 // builder.Services.AddDbContext<ApplicationDb>(opt => 
 //     opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
+// builder.Services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
 // builder.Services.AddScoped<UserRepository<UsersEntity>>();
 // builder.Services.AddScoped<ProfileRepository>();
 // builder.Services.AddScoped(typeof(IEfRepository<>), typeof(ApplicationRepository<>));
 // builder.Services.AddScoped(typeof(IEfRepository<ProfileEntity>), typeof(ProfileRepository<ProfileEntity>));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IProfileRepository, ProfileRepository>();
 builder.Services.AddScoped<ITestCaseRepository, TestCaseRepository>();
 builder.Services.AddScoped<IDirectionRepository, DirectionRepository>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
+builder.Services.AddScoped<IPracticeRepository, PracticeRepository>();
 // builder.Services.AddScoped<IEfRepository<UsersEntity>>();
 // builder.Services.AddScoped<IEfRepository<ProfileEntity>>();
 builder.Services.AddScoped<IUserService, UserService>();
@@ -40,6 +42,7 @@ builder.Services.AddScoped<IApplicationService, ApplicationService>();
 builder.Services.AddScoped<ITestCaseService, TestCaseService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IDirectionService, DirectionService>();
+builder.Services.AddScoped<IPracticeService, PracticeService>();
 
 builder.Services.AddAutoMapper(typeof(UserProfile));
 builder.Services.AddAutoMapper(typeof(ApplicationProfile));
@@ -56,8 +59,6 @@ builder.Services.AddSwaggerGen(c =>
 
 
 var app = builder.Build();
-
-
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

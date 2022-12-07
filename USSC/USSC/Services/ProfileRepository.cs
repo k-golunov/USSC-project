@@ -32,4 +32,9 @@ public class ProfileRepository : IProfileRepository
         await _context.SaveChangesAsync();
         return entity.Id;
     }
+
+    public Task<Guid> UpdateRefreshToken(UsersEntity usersEntity, string refreshToken)
+    {
+        throw new NotImplementedException();
+    }
 }

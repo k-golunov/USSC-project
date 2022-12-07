@@ -1,4 +1,9 @@
-﻿using AutoMapper;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using System.Web.Http.Results;
+using AutoMapper;
+using Microsoft.IdentityModel.Tokens;
 using USSC.Dto;
 using USSC.Entities;
 using USSC.Helpers;
@@ -9,11 +14,11 @@ namespace USSC.Services;
 
 public class UserService : IUserService
 {
-    private readonly IEfRepository<UsersEntity> _userRepository;
+    private readonly IUserRepository _userRepository;
     private readonly IConfiguration _configuration;
     private readonly IMapper _mapper;
 
-    public UserService(IEfRepository<UsersEntity> userRepository, IConfiguration configuration, IMapper mapper)
+    public UserService(IUserRepository userRepository, IConfiguration configuration, IMapper mapper)
     {
         _userRepository = userRepository;
         _configuration = configuration;
@@ -34,16 +39,18 @@ public class UserService : IUserService
         }
 
         var token = _configuration.GenerateJwtToken(user);
-
-        return new AuthenticateResponse(user, token);
+        var refreshToken = GenerateJwtToken(user);
+        user.RefreshToken = refreshToken;
+        var result = _userRepository.UpdateRefreshToken(user, refreshToken);
+        return new AuthenticateResponse(user, token, refreshToken);
     }
 
     public async Task<AuthenticateResponse> Register(UserModel userModel)
     {
         userModel.Role = "User";
-        userModel.RefreshToken = "1";
+        
         var user = _mapper.Map<UsersEntity>(userModel);
-
+        user.RefreshToken = GenerateJwtToken(user);
         var addedUser = await _userRepository.Add(user);
 
         var response = Authenticate(new AuthenticateRequest
@@ -70,5 +77,28 @@ public class UserService : IUserService
     public UsersEntity GetById(Guid id)
     {
         return _userRepository.GetById(id);
+    }
+    
+    private string GenerateJwtToken(UsersEntity user)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = Encoding.ASCII.GetBytes(_configuration["Secret"]);
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(new[] { new Claim("UserId", user.Id.ToString()) }),
+            Expires = DateTime.UtcNow.AddDays(30),
+            SigningCredentials = new SigningCredentials(
+                new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+        };
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        return tokenHandler.WriteToken(token);
+    }
+
+    public AuthenticateResponse UpdateTokens(UsersEntity entity, string refreshToken)
+    {
+        entity.RefreshToken = GenerateJwtToken(entity);
+        var response = new AuthenticateResponse(entity, _configuration.GenerateJwtToken(entity), refreshToken);
+        var result = _userRepository.UpdateRefreshToken(entity, refreshToken);
+        return response;
     }
 }

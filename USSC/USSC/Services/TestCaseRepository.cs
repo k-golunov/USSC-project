@@ -28,7 +28,7 @@ public class TestCaseRepository: ITestCaseRepository
         await _context.SaveChangesAsync();
         return entity.Id;
     }
-
+    
     public TestCaseEntity GetByUserId(Guid userId, Guid directionId)
     {
         var testCase = _context.Set<TestCaseEntity>().FirstOrDefault(x =>

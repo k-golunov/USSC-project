@@ -12,6 +12,8 @@ public class PracticesProfile : Profile
             .ForMember(dst => dst.Description, opt => opt.MapFrom(src => src.Descriptions))
             .ForMember(dst => dst.Info, opt => opt.MapFrom(src => src.Info))
             .ForMember(dst => dst.Name, opt => opt.MapFrom(src => src.Name))
+            .ForMember(dst => dst.StartPractices, opt => opt.MapFrom(src => src.StartPractices))
+            .ForMember(dst => dst.EndPractices, opt => opt.MapFrom(src => src.EndPractices))
             ;
     }
 }

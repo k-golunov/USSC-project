@@ -34,5 +34,8 @@ public class DataContext : DbContext
         modelBuilder.Entity<TestCaseEntity>()
             .HasIndex(e => e.Path)
             .IsUnique();
+        modelBuilder.Entity<ProfileEntity>()
+            .HasIndex(e => e.UserId)
+            .IsUnique();
     }
 }
