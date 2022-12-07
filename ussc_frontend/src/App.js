@@ -1,5 +1,6 @@
 import React from 'react';
-import './App.css';
+// import './App.css';
+import './App.scss';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
@@ -9,7 +10,6 @@ import HomeLayout from './components/HomeLayout';
 import ProfileLayout from './components/ProfileLayout';
 import TaskPage from './pages/TaskPage';
 import RequireAuth from './hoc/RequireAuth';
-import { useAuth } from './hooks/use-auth';
 import DirectionsPage from './pages/DirectionsPage';
 import ApplicationsPage from './pages/ApplicationsPage';
 

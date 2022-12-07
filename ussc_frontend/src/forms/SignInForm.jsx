@@ -8,6 +8,7 @@ import { setUser } from '../store/slices/userSlice';
 import md5 from 'md5';
 import { useNavigate } from 'react-router-dom';
 import { useSignIn } from '../hooks/use-signin';
+import { signInUser } from '../store/slices/userSlice';
 
 const SignInForm = () => {
   const dispatch = useDispatch();
@@ -19,18 +20,20 @@ const SignInForm = () => {
   const togglePassRecoveryPopup = () => dispatch(togglePopup('passRecovery'));
 
   const { register, handleSubmit } = useForm();
-  const onSubmit = async (user) => {
+  const onSubmit = (user) => {
     user.password = md5(user.password);
 
-    let response = await signIn(user);
+    dispatch(signInUser(user));
 
-    if (response.ok) {
-      let user = await response.json();
-      dispatch(setUser(user));
-      localStorage.setItem('token', user.token);
-      localStorage.setItem('userId', user.id);
-      toggleSignInPopup();
-    }
+    // let response = await signIn(user);
+
+    // if (response.ok) {
+    //   let user = await response.json();
+    //   dispatch(setUser(user));
+    //   localStorage.setItem('token', user.token);
+    //   localStorage.setItem('userId', user.id);
+    //   toggleSignInPopup();
+    // }
   };
 
   return (

@@ -13,6 +13,7 @@ import { useSignUp } from '../hooks/use-signup';
 import { useSignIn } from '../hooks/use-signin';
 import { setUser } from '../store/slices/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { signUpUser } from '../store/slices/userSlice';
 
 // {
 
@@ -41,23 +42,26 @@ const SignUpForm = () => {
 
   const methods = useForm();
   const { register, handleSubmit } = methods;
-  const onSubmit = async (user) => {
+  const onSubmit = (user) => {
     if (user.password !== user.password_again) {
       alert('Вы указали разные пароли!');
       return;
     }
-
-    delete user.rule; //Потом надо будет вернуть
     delete user.password_again;
     user.password = md5(user.password);
-    let response = await signUp(user);
 
-    response = await signIn(user);
+    dispatch(signUpUser(user));
 
-    if (response.ok) {
-      dispatch(setUser(await response.json()));
-      toggleSignUpPopup();
-    }
+    // delete user.rule; //Потом надо будет вернуть
+    // user.password = md5(user.password);
+    // let response = await signUp(user);
+
+    // response = await signIn(user);
+
+    // if (response.ok) {
+    //   dispatch(setUser(await response.json()));
+    //   toggleSignUpPopup();
+    // }
   };
 
   // const [isChecked, setIsChecked] = React.useState(false);
