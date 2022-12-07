@@ -181,3 +181,6 @@ C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\System.C
 C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\System.Text.Encodings.Web.dll
 C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\System.Text.Json.dll
 C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\MailKit.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\MimeKit.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\BouncyCastle.Crypto.dll
