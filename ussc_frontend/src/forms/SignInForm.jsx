@@ -4,16 +4,11 @@ import { useDispatch } from 'react-redux';
 import Button from '../components/Button';
 import FormFrame from '../components/FormFrame';
 import { togglePopup } from '../store/slices/popupSlice';
-import { setUser } from '../store/slices/userSlice';
 import md5 from 'md5';
-import { useNavigate } from 'react-router-dom';
-import { useSignIn } from '../hooks/use-signin';
 import { signInUser } from '../store/slices/userSlice';
 
 const SignInForm = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const signIn = useSignIn();
 
   const toggleSignUpPopup = () => dispatch(togglePopup('signUp'));
   const toggleSignInPopup = () => dispatch(togglePopup('signIn'));
@@ -22,18 +17,7 @@ const SignInForm = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = (user) => {
     user.password = md5(user.password);
-
     dispatch(signInUser(user));
-
-    // let response = await signIn(user);
-
-    // if (response.ok) {
-    //   let user = await response.json();
-    //   dispatch(setUser(user));
-    //   localStorage.setItem('token', user.token);
-    //   localStorage.setItem('userId', user.id);
-    //   toggleSignInPopup();
-    // }
   };
 
   return (

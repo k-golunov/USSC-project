@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
 const Popup = ({ active, setActive, content }) => {
   return (

@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { signInUserURL, signUpUserURL } from '../../api/userAPI';
+import USER_API from '../../api/userAPI';
 
 export const signInUser = createAsyncThunk(
   'user/signIn',
   async function (user, { rejectWithValue, dispatch }) {
     try {
-      let response = await fetch(signInUserURL, {
+      let response = await fetch(USER_API.SIGN_IN_USER_URL, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ export const signUpUser = createAsyncThunk(
   'user/signUp',
   async function (user, { rejectWithValue, dispatch }) {
     try {
-      let response = await fetch(signUpUserURL, {
+      let response = await fetch(USER_API.SIGN_UP_USER_URL, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ export const signUpUser = createAsyncThunk(
 
 const initialState = {
   email: null,
-  token: null,
+  accessToken: null,
   id: null,
   status: null,
   error: null,
@@ -78,16 +78,19 @@ const userSlice = createSlice({
     setUser(state, action) {
       state.email = action.payload.email;
       state.id = action.payload.id;
-      state.token = action.payload.token;
-      localStorage.setItem('token', action.payload.token);
+      state.accessToken = action.payload.accessToken;
+
+      localStorage.setItem('accessToken', action.payload.accessToken);
       localStorage.setItem('userId', action.payload.id);
+      localStorage.setItem('email', action.payload.email);
     },
     removeUser(state) {
       state.email = null;
       state.id = null;
-      state.token = null;
-      localStorage.removeItem('token');
+      state.accessToken = null;
+      localStorage.removeItem('accessToken');
       localStorage.removeItem('userId');
+      localStorage.removeItem('email');
     },
   },
   extraReducers: {

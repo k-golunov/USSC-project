@@ -1,21 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fillInfoURL, getInfoURL } from '../../api/profileAPI';
+import PROFILE_API from '../../api/profileAPI';
 
 export const getProfile = createAsyncThunk(
   'profile/getProfile',
   async function (_, { rejectWithValue, dispatch }) {
     try {
-      const token = 'Bearer ' + localStorage.getItem('token');
+      const accessToken = 'Bearer ' + localStorage.getItem('accessToken');
       const userId = localStorage.getItem('userId');
-      let response = await fetch(`${getInfoURL}?userId=${userId}`, {
-        method: 'get',
-        headers: {
-          Authorization: token,
-        },
-      });
+
+      console.dir({ userId, accessToken });
+
+      let response = await fetch(
+        `${PROFILE_API.GET_BY_USER_ID_URL}?userId=${userId}`,
+        {
+          method: 'get',
+          headers: {
+            Authorization: accessToken,
+          },
+        }
+      );
 
       if (!response.ok) {
+        console.log(response.status);
         throw new Error(
           `${response.status}${
             response.statusText ? ' ' + response.statusText : ''
@@ -24,6 +31,8 @@ export const getProfile = createAsyncThunk(
       }
 
       response = await response.json();
+
+      dispatch(setProfile(response));
 
       return response;
     } catch (error) {
@@ -37,12 +46,15 @@ export const fillInfo = createAsyncThunk(
   async function (payload, { rejectWithValue, dispatch }) {
     try {
       const userId = localStorage.getItem('userId');
-      const token = 'Bearer ' + localStorage.getItem('token');
+      const accessToken = 'Bearer ' + localStorage.getItem('accessToken');
       console.log(payload);
       payload = { ...payload, userId };
-      let response = await fetch(fillInfoURL, {
+      let response = await fetch(PROFILE_API.FILL_INFO_URL, {
         method: 'post',
-        headers: { Authorization: token, 'Content-Type': 'application/json' },
+        headers: {
+          Authorization: accessToken,
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify(payload),
       });
 
@@ -71,7 +83,7 @@ const initialState = {
   patronymic: null,
   phone: null,
   telegram: null,
-  univercity: null,
+  university: null,
   faculty: null,
   speciality: null,
   course: null,
@@ -83,12 +95,12 @@ const profileSlice = createSlice({
   initialState: initialState,
   reducers: {
     setProfile(state, action) {
-      state.secondName = action.payload.lastName;
+      state.secondName = action.payload.secondName;
       state.firstName = action.payload.firstName;
       state.patronymic = action.payload.patronymic;
       state.phone = action.payload.phone;
       state.telegram = action.payload.telegram;
-      state.university = action.payload.univercity;
+      state.university = action.payload.university;
       state.faculty = action.payload.faculty;
       state.speciality = action.payload.speciality;
       state.course = action.payload.course;

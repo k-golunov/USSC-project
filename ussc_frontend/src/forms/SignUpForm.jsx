@@ -1,18 +1,10 @@
 import React from 'react';
-
 import { useDispatch } from 'react-redux';
 import { togglePopup } from '../store/slices/popupSlice';
-
 import FormFrame from '../components/FormFrame';
-import FormInput from '../components/FormInput';
 import Button from '../components/Button';
-import Checkbox from '../components/Checkbox';
 import { useForm } from 'react-hook-form';
 import md5 from 'md5';
-import { useSignUp } from '../hooks/use-signup';
-import { useSignIn } from '../hooks/use-signin';
-import { setUser } from '../store/slices/userSlice';
-import { useNavigate } from 'react-router-dom';
 import { signUpUser } from '../store/slices/userSlice';
 
 // {
@@ -33,9 +25,6 @@ import { signUpUser } from '../store/slices/userSlice';
 
 const SignUpForm = () => {
   const dispatch = useDispatch();
-  const signUp = useSignUp();
-  const signIn = useSignIn();
-  const navigate = useNavigate();
 
   const toggleSignUpPopup = () => dispatch(togglePopup('signUp'));
   const toggleSignInPopup = () => dispatch(togglePopup('signIn'));
@@ -51,20 +40,7 @@ const SignUpForm = () => {
     user.password = md5(user.password);
 
     dispatch(signUpUser(user));
-
-    // delete user.rule; //Потом надо будет вернуть
-    // user.password = md5(user.password);
-    // let response = await signUp(user);
-
-    // response = await signIn(user);
-
-    // if (response.ok) {
-    //   dispatch(setUser(await response.json()));
-    //   toggleSignUpPopup();
-    // }
   };
-
-  // const [isChecked, setIsChecked] = React.useState(false);
 
   return (
     <FormFrame onSubmit={handleSubmit(onSubmit)}>
@@ -108,32 +84,6 @@ const SignUpForm = () => {
         />
       </label>
 
-      {/* <div className='checkbox_wrapper' style={{ marginTop: '30px' }}>
-        <input
-          className={isChecked ? 'checked' : ''}
-          type='checkbox'
-          // onChange={() => setIsChecked((prev) => !prev)}
-          {...register('rule', {
-            required: true,
-            onChange: () => setIsChecked((prev) => !prev),
-          })}
-        />
-        <span>
-          Нажимая кнопку зарегистрироваться, я принимаю условия
-          пользовательского соглашения
-        </span>
-      </div> */}
-      {/* <FormInput {...methods} type='text' label='Фамилия' required={true} />
-      <FormInput type='text' label='Имя' required={true} />
-      <FormInput type='text' label='Отчество' required={true} />
-      <FormInput type='email' label='E-mail' required={true} />
-      <FormInput type='password' label='Пароль' required={true} />
-      <FormInput type='password' label='Повторите пароль' required={true} /> */}
-      {/* <Checkbox
-        checked={true}
-        label='Нажимая кнопку зарегистрироваться, я принимаю условия пользовательского соглашения'
-        style={{ marginTop: '30px' }}
-      /> */}
       <Button type='submit' style={{ marginTop: '66px' }}>
         Зарегистрироваться
       </Button>
