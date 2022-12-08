@@ -23,6 +23,8 @@ public class ProfileController : ControllerBase
         var profile = _profileService.GetByUserId(userId);
         if (profile == null)
             return BadRequest(new { message = "Профиль не найден" });
+        // Вытаскивает все поля юзера, в том числе пароль, требует фикса!!!
+        profile.Users = null;
         return Ok(profile);
     }
 
