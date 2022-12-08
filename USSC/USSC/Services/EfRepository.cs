@@ -5,7 +5,7 @@ namespace USSC.Services;
 
 //create baseEntity and DataContext
 
-public class UserRepository<T>: IEfRepository<T> where T: BaseEntity
+public class UserRepository: IUserRepository
 {
     private readonly DataContext _context;
 
@@ -14,14 +14,14 @@ public class UserRepository<T>: IEfRepository<T> where T: BaseEntity
         _context = context;
     }
 
-    public List<T> GetAll()
+    public List<UsersEntity> GetAll()
     {
-        return _context.Set<T>().ToList();
+        return _context.Set<UsersEntity>().ToList();
     }
 
-    public T GetById(Guid id)
+    public UsersEntity GetById(Guid id)
     {
-        var result = _context.Set<T>().FirstOrDefault(x => x.Id == id);
+        var result = _context.Set<UsersEntity>().FirstOrDefault(x => x.Id == id);
 
         if (result == null)
         {
@@ -32,17 +32,25 @@ public class UserRepository<T>: IEfRepository<T> where T: BaseEntity
         return result;
     }
 
-    public async Task<Guid> Add(T entity)
+    public async Task<Guid> Add(UsersEntity entity)
     {
-        var result = await _context.Set<T>().AddAsync(entity);
+        var result = await _context.Set<UsersEntity>().AddAsync(entity);
         await _context.SaveChangesAsync();
         return result.Entity.Id;
     }
 
-    public async Task<Guid> Update(T entity)
+    public async Task<Guid> Update(UsersEntity entity)
     {
-        var result = _context.Set<T>().FirstOrDefault(x => x.Id == entity.Id);
+        var result = _context.Set<UsersEntity>().FirstOrDefault(x => x.Id == entity.Id);
         await _context.SaveChangesAsync();
         return result.Id;
+    }
+
+    public async Task<UsersEntity> GetByUserEmail(string userEmail)
+    {
+        var user = await _context.Set<UsersEntity>().FirstOrDefaultAsync(x => x.Email == userEmail);
+        if (user == null)
+            return null;
+        return user;
     }
 }

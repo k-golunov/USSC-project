@@ -9,11 +9,11 @@ namespace USSC.Services;
 
 public class UserService : IUserService
 {
-    private readonly IEfRepository<UsersEntity> _userRepository;
+    private readonly IUserRepository _userRepository;
     private readonly IConfiguration _configuration;
     private readonly IMapper _mapper;
 
-    public UserService(IEfRepository<UsersEntity> userRepository, IConfiguration configuration, IMapper mapper)
+    public UserService(IUserRepository userRepository, IConfiguration configuration, IMapper mapper)
     {
         _userRepository = userRepository;
         _configuration = configuration;
@@ -53,6 +53,16 @@ public class UserService : IUserService
         });
             
         return response;
+    }
+
+    public async Task<SuccessResponse> CreateAdmin(string userEmail)
+    {
+        var user = await _userRepository.GetByUserEmail(userEmail);
+        if (user == null)
+            return new SuccessResponse(false);
+        user.Role = "Admin";
+        var id = await _userRepository.Update(user);
+        return new SuccessResponse(id == user.Id);
     }
 
     public async Task<Guid> Update(UserModel entity)

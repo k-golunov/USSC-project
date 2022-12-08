@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using USSC;
 using USSC.Dto;
 using USSC.Entities;
@@ -24,7 +25,7 @@ builder.Services.AddDbContext<DataContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 // builder.Services.AddDbContext<ApplicationDb>(opt => 
 //     opt.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped(typeof(IEfRepository<>), typeof(UserRepository<>));
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 // builder.Services.AddScoped<UserRepository<UsersEntity>>();
 // builder.Services.AddScoped<ProfileRepository>();
 // builder.Services.AddScoped(typeof(IEfRepository<>), typeof(ApplicationRepository<>));
@@ -55,6 +56,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "USSC-project", Version = "v1" });
 });
+
 
 
 var app = builder.Build();

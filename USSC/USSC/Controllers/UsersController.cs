@@ -55,4 +55,14 @@ public class UsersController : ControllerBase
     {
         return Ok();
     }
+
+    
+    [HttpGet("adminCreate")]
+    public async Task<IActionResult> CreateAdmin(string userEmail)
+    {
+        var response = await _userService.CreateAdmin(userEmail);
+        if(response.Success)
+            return Ok(response);
+        return BadRequest(new { Message = "Пользователь с таким email не найден" });
+    }
 }
