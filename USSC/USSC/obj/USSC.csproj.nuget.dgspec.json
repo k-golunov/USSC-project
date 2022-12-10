@@ -50,6 +50,10 @@
               "target": "Package",
               "version": "[2.0.123, )"
             },
+            "MailKit": {
+              "target": "Package",
+              "version": "[3.4.3, )"
+            },
             "Microsoft.AspNet.WebApi.Client": {
               "target": "Package",
               "version": "[5.2.9, )"
