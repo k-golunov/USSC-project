@@ -62,6 +62,16 @@ public class UserService : IUserService
         return response;
     }
 
+    public async Task<SuccessResponse> CreateAdmin(string userEmail)
+    {
+        var user = await _userRepository.GetByUserEmail(userEmail);
+        if (user == null)
+            return new SuccessResponse(false);
+        user.Role = "Admin";
+        var id = await _userRepository.Update(user);
+        return new SuccessResponse(id == user.Id);
+    }
+
     public async Task<Guid> Update(UserModel entity)
     {
         var a = _mapper.Map<UsersEntity>(entity);
