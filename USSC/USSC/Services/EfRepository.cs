@@ -53,4 +53,12 @@ public class UserRepository : IUserRepository
         await _context.SaveChangesAsync();
         return entity.Id;
     }
+
+    public async Task<UsersEntity> GetByUserEmail(string userEmail)
+    {
+        var user = await _context.Set<UsersEntity>().FirstOrDefaultAsync(x => x.Email == userEmail);
+        if (user == null)
+            return null;
+        return user;
+    }
 }
