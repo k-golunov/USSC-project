@@ -42,6 +42,8 @@ public class ApplicationController : ControllerBase
     public async Task<IActionResult> ProcessApplication(RequestModel requestModel)
     {
         var response = await _applicationService.ProcessRequest(requestModel);
+        var emailSender = new EmailSender();
+        emailSender.SendEmail("Ваша заявка проверена", "kostya.golunov2015@yandex.ru");
         return Ok(response);
     }
     
