@@ -12,15 +12,15 @@ const NavAuth = () => {
   const toggleSignUpPopup = () => dispatch(togglePopup('signUp'));
 
   const user = useAuth();
-  const profile = useProfile();
+  const [profile] = useProfile();
   const logout = () => dispatch(removeUser());
 
   if (user.isAuth) {
     return (
       <div className='nav_auth'>
         <Link to='/profile' className='nav_item'>
-          {profile.firstname && profile.lastname
-            ? `${profile.firstname} ${profile.lastname}`
+          {profile.firstName && profile.secondName
+            ? `${profile.firstName} ${profile.secondName}`
             : 'Аноним'}
         </Link>
         <span className='sep'></span>

@@ -16,6 +16,7 @@ import samplePhoto1 from '../img/sample_photo1.jpg';
 import DirectionCard from '../components/DirectionCard';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
+import DirectionsGrid from '../components/DirectionsGrid';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -122,11 +123,7 @@ const HomePage = () => {
           </div>
           <div className='content_section' id='directions'>
             <h2 className='section_heading'>Направления подготовки</h2>
-            <div className='directions'>
-              <DirectionCard title='Разработка DATAPK' />
-              <DirectionCard title='Разработка DATAPK' />
-              <DirectionCard title='Разработка DATAPK' />
-            </div>
+            <DirectionsGrid />
           </div>
         </div>
       </div>

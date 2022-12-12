@@ -9,8 +9,6 @@ export const getProfile = createAsyncThunk(
       const accessToken = 'Bearer ' + localStorage.getItem('accessToken');
       const userId = localStorage.getItem('userId');
 
-      console.dir({ userId, accessToken });
-
       let response = await fetch(
         `${PROFILE_API.GET_BY_USER_ID_URL}?userId=${userId}`,
         {
@@ -41,13 +39,13 @@ export const getProfile = createAsyncThunk(
   }
 );
 
-export const fillInfo = createAsyncThunk(
+export const fillProfileInfo = createAsyncThunk(
   'profile/fillInfo',
   async function (payload, { rejectWithValue, dispatch }) {
     try {
       const userId = localStorage.getItem('userId');
       const accessToken = 'Bearer ' + localStorage.getItem('accessToken');
-      console.log(payload);
+
       payload = { ...payload, userId };
       let response = await fetch(PROFILE_API.FILL_INFO_URL, {
         method: 'post',
@@ -77,6 +75,43 @@ export const fillInfo = createAsyncThunk(
   }
 );
 
+export const updateProfileInfo = createAsyncThunk(
+  'profile/updateProfileInfo',
+  async function (payload, { rejectWithValue, dispatch, getState }) {
+    try {
+      const accessToken = 'Bearer ' + localStorage.getItem('accessToken');
+      const userId = localStorage.getItem('userId');
+
+      payload = { ...payload, userId };
+
+      let response = fetch(PROFILE_API.UPDATE_INFO_URL, {
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: accessToken,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `${response.status}${
+            response.statusText ? ' ' + response.statusText : ''
+          }`
+        );
+      }
+
+      response = response.json();
+
+      dispatch(getProfile());
+
+      return response;
+    } catch (error) {
+      rejectWithValue(error.message);
+    }
+  }
+);
+
 const initialState = {
   secondName: null,
   firstName: null,
@@ -87,7 +122,7 @@ const initialState = {
   faculty: null,
   speciality: null,
   course: null,
-  workExp: null,
+  workExperience: null,
 };
 
 const profileSlice = createSlice({
@@ -109,13 +144,11 @@ const profileSlice = createSlice({
   },
   extraReducers: {
     [getProfile.pending]: (state, action) => {},
-    [getProfile.fulfilled]: (state, action) => {
-      console.log(action.payload);
-    },
+    [getProfile.fulfilled]: (state, action) => {},
     [getProfile.rejected]: (state, action) => {},
-    [fillInfo.pending]: (state, action) => {},
-    [fillInfo.fulfilled]: (state, action) => {},
-    [fillInfo.rejected]: (state, action) => {},
+    [fillProfileInfo.pending]: (state, action) => {},
+    [fillProfileInfo.fulfilled]: (state, action) => {},
+    [fillProfileInfo.rejected]: (state, action) => {},
   },
 });
 
