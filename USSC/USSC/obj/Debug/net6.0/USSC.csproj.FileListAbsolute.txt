@@ -184,3 +184,15 @@ C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\runtimes
 G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\MailKit.dll
 G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\MimeKit.dll
 G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\BouncyCastle.Crypto.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Serilog.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Serilog.AspNetCore.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Serilog.Enrichers.Environment.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Serilog.Enrichers.Process.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Serilog.Enrichers.Thread.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Serilog.Extensions.Hosting.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Serilog.Extensions.Logging.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Serilog.Formatting.Compact.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Serilog.Settings.Configuration.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Serilog.Sinks.Console.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Serilog.Sinks.Debug.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Serilog.Sinks.File.dll

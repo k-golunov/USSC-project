@@ -1,6 +1,7 @@
-﻿ using Microsoft.AspNetCore.Authorization;
+﻿
  using Microsoft.AspNetCore.Mvc;
  using USSC.Dto;
+ using USSC.Helpers;
  using USSC.Services;
 
  namespace USSC.Controllers;
@@ -15,7 +16,7 @@
          _practiceService = practiceService;
      }
      
-     [Authorize(Roles = "Admin")]
+     // [Authorize(Roles = "Admin")]
      [HttpGet("GetPractices")]
      public IActionResult GetPractices() 
     {
@@ -26,7 +27,7 @@
          return Ok(new {Message = "Нет ближайших практик"});
     }
 
-     [Authorize(Roles = "Admin")]
+     // [Authorize(Roles = "Admin")]
      [HttpPut("UpdatePractices")]
      public async Task<IActionResult> UpdatePractices(PracticesModel practicesModel)
      {
@@ -34,7 +35,7 @@
          return Ok(new SuccessResponse(practicesModel.Id == id));
      }
 
-     [Authorize(Roles = "Admin")]
+     // [Authorize(Roles = "Admin")]
      [HttpPost("CreatePractices")]
      public async Task<IActionResult> CreatePractices(PracticesModel practicesModel)
      {

@@ -76,7 +76,7 @@ public class TestCaseController : ControllerBase
     //     return Ok(new SuccessResponse(true));
     // }
     
-    [Authorize(Roles="Admin")]
+    // [Authorize(Roles="Admin")]
     [HttpGet("getAll")]
      public IActionResult GetAll()
      {

@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Context;
+using Serilog.Events;
 using USSC;
 using USSC.Dto;
 using USSC.Entities;
@@ -14,6 +17,19 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions {WebRootPat
 
 // Add services to the container.
 
+builder.Host.UseSerilog((cts, lc) =>
+        lc
+            .Enrich.WithThreadId()
+            .Enrich.FromLogContext()
+            // .AuditTo.Sink<SerilogSink>()
+            // .Filter.With<SerilogFilter>()
+            // .Enrich.With<SerilogEnrich>()
+            .WriteTo.Console(
+                LogEventLevel.Information,
+                outputTemplate:
+                "{Timestamp:HH:mm:ss:ms} LEVEL:[{Level}]| THREAD:|{ThreadId}| Test: |{Test}| {Message}{NewLine}{Exception}"));
+
+LogContext.PushProperty("Test", "Development");
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -66,7 +82,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+// Помогает отлаживать HTTP запросы
+// app.UseHttpLogging();
 app.UseCors(x => x
     .AllowAnyOrigin()
     .AllowAnyMethod()
