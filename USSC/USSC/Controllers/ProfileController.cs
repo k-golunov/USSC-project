@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Serilog.Context;
 using USSC.Dto;
 using USSC.Entities;
 using USSC.Helpers;
@@ -11,10 +12,15 @@ namespace USSC.Controllers;
 public class ProfileController : ControllerBase
 {
     private readonly IProfileService _profileService;
+    private readonly IUserService _userService;
+    private readonly ILogger<ProfileController> _logger;
 
-    public ProfileController(IProfileService profileService)
+    public ProfileController(IProfileService profileService, IUserService userService, ILogger<ProfileController> logger)
     {
+        LogContext.PushProperty("Source", "ProfileController");
         _profileService = profileService;
+        _logger = logger;
+        _userService = userService;
     }
     
     [HttpGet("getByUserId")]
@@ -28,17 +34,23 @@ public class ProfileController : ControllerBase
         return Ok(profile);
     }
 
-    [HttpPost("fillInfo")]
+    [HttpPost("fill")]
     public async Task<IActionResult> FillProfileInfo(ProfileModel profileModel)
     {
         // profileModel.UserId = Guid.Parse(HttpContext.Items["Users"].ToString());
+        var user = _userService.GetById(profileModel.UserId);
+        if (user is null)
+        {
+            _logger.LogInformation("Incorrect user Id or user does not exist");
+            return NoContent();
+        }
         var result = await _profileService.Add(profileModel);
         return Ok(new SuccessResponse(true));
         
     }
 
     // [Authorize]
-    [HttpPut("updateInfo")]
+    [HttpPut("update")]
     public IActionResult UpdateProfileInfo(ProfileModel profileModel)
     {
         try
@@ -48,6 +60,7 @@ public class ProfileController : ControllerBase
         }
         catch
         {
+            _logger.LogInformation("Failed update user profile");
             return BadRequest(new {Message = "Не удалось обновить профиль", StatusCode=StatusCode(400)});
         }
     }
