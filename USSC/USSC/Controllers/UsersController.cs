@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Serilog.Context;
 using USSC.Dto;
 using USSC.Helpers;
 using USSC.Services;
@@ -10,10 +11,13 @@ namespace USSC.Controllers;
 public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
+    private readonly ILogger<UsersController> _logger;
 
-    public UsersController(IUserService userService)
+    public UsersController(IUserService userService, ILogger<UsersController> logger)
     {
+        LogContext.PushProperty("Source", "UserController");
         _userService = userService;
+        _logger = logger;
     }
 
     /// <summary>
@@ -28,6 +32,7 @@ public class UsersController : ControllerBase
 
         if (response == null)
         {
+            _logger.LogInformation("Problem in authenticate");
             return BadRequest(new { message = "Username or password is incorrect" });
         }
 
@@ -46,7 +51,7 @@ public class UsersController : ControllerBase
 
         if (response == null)
         {
-            
+            _logger.LogInformation("Problem in register");
             return BadRequest(new {message = "Didn't register!"});
         }
 
@@ -64,6 +69,7 @@ public class UsersController : ControllerBase
         var users = _userService.GetAll();
         if (users.Count() == 0)
         {
+            _logger.LogInformation("No users");
             return NoContent();
         }
         
@@ -89,8 +95,18 @@ public class UsersController : ControllerBase
     public IActionResult UpdateRefreshToken(Guid userId, string refreshToken)
     {
         var user = _userService.GetById(userId);
+        if (user is null)
+        {
+            _logger.LogInformation("Incorrect user Id or user does not exist");
+            return NoContent();
+        }
+
         if (user.RefreshToken != refreshToken)
+        {
+            _logger.LogError($"Bad token: {refreshToken}");
             return BadRequest(new { message = "Token not valid" });
+        }
+            
         var response = _userService.UpdateTokens(user, refreshToken);
         return Ok(response);
     }
