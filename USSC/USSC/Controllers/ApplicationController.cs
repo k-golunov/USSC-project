@@ -10,11 +10,15 @@ namespace USSC.Controllers;
 public class ApplicationController : ControllerBase
 {
     private readonly IApplicationService _applicationService;
+    private readonly IDirectionService _directionService;
+    private readonly IUserService _userService;
     private readonly ILogger<EmailSender> _logger;
 
-    public ApplicationController(IApplicationService applicationService, ILogger<EmailSender> logger)
+    public ApplicationController(IApplicationService applicationService, ILogger<EmailSender> logger, IDirectionService directionService, IUserService userService)
     {
         _applicationService = applicationService;
+        _directionService = directionService;
+        _userService = userService;
         _logger = logger;
     }
 
@@ -40,9 +44,13 @@ public class ApplicationController : ControllerBase
         return Ok(new { Message = "Нет необработанных заявок", StatusCode=StatusCode(200)});
     }
 
-    [HttpPost("getAllow")]
+    [HttpPost("approve")]
     public async Task<IActionResult> ProcessApplication(RequestModel requestModel)
     {
+        var user = _userService.GetById(requestModel.UserId);
+        var direction = _directionService.GetById(requestModel.DirectionId);
+        if (user is null && direction is null)
+            return NoContent();
         var response = await _applicationService.ProcessRequest(requestModel);
         var emailSender = new EmailSender(_logger);
         emailSender.SendEmail("Ваша заявка проверена", "kostya.golunov2015@yandex.ru");

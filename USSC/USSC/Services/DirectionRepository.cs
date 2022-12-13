@@ -17,7 +17,15 @@ public class DirectionRepository : IDirectionRepository
 
     public DirectionsEntity GetById(Guid id)
     {
-        throw new NotImplementedException();
+        var result = _context.Set<DirectionsEntity>().FirstOrDefault(x => x.Id == id);
+
+        if (result == null)
+        {
+            //todo: need to add logger
+            return null;
+        }
+
+        return result;
     }
 
     public async Task<Guid> Add(DirectionsEntity entity)

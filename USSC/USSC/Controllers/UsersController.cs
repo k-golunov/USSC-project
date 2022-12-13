@@ -57,26 +57,25 @@ public class UsersController : ControllerBase
     /// Возвращает всех пользователей, которые зарегистрированы
     /// </summary>
     /// <returns></returns>
-    [Authorize(Roles="Admin")]
+    // [Authorize(Roles="Admin")]
     [HttpGet("getAll")]
     public IActionResult GetAll()
     {
         var users = _userService.GetAll();
         if (users.Count() == 0)
         {
-            HttpContext.Response.StatusCode = 204;
-            return BadRequest(new { message = "Пользователи отсутсвуют" });
+            return NoContent();
         }
         
         return Ok(users);
     }
 
     // Если все хорошо, возвращает ФИО, возможно надо перенести в profile
-    [Authorize]
+    // [Authorize]
     [HttpGet]
-    public IActionResult CheckToken()
+    public ActionResult CheckToken()
     {
-        return Ok();
+        return NoContent();
     }
 
     /// <summary>
