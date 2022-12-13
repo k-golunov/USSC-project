@@ -16,7 +16,12 @@ public class UserRepository : IUserRepository
 
     public List<UsersEntity> GetAll()
     {
-        return _context.Set<UsersEntity>().ToList();
+        return _context
+            .Set<UsersEntity>()
+            .Include(u => u.Profile)
+            .Include(u => u.Request)
+            .Include(u => u.TestCase)
+            .ToList();
     }
 
     public UsersEntity GetById(Guid id)

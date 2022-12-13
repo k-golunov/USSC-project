@@ -37,7 +37,7 @@ public class ApplicationController : ControllerBase
         var requests = _applicationService.GetAll().Where(x => x.Allow == null);
         if (requests.Any())
             return Ok(requests);
-        return Ok(new { Message = "Нет необработанных заявок", StatusCode=StatusCode(200)});
+        return NoContent();
     }
 
     [HttpPost("getAllow")]
