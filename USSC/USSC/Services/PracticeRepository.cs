@@ -1,4 +1,5 @@
-﻿using USSC.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using USSC.Entities;
 
 namespace USSC.Services;
 
@@ -11,7 +12,7 @@ public class PracticeRepository : IPracticeRepository
         _context = context;
     }
 
-    public List<PracticesEntity> GetAll() => _context.Set<PracticesEntity>().ToList();
+    public List<PracticesEntity> GetAll() => _context.Set<PracticesEntity>().Include(p => p.Directions).ToList();
 
     public PracticesEntity GetById(Guid id) => _context.Set<PracticesEntity>().FirstOrDefault(x => x.Id == id);
 

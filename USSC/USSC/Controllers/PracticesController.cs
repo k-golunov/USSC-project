@@ -24,7 +24,7 @@
          var practices = _practiceService.GetAll();
          if (practices.Any())
              return Ok(practices);
-         return Ok(new {Message = "Нет ближайших практик"});
+         return NoContent();
     }
 
      // [Authorize(Roles = "Admin")]

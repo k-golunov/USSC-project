@@ -7,6 +7,7 @@ using Serilog;
 using Serilog.Context;
 using Serilog.Events;
 using USSC;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using USSC.Dto;
 using USSC.Entities;
 using USSC.Helpers;
@@ -59,7 +60,10 @@ builder.Services.AddScoped<ITestCaseService, TestCaseService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IDirectionService, DirectionService>();
 builder.Services.AddScoped<IPracticeService, PracticeService>();
-
+builder.Services.AddControllersWithViews()
+    .AddNewtonsoftJson(options =>
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+    );
 builder.Services.AddAutoMapper(typeof(UserProfile));
 builder.Services.AddAutoMapper(typeof(ApplicationProfile));
 builder.Services.AddAutoMapper(typeof(TestCaseProfiles));
