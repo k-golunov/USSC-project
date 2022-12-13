@@ -10,13 +10,26 @@ import TaskPage from './pages/TaskPage';
 import RequireAuth from './hoc/RequireAuth';
 import DirectionsPage from './pages/DirectionsPage';
 import ApplicationsPage from './pages/ApplicationsPage';
+import DirectionCard from './components/DirectionCard';
+import { TestCaseSentOK } from './components/TestCaseSentOK';
 
 function App() {
+  const content =
+    'Проект существует с 2014 года и создан в первую\n' +
+    'очередь для защиты критически важных\n' +
+    'промышленных объектов (нефтеперерабатывающих\n' +
+    'и атомных заводов и т. д.) от компьютерных атак. \n' +
+    '\n' +
+    'Комплекс отслеживает\n' +
+    'состояние защищенности\n' +
+    'системы и сообщает о подозрительной активности\n' +
+    'ответственным за безопасность.';
   return (
     <Router>
       <Routes>
         <Route path='/' element={<HomeLayout />}>
           <Route index element={<HomePage />} />
+          <Route path='cardpop' element={<TestCaseSentOK />} />
           <Route path='*' element={<NotFoundPage />} />
         </Route>
         <Route

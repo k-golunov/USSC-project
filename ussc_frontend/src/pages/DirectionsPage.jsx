@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import DirectionCard from '../components/DirectionCard';
+import React from 'react';
 import FillProfileRequest from '../components/FillProfileRequest';
 import { useProfile } from '../hooks/use-profile';
 import DirectionsGrid from '../components/DirectionsGrid';

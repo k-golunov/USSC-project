@@ -1,19 +1,36 @@
-import React from 'react';
+import Button from './Button';
 
-const DirectionCard = ({ title, image, alt }) => {
+export default function DirectionCard({ title, description, roles }) {
   return (
-    <div className='direction'>
-      {title ? <p className='direction_title'>{title}</p> : <></>}
-      {image ? (
-        <img className='direction_image' src={image} alt={alt} />
-      ) : (
-        <div
-          className='direction_image'
-          style={{ background: '#D9D9D9' }}
-        ></div>
-      )}
+    <div
+      className='direction_card'
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
+    >
+      <div className='wrapper'>
+        <h1 className='title'>{title}</h1>
+        <div className='content'>
+          <div className='left_block'>
+            <p className='description'>{description}</p>
+          </div>
+          <div className='right_block'>
+            <div className='wrapper'>
+              <p>Нам требуется:</p>
+              <div className='roles'>
+                {roles ? (
+                  roles?.map((value) => {
+                    return <p className='role'>{value}</p>;
+                  })
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+            <Button>Оставить заявку</Button>
+          </div>
+        </div>
+      </div>
     </div>
   );
-};
-
-export default DirectionCard;
+}

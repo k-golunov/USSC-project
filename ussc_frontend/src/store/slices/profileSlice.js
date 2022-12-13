@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import PROFILE_API from '../../api/profileAPI';
+import { removeUser } from './userSlice';
 
 export const getProfile = createAsyncThunk(
   'profile/getProfile',
@@ -20,7 +21,8 @@ export const getProfile = createAsyncThunk(
       );
 
       if (!response.ok) {
-        console.log(response.status);
+        if (response.status === 401) dispatch(removeUser());
+
         throw new Error(
           `${response.status}${
             response.statusText ? ' ' + response.statusText : ''
@@ -57,6 +59,8 @@ export const fillProfileInfo = createAsyncThunk(
       });
 
       if (!response.ok) {
+        if (response.status === 401) dispatch(removeUser());
+
         throw new Error(
           `${response.status}${
             response.statusText ? ' ' + response.statusText : ''
@@ -94,6 +98,8 @@ export const updateProfileInfo = createAsyncThunk(
       });
 
       if (!response.ok) {
+        if (response.status === 401) dispatch(removeUser());
+
         throw new Error(
           `${response.status}${
             response.statusText ? ' ' + response.statusText : ''
@@ -107,7 +113,7 @@ export const updateProfileInfo = createAsyncThunk(
 
       return response;
     } catch (error) {
-      rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );
