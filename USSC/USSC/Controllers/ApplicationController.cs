@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Serilog.Context;
 using USSC.Dto;
 using USSC.Helpers;
 using USSC.Services;
@@ -12,13 +13,15 @@ public class ApplicationController : ControllerBase
     private readonly IApplicationService _applicationService;
     private readonly IDirectionService _directionService;
     private readonly IUserService _userService;
-    private readonly ILogger<EmailSender> _logger;
+    private readonly ILogger<EmailSender> _loggerEmail;
+    private readonly ILogger<ApplicationController> _logger;
 
-    public ApplicationController(IApplicationService applicationService, ILogger<EmailSender> logger, IDirectionService directionService, IUserService userService)
+    public ApplicationController(IApplicationService applicationService, ILogger<EmailSender> loggerEmail, IDirectionService directionService, IUserService userService, ILogger<ApplicationController> logger)
     {
         _applicationService = applicationService;
         _directionService = directionService;
         _userService = userService;
+        _loggerEmail = loggerEmail;
         _logger = logger;
     }
 
@@ -47,12 +50,19 @@ public class ApplicationController : ControllerBase
     [HttpPost("approve")]
     public async Task<IActionResult> ProcessApplication(RequestModel requestModel)
     {
-        var user = _userService.GetById(requestModel.UserId);
-        var direction = _directionService.GetById(requestModel.DirectionId);
-        if (user is null && direction is null)
-            return NoContent();
+        // var user = _userService.GetById(requestModel.UserId);
+        // var direction = _directionService.GetById(requestModel.DirectionId);
+        // if (user is null && direction is null)
+        //     return NoContent();
         var response = await _applicationService.ProcessRequest(requestModel);
-        var emailSender = new EmailSender(_logger);
+        if (response is null)
+        {
+            LogContext.PushProperty("Source", "ApplicationController");
+            _logger.LogInformation("No data with this information");
+            return NoContent();
+        }
+            
+        var emailSender = new EmailSender(_loggerEmail);
         emailSender.SendEmail("Ваша заявка проверена", "kostya.golunov2015@yandex.ru");
         return Ok(response);
     }
