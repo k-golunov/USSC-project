@@ -22,4 +22,9 @@ public class DirectionService : IDirectionService
         var profile = _mapper.Map<DirectionsEntity>(directionsModel);
         return _directionRepository.Add(profile);
     }
+    
+    public DirectionsEntity GetById(Guid id)
+    {
+        return _directionRepository.GetById(id);
+    }
 }

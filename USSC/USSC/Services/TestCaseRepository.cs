@@ -1,4 +1,5 @@
-﻿using USSC.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using USSC.Entities;
 namespace USSC.Services;
 
 
@@ -11,7 +12,9 @@ public class TestCaseRepository: ITestCaseRepository
         _context = context;
     }
     
-    public List<TestCaseEntity> GetAll() => _context.Set<TestCaseEntity>().ToList();
+    public List<TestCaseEntity> GetAll() => _context
+        .Set<TestCaseEntity>()
+        .ToList();
 
     public TestCaseEntity GetById(Guid id) => _context.Set<TestCaseEntity>().FirstOrDefault(x => x.Id == id);
     

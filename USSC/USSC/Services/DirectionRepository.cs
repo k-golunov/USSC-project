@@ -1,4 +1,5 @@
-﻿using USSC.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using USSC.Entities;
 
 namespace USSC.Services;
 
@@ -10,10 +11,12 @@ public class DirectionRepository : IDirectionRepository
     {
         _context = context;
     }
-    public List<DirectionsEntity> GetAll()
-    {
-        throw new NotImplementedException();
-    }
+
+    public List<DirectionsEntity> GetAll() => _context
+        .Set<DirectionsEntity>()
+        .Include(d => d.TestCase)
+        .Include(d => d.Request)
+        .ToList();
 
     public DirectionsEntity GetById(Guid id)
     {

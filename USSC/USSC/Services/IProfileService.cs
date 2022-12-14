@@ -11,5 +11,5 @@ public interface IProfileService
 
     ProfileEntity GetByUserId(Guid userId);
 
-    Task<Guid> Update(ProfileModel profileModel);
+    Task<Guid?> Update(ProfileModel profileModel);
 }

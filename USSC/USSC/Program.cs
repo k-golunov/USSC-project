@@ -3,7 +3,11 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Context;
+using Serilog.Events;
 using USSC;
+using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
 using USSC.Dto;
 using USSC.Entities;
 using USSC.Helpers;
@@ -14,6 +18,19 @@ var builder = WebApplication.CreateBuilder(new WebApplicationOptions {WebRootPat
 
 // Add services to the container.
 
+builder.Host.UseSerilog((cts, lc) =>
+        lc
+            .Enrich.WithThreadId()
+            .Enrich.FromLogContext()
+            // .AuditTo.Sink<SerilogSink>()
+            // .Filter.With<SerilogFilter>()
+            // .Enrich.With<SerilogEnrich>()
+            .WriteTo.Console(
+                LogEventLevel.Information,
+                outputTemplate:
+                "{Timestamp:HH:mm:ss:ms} LEVEL:[{Level}]| THREAD:|{ThreadId}| Source: |{Source}| {Message}{NewLine}{Exception}"));
+
+LogContext.PushProperty("Source", "Program");
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -43,7 +60,10 @@ builder.Services.AddScoped<ITestCaseService, TestCaseService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IDirectionService, DirectionService>();
 builder.Services.AddScoped<IPracticeService, PracticeService>();
-
+builder.Services.AddControllersWithViews()
+    .AddNewtonsoftJson(options =>
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+    );
 builder.Services.AddAutoMapper(typeof(UserProfile));
 builder.Services.AddAutoMapper(typeof(ApplicationProfile));
 builder.Services.AddAutoMapper(typeof(TestCaseProfiles));
@@ -66,7 +86,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+// Помогает отлаживать HTTP запросы
+// app.UseHttpLogging();
 app.UseCors(x => x
     .AllowAnyOrigin()
     .AllowAnyMethod()

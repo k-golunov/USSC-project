@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.AccessControl;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using USSC.Dto;
 using USSC.Helpers;
 using USSC.Services;
@@ -12,10 +14,14 @@ public class TestCaseController : ControllerBase
 {
     private readonly IUserService _userService;
     private readonly ITestCaseService _testCaseService;
-    public TestCaseController(ITestCaseService testCaseService, IUserService userService)
+    private readonly IDirectionService _directionService;
+    private readonly ILogger<TestCaseController> _logger;
+    public TestCaseController(ITestCaseService testCaseService, IUserService userService, IDirectionService directionService, ILogger<TestCaseController> logger)
     {
         _testCaseService = testCaseService;
         _userService = userService;
+        _directionService = directionService;
+        _logger = logger;
     }
     
     [HttpGet("download")]
@@ -37,6 +43,13 @@ public class TestCaseController : ControllerBase
     [HttpPost("upload")]
     public void UploadFile(IFormFile file, Guid userId, Guid directionId)
     {
+        var user = _userService.GetById(userId);
+        if (user is null)
+        {
+            _logger.LogInformation("Incorrect user Id or user does not exist");
+            HttpContext.Response.StatusCode = 204;
+            return;
+        }
         var model = new TestCaseModel();
         model.UserId = userId;
         model.DirectionId = directionId;
@@ -76,7 +89,7 @@ public class TestCaseController : ControllerBase
     //     return Ok(new SuccessResponse(true));
     // }
     
-    [Authorize(Roles="Admin")]
+    // [Authorize(Roles="Admin")]
     [HttpGet("getAll")]
      public IActionResult GetAll()
      {

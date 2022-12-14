@@ -16,7 +16,12 @@ public class UserRepository : IUserRepository
 
     public List<UsersEntity> GetAll()
     {
-        return _context.Set<UsersEntity>().ToList();
+        return _context
+            .Set<UsersEntity>()
+            .Include(u => u.Profile)
+            .Include(u => u.Request)
+            .Include(u => u.TestCase)
+            .ToList();
     }
 
     public UsersEntity GetById(Guid id)
@@ -52,5 +57,13 @@ public class UserRepository : IUserRepository
         _context.Users.Update(entity);
         await _context.SaveChangesAsync();
         return entity.Id;
+    }
+
+    public async Task<UsersEntity> GetByUserEmail(string userEmail)
+    {
+        var user = await _context.Set<UsersEntity>().FirstOrDefaultAsync(x => x.Email == userEmail);
+        if (user == null)
+            return null;
+        return user;
     }
 }
