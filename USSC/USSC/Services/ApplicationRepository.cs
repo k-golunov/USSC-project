@@ -35,10 +35,16 @@ public class ApplicationRepository : IApplicationRepository
         return entity.Id;
     }
 
-    public RequestEntity GetByUserId(Guid userId, Guid directionId)
+    public RequestEntity GetByUserAndDirectionId(Guid userId, Guid directionId)
     {
         var testCase = _context.Set<RequestEntity>().FirstOrDefault(x =>
             x.UserId == userId && x.DirectionId == directionId);
         return testCase;
+    }
+
+    public List<RequestEntity> GetByUserId(Guid userId)
+    {
+        var response = _context.Set<RequestEntity>().Where(x => x.UserId == userId).ToList();
+        return response;
     }
 }

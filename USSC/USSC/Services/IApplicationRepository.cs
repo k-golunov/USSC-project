@@ -5,5 +5,6 @@ namespace USSC.Services;
 
 public interface IApplicationRepository : IEfRepository<RequestEntity>
 {
-    public RequestEntity GetByUserId(Guid userId, Guid directionId);
+    public RequestEntity GetByUserAndDirectionId(Guid userId, Guid directionId);
+    public List<RequestEntity> GetByUserId(Guid userId);
 }
