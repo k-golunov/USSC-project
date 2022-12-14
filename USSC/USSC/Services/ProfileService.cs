@@ -27,9 +27,11 @@ public class ProfileService : IProfileService
 
     public ProfileEntity GetByUserId(Guid userId) => _profileRepository.GetByUserId(userId);
 
-    public async Task<Guid> Update(ProfileModel profileModel)
+    public async Task<Guid?> Update(ProfileModel profileModel)
     {
         var profile = _profileRepository.GetByUserId(profileModel.UserId);
+        if (profile is null)
+            return null;
         foreach (var field in profileModel.GetType().GetProperties())
         {
             var prop = profile.GetType().GetProperty(field.Name);

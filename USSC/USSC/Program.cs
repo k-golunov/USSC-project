@@ -28,9 +28,9 @@ builder.Host.UseSerilog((cts, lc) =>
             .WriteTo.Console(
                 LogEventLevel.Information,
                 outputTemplate:
-                "{Timestamp:HH:mm:ss:ms} LEVEL:[{Level}]| THREAD:|{ThreadId}| Test: |{Test}| {Message}{NewLine}{Exception}"));
+                "{Timestamp:HH:mm:ss:ms} LEVEL:[{Level}]| THREAD:|{ThreadId}| Source: |{Source}| {Message}{NewLine}{Exception}"));
 
-LogContext.PushProperty("Test", "Development");
+LogContext.PushProperty("Source", "Program");
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

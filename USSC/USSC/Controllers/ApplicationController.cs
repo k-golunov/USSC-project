@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Serilog.Context;
 using USSC.Dto;
 using USSC.Helpers;
 using USSC.Services;
@@ -10,11 +11,13 @@ namespace USSC.Controllers;
 public class ApplicationController : ControllerBase
 {
     private readonly IApplicationService _applicationService;
-    private readonly ILogger<EmailSender> _logger;
+    private readonly ILogger<EmailSender> _loggerEmail;
+    private readonly ILogger<ApplicationController> _logger;
 
-    public ApplicationController(IApplicationService applicationService, ILogger<EmailSender> logger)
+    public ApplicationController(IApplicationService applicationService, ILogger<EmailSender> loggerEmail, ILogger<ApplicationController> logger)
     {
         _applicationService = applicationService;
+        _loggerEmail = loggerEmail;
         _logger = logger;
     }
 
@@ -40,11 +43,18 @@ public class ApplicationController : ControllerBase
         return NoContent();
     }
 
-    [HttpPost("getAllow")]
+    [HttpPut("approve")]
     public async Task<IActionResult> ProcessApplication(RequestModel requestModel)
     {
         var response = await _applicationService.ProcessRequest(requestModel);
-        var emailSender = new EmailSender(_logger);
+        if (response is null)
+        {
+            LogContext.PushProperty("Source", "ApplicationController");
+            _logger.LogInformation("No data with this information");
+            return NoContent();
+        }
+            
+        var emailSender = new EmailSender(_loggerEmail);
         emailSender.SendEmail("Ваша заявка проверена", "kostya.golunov2015@yandex.ru");
         return Ok(response);
     }

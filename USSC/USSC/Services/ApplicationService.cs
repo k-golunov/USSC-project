@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
+using Serilog;
+using Serilog.Context;
 using USSC.Dto;
 using USSC.Entities;
 
@@ -10,12 +12,14 @@ public class ApplicationService: IApplicationService
     private readonly IApplicationRepository _applicationRepository;
     private readonly IConfiguration _configuration;
     private readonly IMapper _mapper;
+    private readonly ILogger<ApplicationService> _logger;
 
-    public ApplicationService(IApplicationRepository applicationRepository, IConfiguration configuration, IMapper mapper)
+    public ApplicationService(IApplicationRepository applicationRepository, IConfiguration configuration, IMapper mapper, ILogger<ApplicationService> logger)
     {
         _applicationRepository = applicationRepository;
         _configuration = configuration;
         _mapper = mapper;
+        _logger = logger;
     }
     public Task<Guid> Add(RequestModel model)
     {
@@ -26,10 +30,14 @@ public class ApplicationService: IApplicationService
     public async Task<SuccessResponse> ProcessRequest(RequestModel model)
     {
         var request = _applicationRepository.GetByUserId(model.UserId, model.DirectionId);
+        if (request is null)
+            return null;
         if (request.Allow == null)
         {
             request.Allow = model.Allow;
             var id = await _applicationRepository.Update(request);
+            LogContext.PushProperty("Source", "ApplicationService");
+            _logger.LogInformation("No application with this data");
             return  new SuccessResponse(request.Id == id);
         }
         return new SuccessResponse(false);
