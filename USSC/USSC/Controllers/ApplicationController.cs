@@ -16,11 +16,17 @@ public class ApplicationController : ControllerBase
 
     public ApplicationController(IApplicationService applicationService, ILogger<EmailSender> loggerEmail, ILogger<ApplicationController> logger)
     {
+        LogContext.PushProperty("Source", "ApplicationController");
         _applicationService = applicationService;
         _loggerEmail = loggerEmail;
         _logger = logger;
     }
 
+    /// <summary>
+    /// Отправка заявки на определенную позицию в направлении
+    /// </summary>
+    /// <param name="model">Модель заявки</param>
+    /// <returns></returns>
     [HttpPost("send")]
     public async Task<IActionResult> SendApplication(RequestModel model)
     {
@@ -33,7 +39,11 @@ public class ApplicationController : ControllerBase
         return Ok(new SuccessResponse(true));
     }
     
-    // [Authorize(Roles = "Admin")]
+    /// <summary>
+    /// Получение всех заявок, путь для администратора
+    /// </summary>
+    /// <returns></returns>
+    [Authorize(Roles = "Admin")]
     [HttpGet("getAll")]
     public IActionResult GetAll()
     {
@@ -43,19 +53,40 @@ public class ApplicationController : ControllerBase
         return NoContent();
     }
 
+    /// <summary>
+    /// Одобрение заявки администратором
+    /// </summary>
+    /// <param name="requestModel"></param>
+    /// <returns></returns>
     [HttpPut("approve")]
     public async Task<IActionResult> ProcessApplication(RequestModel requestModel)
     {
         var response = await _applicationService.ProcessRequest(requestModel);
         if (response is null)
         {
-            LogContext.PushProperty("Source", "ApplicationController");
             _logger.LogInformation("No data with this information");
             return NoContent();
         }
             
         var emailSender = new EmailSender(_loggerEmail);
         emailSender.SendEmail("Ваша заявка проверена", "kostya.golunov2015@yandex.ru");
+        return Ok(response);
+    }
+
+    /// <summary>
+    /// Все заявки пользователя
+    /// </summary>
+    /// <param name="userId">Айди пользователя</param>
+    /// <returns></returns>
+    [HttpGet("getByUserId")]
+    public IActionResult GetByUserId(Guid userId)
+    {
+        var response = _applicationService.GetByUserId(userId);
+        if (response.Count == 0)
+        {
+            _logger.LogInformation("No request for this user or user does not exist");
+            return NoContent();
+        }
         return Ok(response);
     }
     

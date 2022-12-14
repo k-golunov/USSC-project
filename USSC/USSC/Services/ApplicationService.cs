@@ -29,7 +29,7 @@ public class ApplicationService: IApplicationService
 
     public async Task<SuccessResponse> ProcessRequest(RequestModel model)
     {
-        var request = _applicationRepository.GetByUserId(model.UserId, model.DirectionId);
+        var request = _applicationRepository.GetByUserAndDirectionId(model.UserId, model.DirectionId);
         if (request is null)
             return null;
         if (request.Allow == null)
@@ -41,6 +41,11 @@ public class ApplicationService: IApplicationService
             return  new SuccessResponse(request.Id == id);
         }
         return new SuccessResponse(false);
+    }
+
+    public List<RequestEntity> GetByUserId(Guid userId)
+    {
+        return _applicationRepository.GetByUserId(userId);
     }
 
     public IEnumerable<RequestEntity> GetAll() => _applicationRepository.GetAll();
