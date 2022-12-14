@@ -1,6 +1,22 @@
 import Button from './Button';
+import { useDispatch } from 'react-redux';
+import {
+  toggleApplicationForm,
+  toggleDirection,
+} from '../store/slices/directionSlice';
 
-export default function DirectionCard({ title, description, roles }) {
+export default function DirectionCard({
+  title,
+  description,
+  roles,
+  direction,
+}) {
+  const dispatch = useDispatch();
+
+  const toggleDir = () => dispatch(toggleDirection({ id: direction.id }));
+  const toggleAppForm = () =>
+    dispatch(toggleApplicationForm({ id: direction.id }));
+
   return (
     <div
       className='direction_card'
@@ -27,7 +43,14 @@ export default function DirectionCard({ title, description, roles }) {
                 )}
               </div>
             </div>
-            <Button>Оставить заявку</Button>
+            <Button
+              onClick={() => {
+                toggleDir();
+                toggleAppForm();
+              }}
+            >
+              Оставить заявку
+            </Button>
           </div>
         </div>
       </div>

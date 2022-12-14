@@ -216,10 +216,17 @@ button {
   font-size: 16px;
   font-weight: 700;
   padding: 15px 50px;
+  border: $orange1 2px solid;
   border-radius: 10px;
-  border: none;
   color: white;
-  background: #f99d1d;
+  background: $orange1;
+  transition: all 200ms ease-out;
+  &:hover {
+    background: white;
+    color: $orange1;
+    border: $orange1 2px solid;
+    transition: all 200ms ease-out;
+  }
 }
 
 .disabled {

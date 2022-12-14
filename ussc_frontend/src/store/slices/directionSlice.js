@@ -51,10 +51,12 @@ const directionSlice = createSlice({
           id: direction.id,
           title: direction.name,
           description: direction.description,
+          roles: direction.directions,
           info: direction.info,
           start: direction.startPractices,
           end: direction.endPractcies,
           isShown: false,
+          isApplicationFormShown: false,
         });
       }
     },
@@ -84,6 +86,19 @@ const directionSlice = createSlice({
         direction.isShown = false;
       });
     },
+    toggleApplicationForm(state, action) {
+      const index = state.directions.findIndex((direction) => {
+        return direction.id === action.payload.id;
+      });
+      if (index < 0) return;
+      state.directions[index].isApplicationFormShown =
+        !state.directions[index].isApplicationFormShown;
+    },
+    hideAllApplicationForms(state) {
+      state.directions.forEach((direction) => {
+        direction.isApplicationFormShown = false;
+      });
+    },
   },
   extraReducers: {
     [getDirections.pending]: () => {},
@@ -98,5 +113,7 @@ export const {
   hideDirection,
   hideAllDirections,
   toggleDirection,
+  toggleApplicationForm,
+  hideAllApplicationForms,
 } = directionSlice.actions;
 export default directionSlice.reducer;

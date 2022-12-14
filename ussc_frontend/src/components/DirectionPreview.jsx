@@ -1,16 +1,22 @@
 import React from 'react';
 import DirectionCard from './DirectionCard';
 import Popup from './Popup';
-import { toggleDirection } from '../store/slices/directionSlice';
+import {
+  hideAllDirections,
+  toggleApplicationForm,
+  toggleDirection,
+} from '../store/slices/directionSlice';
 import { useDispatch } from 'react-redux';
+import SendApplicationForm from '../forms/SendApplicationForm';
 
 const DirectionPreview = ({ title, image, alt, direction, ...prop }) => {
   const dispatch = useDispatch();
-  const toggle = () => dispatch(toggleDirection({ id: direction.id }));
-
+  const toggleDir = () => dispatch(toggleDirection({ id: direction.id }));
+  const toggleAppForm = () =>
+    dispatch(toggleApplicationForm({ id: direction.id }));
   return (
     <>
-      <div className='direction_preview' onClick={toggle}>
+      <div className='direction_preview' onClick={toggleDir}>
         {direction.title ? (
           <p className='direction_title'>{direction.title}</p>
         ) : (
@@ -29,13 +35,19 @@ const DirectionPreview = ({ title, image, alt, direction, ...prop }) => {
       </div>
       <Popup
         active={direction.isShown}
-        toggleActive={toggle}
+        toggleActive={toggleDir}
         content={
           <DirectionCard
             title={direction.title}
             description={direction.description}
+            direction={direction}
           />
         }
+      />
+      <Popup
+        active={direction.isApplicationFormShown}
+        toggleActive={toggleAppForm}
+        content={<SendApplicationForm />}
       />
     </>
   );
