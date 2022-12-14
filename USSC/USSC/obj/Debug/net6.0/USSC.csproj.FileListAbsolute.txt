@@ -213,3 +213,5 @@ C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Serilog.
 C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Serilog.Sinks.File.dll
 C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\danil\Documents\GitHub\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+G:\USSC project\USSC-project\USSC\USSC\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
