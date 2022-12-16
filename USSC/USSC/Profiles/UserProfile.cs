@@ -27,6 +27,7 @@ public class UserProfile : Profile
             .ForMember(dst => dst.Id, opt => opt.MapFrom(src => src.Id))
             .ForMember(dst => dst.AccessToken, opt => opt.Ignore())
             .ForMember(dst => dst.RefreshToken, opt => opt.Ignore())
+            .ForMember(dst => dst.Role, opt => opt.MapFrom(src=> src.Role))
             ;
     }
 }
