@@ -98,7 +98,10 @@ export const updateProfileInfo = createAsyncThunk(
       });
 
       if (!response.ok) {
-        if (response.status === 401) dispatch(removeUser());
+        if (response.status === 401) {
+          dispatch(removeUser());
+          dispatch(removeProfile());
+        }
 
         throw new Error(
           `${response.status}${
@@ -147,6 +150,18 @@ const profileSlice = createSlice({
       state.course = action.payload.course;
       state.workExperience = action.payload.workExperience;
     },
+    removeProfile(state) {
+      state.secondName = null;
+      state.firstName = null;
+      state.patronymic = null;
+      state.phone = null;
+      state.telegram = null;
+      state.university = null;
+      state.faculty = null;
+      state.speciality = null;
+      state.course = null;
+      state.workExperience = null;
+    },
   },
   extraReducers: {
     [getProfile.pending]: (state, action) => {},
@@ -158,6 +173,6 @@ const profileSlice = createSlice({
   },
 });
 
-export const { setProfile } = profileSlice.actions;
+export const { setProfile, removeProfile } = profileSlice.actions;
 
 export default profileSlice.reducer;

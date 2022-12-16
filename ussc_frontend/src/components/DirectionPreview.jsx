@@ -47,7 +47,7 @@ const DirectionPreview = ({ title, image, alt, direction, ...prop }) => {
       <Popup
         active={direction.isApplicationFormShown}
         toggleActive={toggleAppForm}
-        content={<SendApplicationForm />}
+        content={<SendApplicationForm direction={direction} />}
       />
     </>
   );

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
 import { removeUser } from '../store/slices/userSlice';
 import { useProfile } from '../hooks/use-profile';
+import { removeProfile } from '../store/slices/profileSlice';
 
 const NavAuth = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,10 @@ const NavAuth = () => {
 
   const user = useAuth();
   const [profile] = useProfile();
-  const logout = () => dispatch(removeUser());
+  const logout = () => {
+    dispatch(removeUser());
+    dispatch(removeProfile());
+  };
 
   if (user.isAuth) {
     return (

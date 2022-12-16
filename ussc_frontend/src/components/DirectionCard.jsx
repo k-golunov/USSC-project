@@ -5,17 +5,14 @@ import {
   toggleDirection,
 } from '../store/slices/directionSlice';
 
-export default function DirectionCard({
-  title,
-  description,
-  roles,
-  direction,
-}) {
+export default function DirectionCard({ title, description, direction }) {
   const dispatch = useDispatch();
 
   const toggleDir = () => dispatch(toggleDirection({ id: direction.id }));
   const toggleAppForm = () =>
     dispatch(toggleApplicationForm({ id: direction.id }));
+
+  const roles = direction.roles;
 
   return (
     <div
@@ -36,7 +33,11 @@ export default function DirectionCard({
               <div className='roles'>
                 {roles ? (
                   roles?.map((value) => {
-                    return <p className='role'>{value}</p>;
+                    return (
+                      <p className='role' key={value.id}>
+                        {value.directions}
+                      </p>
+                    );
                   })
                 ) : (
                   <></>
