@@ -25,13 +25,13 @@ public class TestCaseController : ControllerBase
     }
     
     [HttpGet("download")]
-    public FileStreamResult DownloadFile(string namePractices)
+    public FileStreamResult DownloadFile(Guid directionId)
     {
         // var path = $"G:\\USSC project\\USSC-project\\USSC\\USSC\\Files\\{namePractices}.zip";
-        var path = $".\\Files\\{namePractices}.zip";
+        var path = $".\\Files\\{directionId}.zip";
         var fileType="application/octet-stream";
         var fileStream = new FileStream(path, FileMode.Open);
-        var fileName = $"{namePractices}.zip";
+        var fileName = $"{directionId}.zip";
         return File(fileStream, fileType, fileName);
     }
 
