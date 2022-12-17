@@ -10,6 +10,7 @@ namespace USSC.Dto;
 public class UserModel
 {
     [Key]
+    [JsonIgnore]
     public Guid Id { get; set; }
     [Email]
     public string? Email { get; set; }
