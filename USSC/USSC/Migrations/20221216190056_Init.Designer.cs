@@ -12,7 +12,7 @@ using USSC;
 namespace USSC.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20221206184000_Init")]
+    [Migration("20221216190056_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -151,6 +151,9 @@ namespace USSC.Migrations
                     b.Property<bool?>("Allow")
                         .HasColumnType("boolean");
 
+                    b.Property<DateTime?>("DateTime")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<Guid>("DirectionId")
                         .HasColumnType("uuid");
 
@@ -177,6 +180,9 @@ namespace USSC.Migrations
 
                     b.Property<string>("Comment")
                         .HasColumnType("text");
+
+                    b.Property<DateTime?>("DateTime")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("DirectionId")
                         .HasColumnType("uuid");

@@ -21,6 +21,8 @@ public class RequestProfile : Profile
                 opt => opt.MapFrom(src => src.Users))
             .ForMember(dst => dst.UserId,
                 opt => opt.MapFrom(src => src.UserId))
+            .ForMember(dst => dst.DateTime,
+                opt => opt.MapFrom(src => src.DateTime))
             ;
     }
 }

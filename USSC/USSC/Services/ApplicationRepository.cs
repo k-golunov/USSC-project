@@ -1,4 +1,5 @@
-﻿using USSC.Dto;
+﻿using Microsoft.EntityFrameworkCore;
+using USSC.Dto;
 using USSC.Entities;
 namespace USSC.Services;
 
@@ -35,6 +36,11 @@ public class ApplicationRepository : IApplicationRepository
         return entity.Id;
     }
 
+    public Task Delete(RequestEntity entity)
+    {
+        throw new NotImplementedException();
+    }
+
     public RequestEntity GetByUserAndDirectionId(Guid userId, Guid directionId)
     {
         var testCase = _context.Set<RequestEntity>().FirstOrDefault(x =>
@@ -44,7 +50,12 @@ public class ApplicationRepository : IApplicationRepository
 
     public List<RequestEntity> GetByUserId(Guid userId)
     {
-        var response = _context.Set<RequestEntity>().Where(x => x.UserId == userId).ToList();
+        var response = _context
+            .Set<RequestEntity>()
+            .Where(x => x.UserId == userId)
+            .Include(r => r.Directions)
+            .Include(r => r.Users.Profile)
+            .ToList();
         return response;
     }
 }

@@ -29,4 +29,10 @@ public class PracticeRepository : IPracticeRepository
         await _context.SaveChangesAsync();
         return entity.Id;
     }
+
+    public async Task Delete(PracticesEntity entity)
+    {
+        var result = _context.Set<PracticesEntity>().Remove(entity);
+        await _context.SaveChangesAsync();
+    }
 }

@@ -148,6 +148,9 @@ namespace USSC.Migrations
                     b.Property<bool?>("Allow")
                         .HasColumnType("boolean");
 
+                    b.Property<DateTime?>("DateTime")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<Guid>("DirectionId")
                         .HasColumnType("uuid");
 
@@ -174,6 +177,9 @@ namespace USSC.Migrations
 
                     b.Property<string>("Comment")
                         .HasColumnType("text");
+
+                    b.Property<DateTime?>("DateTime")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("DirectionId")
                         .HasColumnType("uuid");

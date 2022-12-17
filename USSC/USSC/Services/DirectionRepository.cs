@@ -20,7 +20,7 @@ public class DirectionRepository : IDirectionRepository
 
     public DirectionsEntity GetById(Guid id)
     {
-        throw new NotImplementedException();
+        return _context.Directions.FirstOrDefault(d => d.Id == id);
     }
 
     public async Task<Guid> Add(DirectionsEntity entity)
@@ -30,8 +30,16 @@ public class DirectionRepository : IDirectionRepository
         return result.Entity.Id;
     }
 
-    public Task<Guid> Update(DirectionsEntity entity)
+    public async Task<Guid> Update(DirectionsEntity entity)
     {
-        throw new NotImplementedException();
+        _context.Directions.Update(entity);
+        await _context.SaveChangesAsync();
+        return entity.Id;
+    }
+
+    public async Task Delete(DirectionsEntity entity)
+    {
+        var result = _context.Directions.Remove(entity);
+        await _context.SaveChangesAsync();
     }
 }

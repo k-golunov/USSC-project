@@ -33,6 +33,11 @@ public class ProfileRepository : IProfileRepository
         return entity.Id;
     }
 
+    public Task Delete(ProfileEntity entity)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task<Guid> UpdateRefreshToken(UsersEntity usersEntity, string refreshToken)
     {
         throw new NotImplementedException();

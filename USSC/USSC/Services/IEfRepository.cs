@@ -10,4 +10,5 @@ public interface IEfRepository<T> where T: BaseEntity
     T GetById(Guid id);
     Task<Guid> Add(T entity);
     Task<Guid> Update(T entity);
+    Task Delete(T entity);
 }
