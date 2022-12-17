@@ -10,4 +10,5 @@ public class RequestEntity : BaseEntity
     public Guid DirectionId { get; set; }
     [ForeignKey("UserId")] public UsersEntity? Users { get; set; }
     public Guid UserId { get; set; }
+    public DateTime? DateTime { get; set; }
 }

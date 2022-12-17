@@ -19,6 +19,6 @@ public class TestCaseModel
     public Guid UserId { get; set; }
     [JsonIgnore]
     public DirectionsModel? Directions { get; set; } = new();
-    
+    public DateTime? DateTime { get; set; }
     public Guid DirectionId { get; set; }
 }

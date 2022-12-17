@@ -45,7 +45,9 @@ public class ApplicationService: IApplicationService
 
     public List<RequestEntity> GetByUserId(Guid userId)
     {
-        return _applicationRepository.GetByUserId(userId);
+        var request = _applicationRepository.GetByUserId(userId);
+        request.ForEach(r => r.Users.RefreshToken = "0");
+        return request;
     }
 
     public IEnumerable<RequestEntity> GetAll() => _applicationRepository.GetAll();

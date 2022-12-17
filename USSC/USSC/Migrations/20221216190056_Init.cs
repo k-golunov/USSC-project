@@ -114,7 +114,8 @@ namespace USSC.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Allow = table.Column<bool>(type: "boolean", nullable: true),
                     DirectionId = table.Column<Guid>(type: "uuid", nullable: false),
-                    UserId = table.Column<Guid>(type: "uuid", nullable: false)
+                    UserId = table.Column<Guid>(type: "uuid", nullable: false),
+                    DateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -142,7 +143,8 @@ namespace USSC.Migrations
                     Allow = table.Column<bool>(type: "boolean", nullable: true),
                     Path = table.Column<string>(type: "text", nullable: true),
                     UserId = table.Column<Guid>(type: "uuid", nullable: false),
-                    DirectionId = table.Column<Guid>(type: "uuid", nullable: false)
+                    DirectionId = table.Column<Guid>(type: "uuid", nullable: false),
+                    DateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {

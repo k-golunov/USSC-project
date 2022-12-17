@@ -11,4 +11,5 @@ public class RequestModel
     public Guid DirectionId { get; set; }
     [JsonIgnore] public UserModel? Users { get; set; }
     public Guid UserId { get; set; }
+    public DateTime? DateTime { get; set; }
 }

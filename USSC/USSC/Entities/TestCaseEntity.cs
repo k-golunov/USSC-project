@@ -15,4 +15,5 @@ public class TestCaseEntity : BaseEntity
     [ForeignKey("DirectionId")] 
     public DirectionsEntity Directions { get; set; }
     public Guid DirectionId { get; set; }
+    public DateTime? DateTime { get; set; }
 }
