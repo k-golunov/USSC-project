@@ -3,8 +3,9 @@ import popupReducer from './slices/popupSlice';
 import userReducer from './slices/userSlice';
 import profileReducer from './slices/profileSlice';
 import directionsReducer from './slices/directionSlice';
-import applicationsReducer from './slices/applicationSlice';
+import allApplicationsReducer from './slices/allApplicationsSlice';
 import allUsersReducer from './slices/allUsersSlice';
+import applicationReducer from './slices/applicationSlice';
 
 export default configureStore({
   reducer: {
@@ -12,7 +13,8 @@ export default configureStore({
     user: userReducer,
     profile: profileReducer,
     directions: directionsReducer,
-    applications: applicationsReducer,
+    applications: applicationReducer,
+    allApplications: allApplicationsReducer,
     allUsers: allUsersReducer,
   },
 });

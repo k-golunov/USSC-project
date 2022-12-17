@@ -83,8 +83,6 @@ button {
     align-items: center;
     gap: 17px;
     height: 85px;
-    display: flex;
-    align-items: center;
     cursor: default;
   }
   .logo_image {
@@ -222,7 +220,7 @@ button {
   background: $orange1;
   transition: all 200ms ease-out;
   &:hover {
-    background: white;
+    background: transparent;
     color: $orange1;
     border: $orange1 2px solid;
     transition: all 200ms ease-out;
@@ -408,7 +406,6 @@ input {
   display: flex;
   flex-direction: row;
   gap: 31px;
-  height: min-content;
   margin-bottom: 265px;
   height: 407px;
 }
@@ -752,6 +749,67 @@ input {
   }
 }
 
+.page_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 60px;
+
+  .application {
+    width: 1480px;
+    height: 255px;
+    padding: 40px 62px;
+    background: #E7E7E8;
+    border-radius: 20px;
+    .application_content {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+      height: 100%;
+
+      .texts {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        height: 100%;
+        width: 920px;
+
+        .direction_info {
+          h2 {
+            font-weight: 700;
+            font-size: 30px;
+            line-height: 41px;
+            margin-bottom: 12px;
+          }
+
+          .role {
+            display: flex;
+            gap: 15px;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 28px;
+
+            & > :first-child {
+              font-weight: 700;
+              font-size: 20px;
+              line-height: 30px;
+            }
+          }
+        }
+
+        .status {
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 28px;
+        }
+      }
+    }
+  }
+}
+
 .content_wrapper {
   width: 1480px;
   margin: 58px auto;
@@ -902,13 +960,13 @@ input {
       font-weight: 400;
       font-size: 30px;
       line-height: 41px;
-      margin: 40px 0px;
+      margin: 40px 0;
     }
 
     .profile_wrapper {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      margin: 40px 0px;
+      margin: 40px 0;
 
       .profile_info {
         display: flex;
@@ -1024,7 +1082,8 @@ input {
             span {
               display: flex;
               align-items: center;
-              padding: 0px 10px;
+              padding: 0 10px;
+              white-space: nowrap;
             }
           }
 

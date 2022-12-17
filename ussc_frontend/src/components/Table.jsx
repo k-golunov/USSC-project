@@ -1,6 +1,6 @@
 import TableRow from './TableRow';
 import TableHeader from './TableHeader';
-import { getAllApplications } from '../store/slices/applicationSlice';
+import { getAllApplications } from '../store/slices/allApplicationsSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -26,7 +26,9 @@ export default function Table({ type, user, applications }) {
 function ApplicationsTable() {
   const dispatch = useDispatch();
 
-  const applications = useSelector((state) => state.applications.applications);
+  const applications = useSelector(
+    (state) => state.allApplications.allApplications
+  );
   const users = useSelector((state) => state.allUsers.users);
 
   useEffect(() => {
@@ -127,7 +129,7 @@ function ProfileApplicationTable({ applications }) {
         return 'В рассмотрении';
     }
   };
-  console.log(applications);
+
   return (
     <div className='table'>
       <TableHeader type='profile_application' />
@@ -135,6 +137,7 @@ function ProfileApplicationTable({ applications }) {
       {applications?.map((app) => {
         return (
           <TableRow
+            key={app?.id || 'null'}
             type='profile_application'
             directionName={app?.title}
             role={app?.role}

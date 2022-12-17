@@ -60,7 +60,9 @@ function App() {
               <ProfileLayout />
             </RequireAuth>
           }
-        ></Route>
+        >
+          <Route index element={<ApplicationsPage />} />
+        </Route>
         <Route index element={<ApplicationsPage />} />
         <Route path='/admin/' element={<ProfileLayout />}>
           <Route
