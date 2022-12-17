@@ -42,4 +42,20 @@ public class DirectionController : ControllerBase
         // response.WriteAsync("Файлы успешно загружены");
         var result =  _directionService.Add(directionsModel);
     }
+    
+    [HttpPut("UpdateDirection")]
+    public async Task<IActionResult> UpdateDirection(DirectionsModel directionsModel)
+    {
+        var id = await _directionService.UpdateAsync(directionsModel);
+        return Ok(new SuccessResponse(directionsModel.Id == id));
+    }
+    
+    [HttpDelete("Delete")]
+    public async Task<IActionResult> DeleteDirection(Guid directionId)
+    {
+        var response = await _directionService.Delete(directionId);
+        if (response.Success)
+            return Ok();
+        return NotFound();
+    }
 }

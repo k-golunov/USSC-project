@@ -36,6 +36,11 @@ public class ApplicationRepository : IApplicationRepository
         return entity.Id;
     }
 
+    public Task Delete(RequestEntity entity)
+    {
+        throw new NotImplementedException();
+    }
+
     public RequestEntity GetByUserAndDirectionId(Guid userId, Guid directionId)
     {
         var testCase = _context.Set<RequestEntity>().FirstOrDefault(x =>

@@ -32,6 +32,19 @@ public class PracticeService: IPracticeService
         var id = await _practiceRepository.Add(entity);
         return new SuccessResponse(entity.Id == id);
     }
-    
-    
+
+    public async Task<SuccessResponse> Delete(Guid id)
+    {
+        try
+        {
+            var practice = _practiceRepository.GetById(id);
+            await _practiceRepository.Delete(practice);
+            return new SuccessResponse(true);
+        }
+        catch
+        {
+            return new SuccessResponse(false);
+        }
+        
+    }
 }

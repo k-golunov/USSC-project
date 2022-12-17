@@ -41,5 +41,14 @@
      {
          var response = await _practiceService.AddAsync(practicesModel); 
          return Ok(response);
-    } 
+     }
+
+     [HttpDelete("Delete")]
+     public async Task<IActionResult> DeletePractices(Guid practicesId)
+     {
+         var response = await _practiceService.Delete(practicesId);
+         if (response.Success)
+             return Ok();
+         return NotFound();
+     }
  }

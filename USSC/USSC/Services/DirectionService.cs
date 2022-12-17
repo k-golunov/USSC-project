@@ -27,4 +27,28 @@ public class DirectionService : IDirectionService
     {
         return _directionRepository.GetById(id);
     }
+
+    public async Task<SuccessResponse> Delete(Guid id)
+    {
+        try
+        {
+            var direction = _directionRepository.GetById(id);
+            await _directionRepository.Delete(direction);
+            return new SuccessResponse(true);
+        }
+        catch
+        {
+            return new SuccessResponse(false);
+        }
+        
+    }
+    
+    public async Task<Guid> UpdateAsync(DirectionsModel directionsModel)
+    {
+        var entity = _directionRepository.GetById(directionsModel.Id);
+        entity.Directions = directionsModel.Directions;
+        entity.Path = directionsModel.Path;
+        var id = await _directionRepository.Update(entity);
+        return id;
+    }
 }

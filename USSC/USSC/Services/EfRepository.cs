@@ -51,6 +51,11 @@ public class UserRepository : IUserRepository
         return result.Id;
     }
 
+    public Task Delete(UsersEntity entity)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<Guid> UpdateRefreshToken(UsersEntity entity, string refreshToken)
     {
         var result = _context.Set<UsersEntity>().FirstOrDefault(x => x.Id == entity.Id);
