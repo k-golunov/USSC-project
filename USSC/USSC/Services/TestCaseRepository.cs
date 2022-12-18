@@ -43,4 +43,13 @@ public class TestCaseRepository: ITestCaseRepository
             x.UserId == userId && x.DirectionId == directionId);
         return testCase;
     }
+
+    public string? GetPath(Guid userId, Guid directionId)
+    {
+        var response = _context.Set<TestCaseEntity>().FirstOrDefault(x =>
+            x.UserId == userId && x.DirectionId == directionId);
+        if (response is null)
+            return null;
+        return response.Path;
+    }
 }
