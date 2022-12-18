@@ -1,9 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 
-const Popup = ({ active, setActive, content }) => {
+const Popup = ({ active, toggleActive, content, ...props }) => {
   return (
-    <div className={active ? 'popup active' : 'popup'} onClick={setActive}>
+    <div className={active ? 'popup active' : 'popup'} onClick={toggleActive}>
       {content}
     </div>
   );
