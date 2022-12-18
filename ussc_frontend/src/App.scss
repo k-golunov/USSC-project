@@ -1528,4 +1528,410 @@ input {
       }
     }
   }
+
+  .edits {
+    .heading {
+      color: $black;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 30px;
+      line-height: 41px;
+      margin: 40px 0;
+    }
+
+    .name {
+      grid-area: name;
+    }
+
+    .roles {
+      grid-area: roles;
+    }
+
+    .file {
+      grid-area: file;
+    }
+
+    .roles_edit {
+      .help {
+        font-family: "OpenSans", serif;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        margin-bottom: 24px;
+      }
+
+      button {
+        border: none;
+        background: none;
+      }
+
+      .role {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 28px;
+        margin-bottom: 20px;
+
+        div {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+        }
+
+        .name {
+          margin-bottom: 8px;
+          img {
+            margin-right: 10px;
+          }
+          input {
+            border: none;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 20px;
+            line-height: 28px;
+
+            &:focus {
+              outline: none;
+            }
+          }
+        }
+
+        .add {
+          color: $gray2;
+        }
+      }
+    }
+
+    .description {
+      grid-area: desription;
+
+      textarea {
+        width: 979px !important;
+        height: 315px !important;
+      }
+    }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1050;
+      opacity: 0;
+      -webkit-transition: opacity 200ms ease-in;
+      -moz-transition: opacity 200ms ease-in;
+      transition: opacity 200ms ease-in;
+      pointer-events: none;
+
+      &:target {
+        opacity: 1;
+        pointer-events: auto;
+        overflow-y: auto;
+      }
+
+      .modal-dialog {
+        width: 480px;
+        height: 270px;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        -ms-transform: translate(-50%, -50%);
+        -moz-transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+
+      .modal-content {
+        position: relative;
+        width: 480px;
+        height: 270px;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        background-color: #fff;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        outline: 0;
+      }
+
+      .modal-header {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        padding: 15px;
+        border-bottom: 1px solid #eceeef;
+      }
+
+      .modal_close {
+        height: 40px;
+        padding: 5px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: end;
+        z-index: 10;
+        .close {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 30px;
+          height: 30px;
+          font-size: 30px;
+          font-weight: 700;
+          line-height: 1;
+          color: #000;
+          text-shadow: 0 1px 0 #fff;
+          opacity: .5;
+          text-decoration: none;
+
+          &:focus,
+          &:hover {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+            opacity: .75;
+          }
+        }
+      }
+      .modal-body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        -webkit-box-flex: 1;
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        //padding: 15px;
+        overflow: auto;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 28px;
+        margin-top: -40px;
+      }
+    }
+
+    .buttons {
+      grid-area: buttons;
+      display: flex;
+      gap: 25px;
+
+      button {
+        width: 330px;
+        height: 52px;
+        background: $orange1;
+        color: white;
+        border-radius: 10px;
+        border: $orange1 2px solid;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 22px;
+        font-family: 'OpenSans', serif;
+        transition: all 200ms ease-out;
+        &:hover {
+          background: white;
+          color: $orange1;
+          border: $orange1 2px solid;
+          transition: all 200ms ease-out;
+        }
+
+        &:active {
+          //transition: all 200ms ease-out;
+        }
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .edit {
+        background: $gray2;
+        border: $gray2 2px solid;
+
+        &:hover {
+          color: $gray2;
+          border: $gray2 2px solid;
+        }
+      }
+    }
+
+    .direction_forms {
+      display: grid;
+      grid-template-areas:
+              'name file roles'
+              'desription desription roles'
+              'buttons buttons roles';
+      grid-gap: 25px;
+
+      .direction_form {
+        h3 {
+          margin-bottom: 8px;
+        }
+
+        .input_file,
+        textarea {
+          background: $white;
+          border: none;
+          border-radius: 20px;
+          padding: 30px;
+          width: 477px;
+          height: 253px;
+          cursor: pointer;
+
+          color: $black;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 28px;
+        }
+
+        .input_file {
+          position: relative;
+          display: inline-block;
+
+          span {
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+            align-items: center;
+
+            cursor: pointer;
+            text-decoration: none;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 20px;
+            vertical-align: middle;
+            color: $gray2;
+            text-align: center;
+            box-sizing: border-box;
+            border: none;
+            margin: 0;
+            transition: background-color 0.2s;
+
+            .img {
+              align-items: center;
+            }
+          }
+
+          input[type=file] {
+            position: absolute;
+            z-index: -1;
+            opacity: 0;
+            display: block;
+            width: 0;
+            height: 0;
+          }
+        }
+      }
+    }
+
+    .edit_test_forms {
+      display: grid;
+      grid-template-areas:
+              'name file help'
+              'desription desription help'
+              'desription desription result'
+              'buttons buttons buttons';
+      grid-gap: 25px;
+
+      .test_form {
+        h3 {
+          margin-bottom: 8px;
+        }
+
+        .input_file,
+        textarea {
+          background: $white;
+          border: none;
+          border-radius: 20px;
+          padding: 30px;
+          width: 477px;
+          height: 115px;
+          cursor: pointer;
+
+          color: $black;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 20px;
+          line-height: 28px;
+        }
+
+        .input_file {
+          position: relative;
+          display: inline-block;
+        }
+
+        .input_file span {
+          position: relative;
+          display: flex;
+          flex-direction: row;
+          gap: 10px;
+          align-items: center;
+
+          .img {
+            align-items: center;
+          }
+
+          cursor: pointer;
+          text-decoration: none;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 20px;
+          vertical-align: middle;
+          color: $gray2;
+          text-align: center;
+          box-sizing: border-box;
+          border: none;
+          margin: 0;
+          transition: background-color 0.2s;
+        }
+
+        .input_file input[type=file] {
+          position: absolute;
+          z-index: -1;
+          opacity: 0;
+          display: block;
+          width: 0;
+          height: 0;
+        }
+      }
+      .help {
+        grid-area: help;
+
+        textarea {
+          height: 215px;
+        }
+      }
+      .result {
+        grid-area: result;
+
+        textarea {
+          height: 215px;
+        }
+      }
+    }
+  }
 }

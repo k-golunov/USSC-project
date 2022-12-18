@@ -13,6 +13,7 @@ import ApplicationsPage from './pages/ApplicationsPage';
 import { TestCaseSentOK } from './components/TestCaseSentOK';
 import AdminApplicationsPage from './pages/AdminApplicationsPage';
 import AdminSingleApplicationPage from './pages/AdminSingleApplicationPage';
+import AdminAddingDirectionPage from './pages/AdminAddingDirectionPage';
 
 function App() {
   return (
@@ -73,6 +74,9 @@ function App() {
             path='application/:userId'
             element={<AdminSingleApplicationPage />}
           ></Route>
+          <Route path='create/'>
+            <Route path='direction/' element={<AdminAddingDirectionPage />} />
+          </Route>
         </Route>
       </Routes>
     </Router>
