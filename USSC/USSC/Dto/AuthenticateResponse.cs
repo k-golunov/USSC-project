@@ -8,6 +8,7 @@ public class AuthenticateResponse
     public string Email { get; set; }
     public string AccessToken { get; set; }
     public string RefreshToken { get; set; }
+    public string Role { get; set; }
 
     public AuthenticateResponse(UsersEntity user, string token, string refreshToken)
     {
@@ -15,5 +16,6 @@ public class AuthenticateResponse
         Email = user.Email;
         AccessToken = token;
         RefreshToken = refreshToken;
+        Role = user.Role;
     }
 }

@@ -49,7 +49,7 @@ public class ProfileController : ControllerBase
         
     }
 
-    // [Authorize]
+    [Authorize]
     [HttpPut("update")]
     public IActionResult UpdateProfileInfo(ProfileModel profileModel)
     {

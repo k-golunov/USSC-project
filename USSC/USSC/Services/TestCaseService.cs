@@ -45,6 +45,7 @@ public class TestCaseService : ITestCaseService
     public Task<Guid> Upload(TestCaseModel testCaseModelmodel)
     {
         var entity = _mapper.Map<TestCaseEntity>(testCaseModelmodel);
+        entity.Directions = null;
         return _testcaseRepository.Add(entity);
     }
 
@@ -52,5 +53,10 @@ public class TestCaseService : ITestCaseService
     {
         var testCase = _testcaseRepository.GetByUserId(userId, directionId);
         return testCase != null ? testCase.Path : null;
+    }
+
+    public string? GetPath(Guid userId, Guid directionId)
+    {
+        return _testcaseRepository.GetPath(userId, directionId);
     }
 }

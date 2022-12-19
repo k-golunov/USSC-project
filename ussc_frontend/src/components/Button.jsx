@@ -4,7 +4,6 @@ const Button = ({ children, disabled, ...props }) => {
   return (
     <button
       className={`button${disabled ? ' disabled' : ''}`}
-      //style={style}
       disabled={disabled}
       {...props}
     >

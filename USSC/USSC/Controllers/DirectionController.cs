@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using USSC.Dto;
+using USSC.Helpers;
 using USSC.Services;
 
 namespace USSC.Controllers;
@@ -16,15 +17,27 @@ public class DirectionController : ControllerBase
     }
     
     // почему-то работает только без асинхронности, надо разобраться
-    [HttpPost("add")]
-    public void AddNewDirection(IFormFile file, string direction)
+    [Authorize(Roles = "Admin")]
+    [HttpPut("addFile")]
+    public void AddFile(IFormFile file, Guid directionId)
     { 
-        var uploadPath = $".\\Files\\{direction}.zip";
-        var directionsModel = new DirectionsModel
+        var uploadPath = $".\\Files\\{directionId}.zip";
+        var directionsEntity = _directionService.GetById(directionId);
+        if (directionsEntity is null)
         {
-            Directions = direction,
-            Path = $".\\Files\\{file.FileName}"
+            HttpContext.Response.StatusCode = 204;
+            return;
+        }
+        var model = new DirectionsModel()
+        {
+            Id = directionId,
+            Directions = directionsEntity.Directions,
+            Path = uploadPath
         };
+        // var directionsModel = new DirectionsModel
+        // {
+        //     Path = $".\\Files\\{direction}.zip"
+        // };
         var response = HttpContext.Response;
         var name = file.FileName.Split("."); 
         if (name.Length != 2 || name[1] != "zip") 
@@ -40,9 +53,11 @@ public class DirectionController : ControllerBase
         }
 
         // response.WriteAsync("Файлы успешно загружены");
-        var result =  _directionService.Add(directionsModel);
+        // var result =  _directionService.Add(directionsModel);
+        var result = _directionService.UpdateAsync(model);
     }
     
+    [Authorize(Roles = "Admin")]
     [HttpPut("UpdateDirection")]
     public async Task<IActionResult> UpdateDirection(DirectionsModel directionsModel)
     {
@@ -50,6 +65,7 @@ public class DirectionController : ControllerBase
         return Ok(new SuccessResponse(directionsModel.Id == id));
     }
     
+    [Authorize(Roles = "Admin")]
     [HttpDelete("Delete")]
     public async Task<IActionResult> DeleteDirection(Guid directionId)
     {

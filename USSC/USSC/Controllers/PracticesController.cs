@@ -16,7 +16,7 @@
          _practiceService = practiceService;
      }
      
-     // [Authorize(Roles = "Admin")]
+     [Authorize(Roles = "Admin")]
      [HttpGet("GetPractices")]
      public IActionResult GetPractices() 
     {
@@ -27,7 +27,7 @@
          return NoContent();
     }
 
-     // [Authorize(Roles = "Admin")]
+     [Authorize(Roles = "Admin")]
      [HttpPut("UpdatePractices")]
      public async Task<IActionResult> UpdatePractices(PracticesModel practicesModel)
      {
@@ -35,7 +35,7 @@
          return Ok(new SuccessResponse(practicesModel.Id == id));
      }
 
-     // [Authorize(Roles = "Admin")]
+     [Authorize(Roles = "Admin")]
      [HttpPost("CreatePractices")]
      public async Task<IActionResult> CreatePractices(PracticesModel practicesModel)
      {

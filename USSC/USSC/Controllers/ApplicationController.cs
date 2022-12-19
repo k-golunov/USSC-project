@@ -27,6 +27,7 @@ public class ApplicationController : ControllerBase
     /// </summary>
     /// <param name="model">Модель заявки</param>
     /// <returns></returns>
+    [Authorize]
     [HttpPost("send")]
     public async Task<IActionResult> SendApplication(RequestModel model)
     {
@@ -58,6 +59,7 @@ public class ApplicationController : ControllerBase
     /// </summary>
     /// <param name="requestModel"></param>
     /// <returns></returns>
+    [Authorize(Roles = "Admin")]
     [HttpPut("approve")]
     public async Task<IActionResult> ProcessApplication(RequestModel requestModel)
     {

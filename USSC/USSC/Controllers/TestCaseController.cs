@@ -1,6 +1,6 @@
 ﻿using System.Security.AccessControl;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using USSC.Dto;
 using USSC.Helpers;
 using USSC.Services;
@@ -25,12 +25,13 @@ public class TestCaseController : ControllerBase
     }
     
     [HttpGet("download")]
-    public FileStreamResult DownloadFile(string namePractices)
+    public FileStreamResult DownloadFile(Guid directionId)
     {
-        var path = $"G:\\USSC project\\USSC-project\\USSC\\USSC\\Files\\{namePractices}.zip";
+        // var path = $"G:\\USSC project\\USSC-project\\USSC\\USSC\\Files\\{namePractices}.zip";
+        var path = $".\\Files\\{directionId}.zip";
         var fileType="application/octet-stream";
         var fileStream = new FileStream(path, FileMode.Open);
-        var fileName = $"{namePractices}.zip";
+        var fileName = $"{directionId}.zip";
         return File(fileStream, fileType, fileName);
     }
 
@@ -62,7 +63,7 @@ public class TestCaseController : ControllerBase
             return;
         }
         // здесь вместо file.FileName должно быть {user.Id}.zip 
-        var uploadPath = $".\\Uploads\\{model.UserId.ToString()}.zip";
+        var uploadPath = $".\\Uploads\\{model.UserId.ToString()}_{directionId}.zip";
         
         // var uploadPath = $"G:\\USSC project\\USSC-project\\USSC\\USSC\\Upload\\{file.FileName}";
         model.Path = uploadPath;
@@ -89,7 +90,7 @@ public class TestCaseController : ControllerBase
     //     return Ok(new SuccessResponse(true));
     // }
     
-    // [Authorize(Roles="Admin")]
+    [Authorize(Roles="Admin")]
     [HttpGet("getAll")]
      public IActionResult GetAll()
      {
@@ -97,27 +98,42 @@ public class TestCaseController : ControllerBase
          return Ok(testCases);
      }
 
-     /// <summary>
-     /// возвращает файл решения пользователя
-     /// </summary>
-     // [Authorize(Roles = "Admin")]
-     [HttpGet("downloadPractices")]
-     public FileStreamResult DownLoadPractice(Guid userId, Guid directionId)
+     [Authorize(Roles = "Admin")]
+     [HttpGet("getUserSolution")]
+     public FileStreamResult GetUserSolution(Guid userId, Guid directionId)
      {
-         // try
-         // {
-             var testCasePath = _testCaseService.DownLoad(userId, directionId);            
-             var fileType="application/octet-stream";
-             var fileStream = new FileStream(testCasePath, FileMode.Open);
-             var fileName = $"{userId}.zip";
-             return File(fileStream, fileType, fileName);
-             // return Ok(testCasePath);
-         // }
-         // catch
-         // {
-         //     return BadRequest(new { Message = "Пользователь не предоставил решения" });
-         // }
+         var path = _testCaseService.GetPath(userId, directionId);
+         /*if (path.IsNullOrEmpty())
+         {
+             _logger.LogInformation("No solution for this user and this direction");
+             HttpContext.Response.StatusCode = 204;
+             return BadRequest();
+         }*/
+         // var path = $".\\Uploads\\{userId}_{directionId}.zip";
+         var fileType="application/octet-stream";
+         var fileStream = new FileStream(path, FileMode.Open);
+         var fileName = $"Solution.zip";
+         return File(fileStream, fileType, fileName);
      }
+     
+     // [Authorize(Roles = "Admin")]
+     // [HttpGet("downloadPractices")]
+     // public FileStreamResult DownLoadPractice(Guid userId, Guid directionId)
+     // {
+     //     // try
+     //     // {
+     //         var testCasePath = _testCaseService.DownLoad(userId, directionId);            
+     //         var fileType="application/octet-stream";
+     //         var fileStream = new FileStream(testCasePath, FileMode.Open);
+     //         var fileName = $"{userId}.zip";
+     //         return File(fileStream, fileType, fileName);
+     //         // return Ok(testCasePath);
+     //     // }
+     //     // catch
+     //     // {
+     //     //     return BadRequest(new { Message = "Пользователь не предоставил решения" });
+     //     // }
+     // }
 
      /// <summary>
      /// проверка практики куратором

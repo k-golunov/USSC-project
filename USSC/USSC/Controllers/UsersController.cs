@@ -62,7 +62,7 @@ public class UsersController : ControllerBase
     /// Возвращает всех пользователей, которые зарегистрированы
     /// </summary>
     /// <returns></returns>
-    // [Authorize(Roles="Admin")]
+    [Authorize(Roles="Admin")]
     [HttpGet("getAll")]
     public IActionResult GetAll()
     {
@@ -90,7 +90,7 @@ public class UsersController : ControllerBase
     /// <param name="userId">Идентификатор пользователя, Guid</param>
     /// <param name="refreshToken">Старый рефреш токен пользователя</param>
     /// <returns></returns>
-    // [Authorize]
+    [Authorize]
     [HttpPut("refresh")]
     public IActionResult UpdateRefreshToken(Guid userId, string refreshToken)
     {
