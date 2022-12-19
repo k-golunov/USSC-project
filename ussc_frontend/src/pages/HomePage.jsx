@@ -11,11 +11,11 @@ import circle from '../img/circle.svg';
 import circleBig from '../img/circle_big.svg';
 import clockIcon from '../img/clock_icon.svg';
 import bagIcon from '../img/bag_icon.svg';
-import checkmarckIcon from '../img/checkmark_icon.svg';
+import checkmarkIcon from '../img/checkmark_icon.svg';
 import samplePhoto1 from '../img/sample_photo1.jpg';
-import DirectionCard from '../components/DirectionCard';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks/use-auth';
+import DirectionsGrid from '../components/DirectionsGrid';
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -50,7 +50,7 @@ const HomePage = () => {
                   безопасности. В течение месяца студенты решают рабочие задачи,
                   учатся у экспертов компании, делают вклад в свое развитие.
                 </p>
-                <Button>Начать</Button>
+                <Button onClick={toggleSignUpActive}>Начать</Button>
               </div>
               <div className='offer_images'>
                 <img src={school_logo} alt='' className='school_logo' />
@@ -82,7 +82,7 @@ const HomePage = () => {
                 </p>
               </div>
               <div className='advantage'>
-                <img src={checkmarckIcon} alt='' />
+                <img src={checkmarkIcon} alt='' />
                 <p className='advantage_title'>
                   Более 1000 завершенных проектов
                 </p>
@@ -122,28 +122,24 @@ const HomePage = () => {
           </div>
           <div className='content_section' id='directions'>
             <h2 className='section_heading'>Направления подготовки</h2>
-            <div className='directions'>
-              <DirectionCard title='Разработка DATAPK' />
-              <DirectionCard title='Разработка DATAPK' />
-              <DirectionCard title='Разработка DATAPK' />
-            </div>
+            <DirectionsGrid />
           </div>
         </div>
       </div>
 
       <Popup
         active={signInPopupActive}
-        setActive={toggleSignInActive}
+        toggleActive={toggleSignInActive}
         content={<SignInForm />}
       />
       <Popup
         active={signUpPopupActive}
-        setActive={toggleSignUpActive}
+        toggleActive={toggleSignUpActive}
         content={<SignUpForm />}
       />
       <Popup
         active={passRecoveryPopupActive}
-        setActive={togglePassRecoveryActive}
+        toggleActive={togglePassRecoveryActive}
         content={<PassRecoveryForm />}
       />
     </>
