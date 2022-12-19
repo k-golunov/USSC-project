@@ -9,5 +9,6 @@
     &lt;TestId&gt;NUnit3x::B83F976D-DA19-4927-B011-5A3E499FF0F4::net6.0::UnitTests.Tests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::B83F976D-DA19-4927-B011-5A3E499FF0F4::net6.0::UnitTests.UserControllerTests.GetAllTest&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::B83F976D-DA19-4927-B011-5A3E499FF0F4::net6.0::UnitTests.UserControllerTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::B83F976D-DA19-4927-B011-5A3E499FF0F4::net6.0::UnitTests.ProfileControllerTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

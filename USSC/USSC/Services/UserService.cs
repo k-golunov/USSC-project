@@ -84,7 +84,7 @@ public class UserService : IUserService
         return _userRepository.GetAll();
     }
 
-    public UsersEntity GetById(Guid id)
+    public UsersEntity? GetById(Guid id)
     {
         return _userRepository.GetById(id);
     }
