@@ -1,5 +1,4 @@
-﻿
- using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
  using USSC.Dto;
  using USSC.Helpers;
  using USSC.Services;
@@ -32,7 +31,7 @@
      public async Task<IActionResult> UpdatePractices(PracticesModel practicesModel)
      {
          var id = await _practiceService.UpdateAsync(practicesModel);
-         return Ok(new SuccessResponse(practicesModel.Id == id));
+         return Ok(new SuccessResponse(true));
      }
 
      // [Authorize(Roles = "Admin")]
