@@ -17,7 +17,7 @@
      }
      
      // [Authorize(Roles = "Admin")]
-     [HttpGet("GetPractices")]
+     [HttpGet("get")]
      public IActionResult GetPractices() 
     {
          // возвращает поля практики name, description, info, id
@@ -28,7 +28,7 @@
     }
 
      // [Authorize(Roles = "Admin")]
-     [HttpPut("UpdatePractices")]
+     [HttpPut("update")]
      public async Task<IActionResult> UpdatePractices(PracticesModel practicesModel)
      {
          var id = await _practiceService.UpdateAsync(practicesModel);
@@ -36,14 +36,14 @@
      }
 
      // [Authorize(Roles = "Admin")]
-     [HttpPost("CreatePractices")]
+     [HttpPost("create")]
      public async Task<IActionResult> CreatePractices(PracticesModel practicesModel)
      {
          var response = await _practiceService.AddAsync(practicesModel); 
          return Ok(response);
      }
 
-     [HttpDelete("Delete")]
+     [HttpDelete("delete")]
      public async Task<IActionResult> DeletePractices(Guid practicesId)
      {
          var response = await _practiceService.Delete(practicesId);

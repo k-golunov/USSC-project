@@ -55,14 +55,14 @@ public class DirectionController : ControllerBase
         var result = _directionService.UpdateAsync(model);
     }
     
-    [HttpPut("UpdateDirection")]
+    [HttpPut("update")]
     public async Task<IActionResult> UpdateDirection(DirectionsModel directionsModel)
     {
         var id = await _directionService.UpdateAsync(directionsModel);
         return Ok(new SuccessResponse(directionsModel.Id == id));
     }
     
-    [HttpDelete("Delete")]
+    [HttpDelete("delete")]
     public async Task<IActionResult> DeleteDirection(Guid directionId)
     {
         var response = await _directionService.Delete(directionId);

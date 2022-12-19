@@ -138,7 +138,7 @@ public class TestCaseController : ControllerBase
      /// <summary>
      /// проверка практики куратором
      /// </summary>
-     [HttpPost("reviewPractice")]
+     [HttpPost("review")]
      public IActionResult ReviewPractice(ReviewedTestCase reviewTestcase)
      {
          var response = _testCaseService.ReviewTestCaseAsync(reviewTestcase);
