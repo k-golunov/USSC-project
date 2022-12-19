@@ -10,11 +10,11 @@ public class AuthenticateResponse
     public string RefreshToken { get; set; }
     public string Role { get; set; }
 
-    public AuthenticateResponse(UsersEntity user, string token, string refreshToken)
+    public AuthenticateResponse(UsersEntity user, string accessToken, string refreshToken)
     {
         Id = user.Id;
         Email = user.Email;
-        AccessToken = token;
+        AccessToken = accessToken;
         RefreshToken = refreshToken;
         Role = user.Role;
     }
