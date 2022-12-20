@@ -71,7 +71,7 @@ builder.Services.AddAutoMapper(typeof(PracticesProfile));
 builder.Services.AddAutoMapper(typeof(ProfileUserProfile));
 builder.Services.AddAutoMapper(typeof(RequestProfile));
 // var myOrigins = "_myOrigins";
-builder.Services.AddCors(options => options.AddDefaultPolicy(/*name: myOrigins,*/
+/*builder.Services.AddCors(options => options.AddDefaultPolicy(/*name: myOrigins,#1#
     policy =>
     {
         policy.WithOrigins("http://185.133.40.145:3033",
@@ -79,7 +79,7 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(/*name: myOrigins,*
             .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader();
-    }));
+    }));*/
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -103,7 +103,7 @@ app.UseMiddleware<JwtMiddleware>();
 //     .AllowAnyOrigin()
 //     .AllowAnyMethod()
 //     .AllowAnyHeader());
-app.UseCors(/*myOrigins*/);
+// app.UseCors(/*myOrigins*/);
 
 app.UseHttpsRedirection();
 
