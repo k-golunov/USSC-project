@@ -14,7 +14,7 @@ using USSC.Helpers;
 using USSC.Profiles;
 using USSC.Services;
 
-var builder = WebApplication.CreateBuilder(new WebApplicationOptions {WebRootPath = "Files"});
+var builder = WebApplication.CreateBuilder(/*new WebApplicationOptions {WebRootPath = "Files"}*/args);
 
 // Add services to the container.
 
