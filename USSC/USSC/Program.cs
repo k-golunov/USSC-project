@@ -70,8 +70,8 @@ builder.Services.AddAutoMapper(typeof(TestCaseProfiles));
 builder.Services.AddAutoMapper(typeof(PracticesProfile));
 builder.Services.AddAutoMapper(typeof(ProfileUserProfile));
 builder.Services.AddAutoMapper(typeof(RequestProfile));
-var myOrigins = "_myOrigins";
-builder.Services.AddCors(options => options.AddPolicy(name: myOrigins,
+// var myOrigins = "_myOrigins";
+builder.Services.AddCors(options => options.AddDefaultPolicy(/*name: myOrigins,*/
     policy =>
     {
         policy.WithOrigins("http://185.133.40.145:3033",
@@ -102,7 +102,7 @@ app.UseHttpLogging();
 //     .AllowAnyOrigin()
 //     .AllowAnyMethod()
 //     .AllowAnyHeader());
-app.UseCors(myOrigins);
+app.UseCors(/*myOrigins*/);
 
 app.UseHttpsRedirection();
 
