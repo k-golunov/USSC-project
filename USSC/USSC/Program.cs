@@ -74,8 +74,8 @@ var myOrigins = "_myOrigins";
 builder.Services.AddCors(options => options.AddPolicy(name: myOrigins,
     policy =>
     {
-        policy.WithOrigins("http://185.133.40.145:3033/",
-            "http://185.133.40.145:7296/")
+        policy.WithOrigins("http://185.133.40.145:3033",
+            "http://185.133.40.145:7296")
             .AllowAnyOrigin()
             .AllowAnyMethod()
             .AllowAnyHeader();
