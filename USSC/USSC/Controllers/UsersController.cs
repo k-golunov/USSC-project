@@ -9,7 +9,7 @@ namespace USSC.Controllers;
 
 [ApiController]
 [Route("user")]
-[EnableCors]
+// [EnableCors]
 public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
@@ -28,7 +28,7 @@ public class UsersController : ControllerBase
     /// <param name="model">Модель для входа в аккаунт (Почта, пароль)</param>
     /// <returns></returns>
     [HttpPost("signin")]
-    [EnableCors]
+    // [EnableCors]
     public IActionResult Authenticate(AuthenticateRequest model)
     {
         var response = _userService.Authenticate(model);
@@ -48,7 +48,7 @@ public class UsersController : ControllerBase
     /// <param name="userModel">Основная модель данных для пользователя</param>
     /// <returns></returns>
     [HttpPost("register")]
-    [EnableCors]
+    // [EnableCors]
     public async Task<IActionResult> Register(UserModel userModel)
     {
         var response = await _userService.Register(userModel);
@@ -68,7 +68,7 @@ public class UsersController : ControllerBase
     /// <returns></returns>
     // [Authorize(Roles="Admin")]
     [HttpGet("getAll")]
-    [EnableCors]
+    // [EnableCors]
     public IActionResult GetAll()
     {
         var users = _userService.GetAll();
