@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Mvc;
 using Serilog.Context;
 using USSC.Dto;
 using USSC.Helpers;
@@ -26,6 +27,7 @@ public class UsersController : ControllerBase
     /// <param name="model">Модель для входа в аккаунт (Почта, пароль)</param>
     /// <returns></returns>
     [HttpPost("signin")]
+    [EnableCors]
     public IActionResult Authenticate(AuthenticateRequest model)
     {
         var response = _userService.Authenticate(model);
@@ -45,6 +47,7 @@ public class UsersController : ControllerBase
     /// <param name="userModel">Основная модель данных для пользователя</param>
     /// <returns></returns>
     [HttpPost("register")]
+    [EnableCors]
     public async Task<IActionResult> Register(UserModel userModel)
     {
         var response = await _userService.Register(userModel);
@@ -64,6 +67,7 @@ public class UsersController : ControllerBase
     /// <returns></returns>
     // [Authorize(Roles="Admin")]
     [HttpGet("getAll")]
+    [EnableCors]
     public IActionResult GetAll()
     {
         var users = _userService.GetAll();
