@@ -70,7 +70,16 @@ builder.Services.AddAutoMapper(typeof(TestCaseProfiles));
 builder.Services.AddAutoMapper(typeof(PracticesProfile));
 builder.Services.AddAutoMapper(typeof(ProfileUserProfile));
 builder.Services.AddAutoMapper(typeof(RequestProfile));
-builder.Services.AddCors();
+var myOrigins = "_myOrigins";
+builder.Services.AddCors(options => options.AddPolicy(name: myOrigins,
+    policy =>
+    {
+        policy.WithOrigins("http://185.133.40.145:3033/",
+            "http://185.133.40.145:7296/")
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    }));
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -88,10 +97,12 @@ if (app.Environment.IsDevelopment())
 }
 // Помогает отлаживать HTTP запросы
 app.UseHttpLogging();
-app.UseCors(x => x
-    .AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader());
+// app.UseCors(x => x
+//     .WithOrigins()
+//     .AllowAnyOrigin()
+//     .AllowAnyMethod()
+//     .AllowAnyHeader());
+app.UseCors(myOrigins);
 
 app.UseHttpsRedirection();
 
