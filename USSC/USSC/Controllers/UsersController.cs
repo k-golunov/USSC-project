@@ -9,6 +9,7 @@ namespace USSC.Controllers;
 
 [ApiController]
 [Route("user")]
+[EnableCors]
 public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
