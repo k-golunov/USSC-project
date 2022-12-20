@@ -15,7 +15,7 @@
          _practiceService = practiceService;
      }
      
-     [Authorize(Roles = "Admin")]
+     // [Authorize(Roles = "Admin")]
      [HttpGet("get")]
      public IActionResult GetPractices() 
     {
