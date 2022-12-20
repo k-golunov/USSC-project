@@ -43,7 +43,8 @@ public class ApplicationController : ControllerBase
     /// Получение всех заявок, путь для администратора
     /// </summary>
     /// <returns></returns>
-    [Authorize(Roles = "Admin")]
+    // [Authorize(Roles = "Admin")]
+    // [Authorize]
     [HttpGet("getAll")]
     public IActionResult GetAll()
     {

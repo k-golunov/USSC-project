@@ -87,7 +87,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 // Помогает отлаживать HTTP запросы
-// app.UseHttpLogging();
+app.UseHttpLogging();
 app.UseCors(x => x
     .AllowAnyOrigin()
     .AllowAnyMethod()
