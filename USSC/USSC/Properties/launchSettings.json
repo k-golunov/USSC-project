@@ -19,10 +19,22 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
+    "deploy": {
+      "configuration": "Release",
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": false,
+      "launchUrl": "swagger",
+      "applicationUrl": "https://0.0.0.0:7296",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "PRODUCTION"
+      }
+    },
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
       "launchUrl": "swagger",
+      "applicationUrl": "https://0.0.0.0:7296",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
