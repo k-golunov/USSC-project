@@ -97,6 +97,7 @@ if (app.Environment.IsDevelopment())
 }
 // Помогает отлаживать HTTP запросы
 app.UseHttpLogging();
+app.UseMiddleware<JwtMiddleware>();
 // app.UseCors(x => x
 //     .WithOrigins()
 //     .AllowAnyOrigin()
@@ -110,7 +111,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.UseMiddleware<JwtMiddleware>();
+
 // app.UseEndpoints(x => x.MapControllers());
 
 app.Run();
