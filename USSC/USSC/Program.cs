@@ -8,6 +8,7 @@ using Serilog.Context;
 using Serilog.Events;
 using USSC;
 using Microsoft.AspNetCore.Mvc.NewtonsoftJson;
+using Microsoft.Extensions.FileProviders;
 using USSC.Dto;
 using USSC.Entities;
 using USSC.Helpers;
@@ -111,7 +112,21 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.Map(new PathString("/app"), client =>
+{
+    var clientPath = Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\ussc_frontend\\public");
+    var clientAppDist = new StaticFileOptions()
+    {
+        FileProvider = new PhysicalFileProvider(clientPath)
+    };
+    client.UseSpaStaticFiles(clientAppDist);
 
+    client.UseSpa(spa =>
+    {
+        spa.Options.DefaultPageStaticFileOptions = clientAppDist;
+    });
+});
+app.UseStaticFiles();
 // app.UseEndpoints(x => x.MapControllers());
 
 app.Run();
