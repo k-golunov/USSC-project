@@ -24,6 +24,8 @@ public class ApplicationRepository : IApplicationRepository
 
     public async Task<Guid> Add(RequestEntity entity)
     {
+        if (_context.Request.Where(r => r.UserId == entity.UserId && r.DirectionId == entity.DirectionId).Count() != 0)
+            return default;
         var result = await _context.Set<RequestEntity>().AddAsync(entity);
         await _context.SaveChangesAsync();
         return result.Entity.Id;
